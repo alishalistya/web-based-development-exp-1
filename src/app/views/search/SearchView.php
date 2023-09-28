@@ -1,7 +1,6 @@
 <?php
 
-class NotFoundView
-{
+class SearchView {
     public function __construct($data = [])
     {
         $this->data = $data;
@@ -9,6 +8,6 @@ class NotFoundView
 
     public function render(): void
     {
-        require_once __DIR__ . "/../../component/others/NotFoundComponent.php";
+        require_once __DIR__ . "/../../component/search/SearchComponent.php";
     }
 }
