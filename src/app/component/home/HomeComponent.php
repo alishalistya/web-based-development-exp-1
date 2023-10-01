@@ -9,7 +9,7 @@
 
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
-    <h1 style="align-items: center; color: black;">INI HOME</h1>
+    <h1 style="align-items: center; color: black;">INI Home</h1>
 </body>
 
 </html>

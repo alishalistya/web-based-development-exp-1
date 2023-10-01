@@ -6,4 +6,4 @@ define ('USER', $_ENV['MYSQL_USER']);
 define ('DB_NAME', $_ENV['MYSQL_DATABASE']);
 define ('PASSWORD', $_ENV['MYSQL_ROOT_PASSWORD']);
 
-define('BASE_URL', 'http://localhost:8080/public');
+const BASE_URL = 'http://localhost:8080/public';

@@ -10,6 +10,12 @@ class MovieController
     }
 
     public function search() {
-        $data['']
+        
+        $categoryModel = Utils::model('Category');
+        $category = $categoryModel->getAllCategory(); 
+
+        $searchView = Utils::view("search", "SearchView", ['category' => $category]);
+        $searchView->render();
     }
+
 }

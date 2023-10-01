@@ -2,3 +2,13 @@
     margin: 0;
     padding: 0;
 }
+
+ul {
+    list-style: none;
+}
+
+:root {
+    --white: #f9f9f9;
+    --black: #36383f;
+    --gray: #85888c;
+} /* variables*/
