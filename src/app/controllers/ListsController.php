@@ -17,7 +17,9 @@ class ListsController
     }
 
     public function actors() {
-        $loginView = Utils::view("lists", "ActorListView", []);
+        $actorModel = Utils::model('Actor');
+        $data["actor"] = $actorModel->getAllActor();
+        $loginView = Utils::view("lists", "ActorListView", $data);
         $loginView->render();
     }
 }
