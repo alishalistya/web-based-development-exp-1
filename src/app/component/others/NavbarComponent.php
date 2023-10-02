@@ -7,8 +7,8 @@
         <!-- Menu -->
         <nav class="nav">
             <ul class="menu">
-                <li><a href="/public/home">Home</a></li>
-                <li><a href="/public/movie/search">Search</a> </li>
+                <li><a href="/home">Home</a></li>
+                <li><a href="/movie/search">Search</a> </li>
                 <li><a href="#">Ratings</a></li>
                 <li><a href="#">Login</a></li>
             </ul>

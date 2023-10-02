@@ -3,10 +3,10 @@
 
 <head>
     <title>Movie</title>
-    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/others/main.css">
-    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/search/search.css">
-    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/others/navbar.css">
-    <script type="text/javascript" src="<?= BASE_URL ?>/js/search/search.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="/styles/others/main.css">
+    <link rel="stylesheet" type="text/css" href="/styles/search/search.css">
+    <link rel="stylesheet" type="text/css" href="/styles/others/navbar.css">
+    <script type="text/javascript" src="/js/search/search.js" defer></script>
 </head>
 
 <body>
