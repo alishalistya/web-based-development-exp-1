@@ -3,8 +3,8 @@
 
 <head>
     <title>NOT FOUND PAGE</title>
-    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/others/main.css">
-    <link rel="stylesheet" type="text/css" href="<?= BASE_URL ?>/styles/others/navbar.css">
+    <link rel="stylesheet" type="text/css" href="/styles/others/main.css">
+    <link rel="stylesheet" type="text/css" href="/styles/others/navbar.css">
 </head>
 
 <body>

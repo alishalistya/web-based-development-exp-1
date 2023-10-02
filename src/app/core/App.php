@@ -14,22 +14,18 @@ class App
         $this->controller = new NotFoundController();
 
         $url = $this->parseURL();
-
-        var_dump($_SERVER);
-        var_dump($_GET);
-
-        $controllerUrl = $url[0] ?? null;
+        $controllerUrl = $url[1] ?? null;
         if (isset($controllerUrl) && file_exists(__DIR__ . '/../controllers/' . $controllerUrl . 'Controller.php')) {
             require_once __DIR__ . '/../controllers/' . $controllerUrl . 'Controller.php';
             $controllerClass = $controllerUrl . "Controller";
             $this->controller = new $controllerClass();
-            unset($url[0]);
+            unset($url[1]);
         }
 
-        $methodUrl = $url[1] ?? null;
+        $methodUrl = $url[2] ?? null;
         if (isset($methodUrl) && method_exists($this->controller, $methodUrl)) {
             $this->method = $methodUrl;
-            unset($url[1]);
+            unset($url[2]);
         }
 
         if (!empty($url)) {
@@ -41,11 +37,13 @@ class App
 
     public function parseURL(): ?array
     {
+        $url = $_SERVER['REQUEST_URI'];
         if (isset($_GET['url'])) {
-            $url = trim($_GET['url'], '/');
-            $url = filter_var($url, FILTER_SANITIZE_URL);
-            return explode('/', $url);
+            $url = $_GET["url"];
+            
         }
-        return null;
+        $url = rtrim($url, '/');
+        $url = filter_var($url, FILTER_SANITIZE_URL);
+        return explode('/', $url);
     }
 }
