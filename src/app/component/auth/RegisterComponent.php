@@ -1,21 +1,18 @@
-<form method="post" novalidate>
+<form method="post">
     <h1 class="auth-title">
-        Selamat Datang Kembali!
+        Silahkan Daftarkan Dirimu!
     </h1>
     <div class="form-group">
         <label for="email">Email</label>
         <input class="form-input" name="email" type="email" placeholder="Email" />
-        <!-- <? if (isset($this->data["errors"])) :?>
-            <span class="error"><?= $this->data["errors"]["email"] ?></span>
-        <? endif ?> -->
+    </div>
+    <div class="form-group">
+        <label for="name">Nama</label>
+        <input class="form-input" name="name" type="text" placeholder="Nama" />
     </div>
     <div class="form-group">
         <label for="password">Password</label>
         <input class="form-input" name="password" type="password" placeholder="Password"/>
     </div>
-    <button class="btn btn-primary">Masuk</button>
+    <button class="btn btn-primary">Daftar</button>
 </form>
-
-<div class="register-btn">
-    <a href="/auth/register" class="btn alt-btn">Register</a>
-</div>

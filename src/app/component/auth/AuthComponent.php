@@ -39,7 +39,7 @@
                     </linearGradient>
                 </defs>
             </svg>
-            <img src="/auth-decor-caption.png"/>
+            <img src="/auth-decor-caption.png" alt="Ready for A Wave of New Beginnings"/>
         </div>
         <div class="auth-form-container">
             <? if ($this->data["isLogin"]) {
