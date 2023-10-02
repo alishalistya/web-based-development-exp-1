@@ -15,6 +15,7 @@ class App
         $this->controller = $notFoundController;
 
         $url = $this->parseURL();
+        unset($url[0]);
         $controllerUrl = $url[1] ?? null;
         if (isset($controllerUrl) && file_exists(__DIR__ . '/../controllers/' . $controllerUrl . 'Controller.php')) {
             require_once __DIR__ . '/../controllers/' . $controllerUrl . 'Controller.php';
@@ -40,10 +41,9 @@ class App
 
     public function parseURL(): ?array
     {
-        $url = $_SERVER['REQUEST_URI'];
+        $url = parse_url($_SERVER['REQUEST_URI'])["path"];
         if (isset($_GET['url'])) {
             $url = $_GET["url"];
-            
         }
         $url = rtrim($url, '/');
         $url = filter_var($url, FILTER_SANITIZE_URL);
