@@ -14,4 +14,10 @@ class Movie {
 
         return $this->db->resultSet();
     }
+
+    public function getAllMovies()
+    {
+        $this->db->query("SELECT * FROM movie");
+        return $this->db->resultSet();
+    }
 }
