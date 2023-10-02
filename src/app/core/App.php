@@ -11,7 +11,8 @@ class App
     public function __construct()
     {
         require_once __DIR__ . '/../controllers/NotFoundController.php';
-        $this->controller = new NotFoundController();
+        $notFoundController = new NotFoundController();
+        $this->controller = $notFoundController;
 
         $url = $this->parseURL();
         $controllerUrl = $url[1] ?? null;
@@ -26,6 +27,8 @@ class App
         if (isset($methodUrl) && method_exists($this->controller, $methodUrl)) {
             $this->method = $methodUrl;
             unset($url[2]);
+        } else if (!method_exists($this->controller, $this->method)) {
+            $this->controller = $notFoundController;
         }
 
         if (!empty($url)) {

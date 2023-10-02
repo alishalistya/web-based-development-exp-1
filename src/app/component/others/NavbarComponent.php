@@ -11,7 +11,7 @@
                 <li><a href="/home">Home</a></li>
                 <li><a href="/movie/search">Search</a> </li>
                 <li><a href="#">Ratings</a></li>
-                <li><a href="#">Login</a></li>
+                <li><a href="/auth/login">Login</a></li>
             </ul>
         </nav>
     </div>
