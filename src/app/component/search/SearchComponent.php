@@ -11,11 +11,12 @@
 
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
-    <div class="search-group">
-        <div class="search search-box">
-            <label for="search">Search</label>
-            <input type="text" id="search" placeholder="Movie, Actor or Director" name="q">
-        </div>
+    <section class="search-section">
+        <div class="search-group">
+            <div class="search search-box">
+                <label for="search">Search</label>
+                <input type="text" id="search" placeholder="Movie, Actor or Director" name="q">
+            </div>
         <div class="search sort-box">
             <label for="sort">Sort By</label>
             <select name="sort" id="sort">
@@ -32,16 +33,27 @@
                 <?php foreach ($this->data["category"] as $index => $category) : ?>
                     <option value="<?= $category['name'] ?>">
                         <?= $category['name'] ?>
+                        <?php endforeach; ?>
                     </option>
-                <?php endforeach; ?>
-            </select>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="debug">
-        <div class="hasil-search"></div>
-        <div class="hasil-sort"></div>
-        <div class="hasil-filter"></div>
-    </div>
-</body>
+    </section>
+    <section class="result-section">
+        <?php if (!$this->data['movies']) : ?>
+            <div> NO RESULT</div>
+        <?php else : ?>
+            <div class="container">
+                <?php foreach ($this->data['movies'] as $movie) :?>
+                    <div class="name-movie"><?= $movie['title'] ?></div>
+                    <div class="name-movie"><?= $movie['description'] ?></div>
+                    <div class="name-movie"><?= $movie['release_date'] ?></div>
+                    <div class="name-movie"><?= $movie['duration'] ?></div>
+                    <br>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </section>
+    </body>
 
 </html>

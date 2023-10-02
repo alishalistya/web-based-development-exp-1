@@ -15,6 +15,9 @@ class App
 
         $url = $this->parseURL();
 
+        var_dump($_SERVER);
+        var_dump($_GET);
+
         $controllerUrl = $url[0] ?? null;
         if (isset($controllerUrl) && file_exists(__DIR__ . '/../controllers/' . $controllerUrl . 'Controller.php')) {
             require_once __DIR__ . '/../controllers/' . $controllerUrl . 'Controller.php';
@@ -39,7 +42,7 @@ class App
     public function parseURL(): ?array
     {
         if (isset($_GET['url'])) {
-            $url = rtrim($_GET['url'], '/');
+            $url = trim($_GET['url'], '/');
             $url = filter_var($url, FILTER_SANITIZE_URL);
             return explode('/', $url);
         }
