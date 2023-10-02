@@ -3,12 +3,34 @@
     padding: 0;
 }
 
-ul {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+ul { 
     list-style: none;
 }
 
 :root {
+    font-family: 'Inter', sans-serif;
     --white: #f9f9f9;
     --black: #36383f;
+    --primary: #1A1D4E;
     --gray: #85888c;
 } /* variables*/
+
+.btn {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: white;
+}
+.btn:focus {
+    outline: none;
+}
