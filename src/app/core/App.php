@@ -11,9 +11,11 @@ class App
     public function __construct()
     {
         require_once __DIR__ . '/../controllers/NotFoundController.php';
-        $this->controller = new NotFoundController();
+        $notFoundController = new NotFoundController();
+        $this->controller = $notFoundController;
 
         $url = $this->parseURL();
+        unset($url[0]);
         $controllerUrl = $url[1] ?? null;
         if (isset($controllerUrl) && file_exists(__DIR__ . '/../controllers/' . $controllerUrl . 'Controller.php')) {
             require_once __DIR__ . '/../controllers/' . $controllerUrl . 'Controller.php';
@@ -26,6 +28,8 @@ class App
         if (isset($methodUrl) && method_exists($this->controller, $methodUrl)) {
             $this->method = $methodUrl;
             unset($url[2]);
+        } else if (!method_exists($this->controller, $this->method)) {
+            $this->controller = $notFoundController;
         }
 
         if (!empty($url)) {
@@ -37,10 +41,9 @@ class App
 
     public function parseURL(): ?array
     {
-        $url = $_SERVER['REQUEST_URI'];
+        $url = parse_url($_SERVER['REQUEST_URI'])["path"];
         if (isset($_GET['url'])) {
             $url = $_GET["url"];
-            
         }
         $url = rtrim($url, '/');
         $url = filter_var($url, FILTER_SANITIZE_URL);
