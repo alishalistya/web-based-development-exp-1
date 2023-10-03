@@ -25,9 +25,9 @@
         <div class="home-recommend-header">
             <h1>Top Movies For You</h1>
             <div class="header-buttons">
-                <a href="/movie" class="btn btn-primary">View Films</a>
-                <a href="/director" class="btn btn-primary">View Directors</a>
-                <a href="/actor" class="btn btn-primary">View Actors</a>
+                <a href="lists/movies" class="btn btn-primary">View Films</a>
+                <a href="lists/directors" class="btn btn-primary">View Directors</a>
+                <a href="lists/actors" class="btn btn-primary">View Actors</a>
             </div>
         </div>
         <div class="movie-container">

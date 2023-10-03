@@ -1,0 +1,31 @@
+.actor-container {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.actor-thumbnail img {
+    width: 200px;
+    max-width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+.actor-thumbnail img {
+    transition: all 0.2s ease-in-out;
+}
+
+.actor-thumbnail img:hover {
+    transform: scale(1.05);
+}
+
+.actor-card .title {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}

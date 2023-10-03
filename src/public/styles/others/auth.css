@@ -30,11 +30,13 @@ body {
 }
 
 .auth-form-container {
-    display: flex;
+    display:block;
+    position: relative;
     justify-content: center;
     align-items: center;
     max-width: 280px;
-    margin: 0 auto;
+    margin: auto;
+    /* padding: 20 20 20 20; */
 }
 
 .auth-title {
@@ -48,6 +50,22 @@ body {
 
 .form-group {
     margin-bottom: 32px;
+}
+
+.register-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+}
+
+.alt-btn {
+    justify-content: center;
+    text-align: center;
+    background-color: #BBBBBB;
+    color: white;
+    max-width: 280px;
 }
 
 .btn {

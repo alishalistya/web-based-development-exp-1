@@ -89,6 +89,9 @@ class Movie {
 
         $this->db->query($sql);
 
+    public function getAllMovies()
+    {
+        $this->db->query("SELECT * FROM movie");
         return $this->db->resultSet();
     }
 }
