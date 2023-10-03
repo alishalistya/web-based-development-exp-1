@@ -28,9 +28,26 @@
     
     <div class="actor-movie-container">
         <h1 id="known-for">
-            Known for:
+            KNOWN FOR:
         </h1>
         <div class="row">
+            <?php $count = 0; ?>
+            <?php foreach ($this->data['images'] as $movieName => $imagePath): ?>
+                <div class="picture">
+                    <img src="<?php echo $imagePath; ?>" alt="<?php echo $movieName; ?>">
+                </div>
+                <?php $count++; ?>
+                <?php if ($count % 3 === 0): ?>
+                    </div>
+                    <?php if ($count < count($this->data['images'])): ?>
+                        <div class="row"> 
+                    <?php endif; ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+
+
+        <!-- <div class="row">
             <div class="picture">
                 <img src="../../../public/img/Knives Out.jpg" alt="Picture 1">
             </div>
@@ -47,14 +64,13 @@
             </div>
         </div>
         <div class="row">
-            <!-- Add more pictures here -->
             <div class="picture">
                 <img src="../../../public/img/Knock Knock.jpg" alt="Picture 5">
             </div>
             <div class="picture">
                 <img src="../../../public/img/No Time To Die.jpg" alt="Picture 6">
             </div>
-        </div>
+        </div> -->
     </div>
     
 </body>
