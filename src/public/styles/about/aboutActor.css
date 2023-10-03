@@ -1,0 +1,126 @@
+#actor-container {
+    position: relative;
+    height: 100vh;
+    width: 50vw;
+    background-color: rgba(45, 49, 107, 0.8);
+
+}
+
+#actor-background {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1; 
+    object-fit: cover;
+    filter: grayscale(100%);
+    box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
+
+}
+
+#about-actor {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    transform: translate(-50%, -50%);
+    z-index:2;
+    text-align: left;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+#actor-img {
+    position: absolute;
+    display: block;
+    top: 45%;
+    left: 50%;
+    height: 30%;
+    width: 70%;
+    transform: translate(-50%, -50%);
+    z-index:2;
+    object-fit: cover;
+    box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+#actor-name {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:2;
+    text-align: center;
+    font-size: 4em;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+}
+
+#actor-birth {
+    position: absolute;
+    top: 67%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index:2;
+    text-align: center;
+    font-size: 1em;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+}
+
+#actor-description {
+    position: absolute;
+    top: 73%;
+    left: 50%; 
+    width: 80%;
+    transform: translate(-50%, 0);
+    z-index: 2;
+    text-align: center;
+    font-size: 100%;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.actor-movie-container {
+    position: fixed;
+    height: 100vh;
+    width: 50vw;
+    top: 80px;
+    left: 50%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: linear-gradient(to right, #ffffff, #ffffff, rgba(26, 29, 78, 0.7));
+    z-index: -2;
+}
+
+#known-for {
+    position: relative;
+    left: 7%;
+    color: #1A1D4E;
+}
+
+.row {
+    left: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px; 
+}
+.picture {
+    flex: 0 0 calc(33% - 20px); 
+    margin:3% 0% 3% 11.5%; 
+    overflow: hidden;
+    border-radius: 4%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border: 1px solid #2D316B;
+
+}
+
+.picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Maintain aspect ratio and cover the entire container */
+    display: block;
+}
+
+.picture img:hover {
+    transform: scale(1.1);
+    transition: all 0.5s ease-in-out;
+}
