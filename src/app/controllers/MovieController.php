@@ -14,9 +14,12 @@ class MovieController
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     $categoryModel = Utils::model('Category');
-                    $category = $categoryModel->getAllCategory(); 
+                    $movieModel = Utils::model('Movie');
+                    $category = $categoryModel->getAllCategory();
+                    $year = $movieModel->getYear();
 
-                    $searchView = Utils::view("search", "SearchView", ['category' => $category, 'movies' => $result]);
+                    $result = null;
+                    $searchView = Utils::view("search", "SearchView", ['category' => $category, 'movies' => $result, 'years' => $year]);
                     $searchView->render();                    
                     break;
                 default:
@@ -32,12 +35,13 @@ class MovieController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    var_dump($_SERVER['QUERY_STRING']);
                     $movieModel = Utils::model("Movie");
-                    $result = $movieModel->getByArgs($_GET['q'], $_GET['sort'], $_GET['category'], $page);
+                    
+                    $movies = $movieModel->getByArgs($_GET['q'], $_GET['sort'], $_GET['category'], $page);
+                    $count = $movieModel->getCountPage($_GET['q'], $_GET['category']);
 
                     header('Content-Type: application/json');
-                    echo json_encode($result);
+                    echo json_encode(['movies' => $movies, 'page' => $count]);
                     
                     exit;
                     break;
