@@ -1,4 +1,4 @@
-#actor-container {
+#director-container {
     position: relative;
     height: 100vh;
     width: 50vw;
@@ -6,7 +6,7 @@
 
 }
 
-#actor-background {
+#director-background {
     position: absolute;
     height: 100%;
     width: 100%;
@@ -17,7 +17,7 @@
 
 }
 
-#about-actor {
+#about-director {
     position: absolute;
     top: 15%;
     left: 15%;
@@ -28,7 +28,7 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-#actor-img {
+#director-img {
     position: absolute;
     display: block;
     top: 45%;
@@ -41,7 +41,7 @@
     box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
 }
 
-#actor-name {
+#director-name {
     position: absolute;
     top: 60%;
     left: 50%;
@@ -53,7 +53,7 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
 }
 
-#actor-birth {
+#director-birth {
     position: absolute;
     top: 67%;
     left: 50%;
@@ -65,7 +65,7 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
 }
 
-#actor-description {
+#director-description {
     position: absolute;
     top: 73%;
     left: 50%; 
@@ -78,7 +78,7 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-.actor-movie-container {
+.director-movie-container {
     position: fixed;
     height: 100vh;
     width: 50vw;
