@@ -13,7 +13,8 @@
         <div class="list-container">
             <div class="list-header">
                 <h1> List of Movies </h1>
-                <a href="addmovies" class="btn btn-primary">Add New</a>
+                <!-- if user = admin maka ada button add new -->
+                <a href="/addData/movie" class="btn btn-primary">Add New</a>
             </div>
             <div class="movie-container">
                 <?php foreach ($this->data['movies'] as $index => $movie) : ?>
