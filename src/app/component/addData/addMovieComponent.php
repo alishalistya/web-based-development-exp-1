@@ -1,4 +1,4 @@
-<form method="post" class="addMovie" novalidate>
+<form action = "tambahMovie" method="post" class="addMovie" novalidate>
     <h1 class="auth-title">
         Tambahkan Film Baru
     </h1>
@@ -15,8 +15,8 @@
 
     <!-- Release Date -->
     <div class="form-group">
-        <label for="release-date">Release Year</label>
-        <input class="form-input" name="release-date" type="text" placeholder="1996"/>
+        <label for="release-year">Release Year</label>
+        <input class="form-input" name="release-year" type="text" placeholder="1996"/>
     </div>
 
     <!-- Duration -->
@@ -27,14 +27,14 @@
 
     <!-- Image -->
     <div class="form-group">
-        <label for="description">Poster Film</label>
-        <input class="form-input" name="description" type="file" placeholder="Sebuah Deskripsi"/>
+        <label for="movie_img">Poster Film</label>
+        <input class="form-input" name="movie_img" type="file" placeholder="Sebuah Deskripsi"/>
     </div>
 
     <!-- Trailer -->
     <div class="form-group">
-        <label for="description">Trailer</label>
-        <input class="form-input" name="description" type="file" placeholder="Sebuah Deskripsi"/>
+        <label for="movie-trailer">Trailer</label>
+        <input class="form-input" name="movie-trailer" type="file" placeholder="Sebuah Deskripsi"/>
     </div>
 
     <button class="btn btn-primary">Submit</button>

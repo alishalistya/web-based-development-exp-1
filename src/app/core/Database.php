@@ -89,4 +89,9 @@ class Database
             throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
         }
     }
+
+    public function rowCount() 
+    {
+        return $this->statement->rowCount();
+    }
 }

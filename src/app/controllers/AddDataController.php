@@ -27,4 +27,34 @@ class AddDataController
         $addActorView = Utils::view("addData", "AddDataView", $data);
         $addActorView->render();
     }
+
+    public function tambahMovie(){
+        $movieModel = Utils::model('Movie');
+        // var_dump();
+        if ($movieModel -> addMovie($_POST) > 0){
+            // var_dump($_POST);
+            header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+            exit;
+        }
+    }
+
+    public function tambahDirector(){
+        $directorModel = Utils::model('Director');
+        // var_dump($_POST);
+        if ($directorModel -> addDirector($_POST) > 0){
+            // var_dump($_POST);
+            header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+            exit;
+        }
+    }
+
+    public function tambahActor(){
+        $actorModel = Utils::model('Actor');
+        // var_dump();
+        if ($actorModel -> addActor($_POST) > 0){
+            // var_dump($_POST);
+            header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+            exit;
+        }
+    }
 }
