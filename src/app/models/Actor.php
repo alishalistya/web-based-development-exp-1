@@ -28,4 +28,11 @@ class Actor
         $this->db->bind("name", $name);
         return $this->db->single();
     }
+
+    public function getMovieByActorID($id)
+    {
+        $this->db->query("SELECT * FROM movie_actor WHERE actor_id = :id");
+        $this->db->bind("id", $id);
+        return $this->db->resultSet();
+    }
 }

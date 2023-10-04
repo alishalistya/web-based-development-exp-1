@@ -30,12 +30,16 @@
         <p id="movie-duration" class="text">
                 <?= $this->data['movie']['duration'] ?>
         </p>
-        <h2 id="movie-director" class="text">
-            <?= $this->data['director']['name'] ?>
-        </h2>
+        <a href="director?name=<?= $this->data['director']['name'] ?>" >
+            <h2 id="movie-director" class="text">
+                <?= $this->data['director']['name'] ?>
+            </h2>
+        </a>
         <div class="movie-cast text">
             <?php foreach ($this->data['actor'] as $key => $actor): ?>
-                <span><?= $actor['name'] ?></span>
+                <a href="actor?name=<?= $actor['name'] ?>" class="cast-link">
+                    <span><?= $actor['name'] ?></span>
+                </a>
                 <?php if ($key !== array_key_last($this->data['actor'])): ?>
                     <span> | </span>
                 <?php endif; ?>

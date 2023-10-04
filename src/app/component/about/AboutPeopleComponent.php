@@ -13,11 +13,11 @@
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
     <div id="people-container">
-        <img id="people-background" src="../../../public/media/img/actor/Ana de Armas.jpg" alt="<?= $this->data['people']['name'] ?>">
+        <img id="people-background" src="../../../public/media/img/actor/<?= $this->data['people']['img_path'] ?>.jpeg" alt="<?= $this->data['people']['img_path'] ?>">
         <h2 id="about-people" class="text">
             about <?= $this->data['title']; ?>,
         </h2>
-        <img id="people-img" src="../../../public/media/img/actor/Ana de Armas II.jpg" alt="<?= $this->data['people']['name'] ?>">
+        <img id="people-img" src="../../../public/media/img/actor/<?= $this->data['people']['img_path'] ?>.jpeg" alt="<?= $this->data['people']['img_path'] ?>">
         <h1 id="people-name" class="text">
             <?= $this->data['people']['name'] ?>
         </h1>
@@ -35,11 +35,11 @@
         </h1>
         <div class="row">
             <?php $count = 0; ?>
-            <?php foreach ($this->data['images'] as $movieName => $imagePath): ?>
+            <?php foreach ($this->data['movie'] as $movie): ?>
                 <?php if ($count >= 6) break; ?>
                     <div class="picture">
-                        <a href="movie">
-                            <img src="<?php echo $imagePath; ?>" alt="<?php echo $movieName; ?>">
+                        <a href="movie?title=<?= $movie['title'] ?>">
+                            <img src="../../../public/media/img/movie/<?= $movie['img_path']; ?>.jpg" alt="<?php echo $movie['title']; ?>">
                         </a>
                     </div>
                     <?php $count++; ?>

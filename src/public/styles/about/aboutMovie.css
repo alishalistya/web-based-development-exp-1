@@ -59,12 +59,12 @@
 
 #movie-title {
     position: absolute;
-    top: 65%;
+    top: 66%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
     text-align: center;
-    font-size: 3em;
+    font-size: 2rem;
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
 }
@@ -116,6 +116,11 @@
     font-size: 1em;
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Use the parent's color */
 }
 
 
@@ -284,7 +289,12 @@
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
+    a {
+        text-decoration: none; /* Remove underline */
+        color: inherit; /* Use the parent's color */
+    }
+
     
     #movie-description {
         position: absolute;
