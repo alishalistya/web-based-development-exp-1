@@ -35,4 +35,25 @@ class Actor
         $this->db->bind("id", $id);
         return $this->db->resultSet();
     }
+    
+    public function addActor($data)
+    {
+        // echo 'okey';
+        // var_dump($data);
+        $query = "INSERT INTO actor(name, birth_date,description, img_path)
+                    VALUES
+                    (:name, :birth_date, :description, :img_path)";
+
+        $this->db->query($query);
+        $this->db->bind('name', $data['name']);
+        $this->db->bind('birth_date', $data['birth_date']);
+        $this->db->bind('description', $data['description']);
+        $this->db->bind('img_path', $data['name']);
+
+        // echo $query;
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }

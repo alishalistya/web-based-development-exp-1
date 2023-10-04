@@ -1,11 +1,11 @@
-<form method="post" class="addMovie" novalidate>
+<form action="tambahActor" method="post" class="addMovie" novalidate>
     <h1 class="auth-title">
         Tambahkan Actor Baru
     </h1>
    <!-- Name -->
    <div class="form-group">
         <label for="title">Name</label>
-        <input class="form-input" name="title" type="text" placeholder="Nama Director" />
+        <input class="form-input" name="name" type="text" placeholder="Nama Director" />
     </div>
 
     <!-- Description -->
@@ -16,8 +16,8 @@
 
     <!-- Birthdate -->
     <div class="form-group">
-        <label for="birthdate">Birthdate</label>
-        <input class="form-input" name="birthdate" type="date" placeholder="Sebuah Deskripsi"/>
+        <label for="birth_date">Birthdate</label>
+        <input class="form-input" name="birth_date" type="date" placeholder="Sebuah Deskripsi"/>
     </div>
 
     <!-- Image -->

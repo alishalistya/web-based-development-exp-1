@@ -124,4 +124,27 @@ class Movie {
         $this->db->bind("id", $id);
         return $this->db->single();
     }
+
+    public function addMovie($data)
+    {
+        // echo 'okey';
+        // var_dump($data);
+        $query = "INSERT INTO movie(title, description, year, duration, img_path, trailer_path)
+                    VALUES
+                    (:title, :deskripsi, :rdate, :duration, :img_path, :trailer_path)";
+
+        $this->db->query($query);
+        $this->db->bind('title', $data['title']);
+        $this->db->bind('deskripsi', $data['description']);
+        $this->db->bind('rdate', $data['release-year']);
+        $this->db->bind('duration', $data['duration']);
+        $this->db->bind('img_path', $data['title']);
+        $this->db->bind('trailer_path', $data['title']);
+
+        // echo $query;
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
