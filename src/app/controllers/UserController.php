@@ -18,16 +18,19 @@ class UserController
                     $loginView = Utils::view("auth", "AuthView", $data);
                     $loginView->render();
                     break;
+
                 case 'POST':
                     $userModel = Utils::model("User");
+
                     $user_id = $userModel->login($_POST['username'], $_POST['password']);
                     $_SESSION['user_id'] = $user_id;
 
                     header('Content-Type: application/json');
                     http_response_code(201);
-                    echo json_encode(['redirect' => BASE_URL . "/home"]);
+                    echo json_encode(['redirect' => "http://localhost:8080/home"]);
                     exit;
                     break;
+
                 default:
                     throw new Exception();
             }

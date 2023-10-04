@@ -23,10 +23,10 @@ class MovieController
                     $searchView->render();                    
                     break;
                 default:
-                    throw new Exception();
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
-            http_response_code(405);
+            http_response_code($e->getCode());
         }
 
     }

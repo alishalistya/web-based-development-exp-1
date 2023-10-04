@@ -24,8 +24,8 @@ class Database
 
         try {
             $this->conn = new PDO($db_url, $this->user, $this->pass);
-        } catch (PDOException $err) {
-            die($err->getMessage());
+        } catch (PDOException) {
+            throw new Exception('Bad Gateway', STATUS_BAD_GATEWAY);
         }
     }
 
