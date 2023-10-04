@@ -7,6 +7,8 @@ define ('DB_NAME', $_ENV['MYSQL_DATABASE']);
 define ('PASSWORD', $_ENV['MYSQL_ROOT_PASSWORD']);
 define ('STORAGE_URL', '/media');
 
+define ('LIMIT_PAGE', 10);
+
 // 2xx
 define ('STATUS_OK', 200);
 define ('STATUS_CREATED', 201);

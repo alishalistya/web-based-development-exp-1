@@ -2,6 +2,8 @@ const loginForm = document.querySelector(".login");
 const usernameInput = document.querySelector("#username");
 const passwordInput = document.querySelector("#password");
 
+// NOTE : VALIDASI BELUM
+
 loginForm &&
     loginForm.addEventListener("submit", async (e) => {
         e.preventDefault();

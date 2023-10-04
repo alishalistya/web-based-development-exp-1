@@ -39,7 +39,7 @@
                     <label for="cat">Filter Category</label>
                     <div class="select-box">
                         <select name="cat" id="cat">
-                            <option value="all">None</option>
+                            <option value="none">None</option>
                             <?php foreach ($this->data["category"] as $index => $category) : ?>
                                 <option value="<?= $category['name'] ?>">
                                     <?= ucfirst($category['name']) ?>
@@ -52,7 +52,7 @@
                     <label for="year">Filter Year</label>
                     <div class="select-box">
                         <select name="year" id="year">
-                            <option value="title">None</option>
+                            <option value="none">None</option>
                             <?php foreach ($this->data["years"] as $index => $year) : ?>
                                 <option value="<?= $year['year'] ?>">
                                     <?= $year['year'] ?>

@@ -94,6 +94,7 @@ const searchDebounce = debounce(async () => {
 
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
+            console.log(this.responseText);
             data = JSON.parse(this.responseText);
             processResult(data);
         }
