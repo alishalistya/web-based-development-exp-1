@@ -1,9 +1,13 @@
 #movie-container {
     position: relative;
     height: 100vh;
-    width: 70vw;
+    width: 72vw;
     background-color: rgba(45, 49, 107, 0.8);
 
+}
+
+.text {
+    font-family: 'Raleway', sans-serif;
 }
 
 #movie-background {
@@ -32,7 +36,7 @@
     position: absolute;
     display: inline;
     top: 45%;
-    left: 15%;
+    left: 14%;
     height: 40vh;
     transform: translate(-50%, -50%);
     z-index: 3;
@@ -44,7 +48,7 @@
     position: absolute;
     display: inline;
     top: 45%;
-    left: 60%;
+    left: 62%;
     height: 40vh;
     transform: translate(-50%, -50%);
     z-index: 3;
@@ -55,26 +59,35 @@
 
 #movie-title {
     position: absolute;
-    display: inline;
     top: 65%;
-    left: 14%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
-    text-align: left;
+    text-align: center;
     font-size: 3em;
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
 }
 
-#movie-year {
+#movie-release {
     position: absolute;
-    display: inline;
-    top: 66%;
-    left: 30%;
+    top: 70%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
-    text-align: left;
-    font-size: 2em;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+}
+
+#movie-duration {
+    position: absolute;
+    top: 72%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    text-align: center;
+    font-size: smaller;
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
 }
@@ -82,47 +95,34 @@
 #movie-director {
     position: absolute;
     display: inline;
-    top: 70%;
-    left: 13%;
+    top: 77%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
-    text-align: left;
+    text-align: center;
     font-size: 1.5em;
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
 }
 
-#movie-description {
-    position: absolute;
-    display: inline;
-    top: 75%;
-    left: 38%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-    text-align: left;
-    font-size: 1em;
-    color: #ffffff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-}
-
-#cast {
-    position: absolute;
-    display: inline;
-    top: 82%;
-    left: 13%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-    text-align: left;
-    font-size: 1.5em;
-    color: #ffffff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-}
-
 .movie-cast {
     position: absolute;
     display: inline;
-    top:87%;
-    left: 13%;
+    top: 81%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    text-align: center;
+    font-size: 1em;
+    color: #ffffff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+
+#movie-description {
+    position: absolute;
+    top: 86%;
+    left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
     text-align: left;
@@ -131,6 +131,689 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
+
 #review-container {
+    position: fixed;
+    height: 100vh;
+    width: 28vw;
+    top: 80px;
+    bottom: auto;
+    left: 75%;
+
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: linear-gradient(to right, #ffffff, #ffffff, rgba(26, 29, 78, 0.7));
+    z-index: 1;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    /* margin: -10px;  */
+}
+.review-card {
+    height: 10vh;
+    width: 22vw;
+    margin-bottom: 2%;
+    margin-left: 2%;
+    padding: 1%;
+    border-radius: 4%;
+    border: 1px solid #2D316B;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+
+    /* flex: 0 0 calc(33% - 20px); 
+    margin:3% 0% 3% 11.5%; 
+    overflow: hidden;
+    border-radius: 4%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border: 1px solid #2D316B;
+    height: 200px;
+    width: 10px; */
+
+}
+
+@media (min-width: 280px) and (max-width: 800px) {
+    #movie-container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(45, 49, 107, 0.8);
     
+    }
+    
+    .text {
+        font-family: 'Raleway', sans-serif;
+    }
+    
+    #movie-background {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: -1; 
+        object-fit: cover;
+        filter: grayscale(100%);
+        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
+    
+    }
+    
+    #about-movie {
+        position: absolute;
+        top: 1%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        z-index:3;
+        text-align: left;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+
+        
+    #movie-trailer {
+        display: none;
+    }
+    
+    #movie-img {
+        position: absolute;
+        top: 27%;
+        left: 50%;
+        height: 40vh;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        object-fit: cover;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    
+    #movie-title {
+        position: absolute;
+        top: 48%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 3em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+    
+    /* #movie-release {
+        position: absolute;
+        top: 51%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+    
+    #movie-duration {
+        position: absolute;
+        top: 52%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: smaller;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    } */
+    #movie-director {
+        position: absolute;
+        top: 54%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 1.5em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+    
+    .movie-cast {
+        position: absolute;
+        display: inline;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 1em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    
+    #movie-description {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: left;
+        font-size: 1em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    
+    #review-container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        top: 80px;
+        bottom: auto;
+        left: 5%;
+    
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
+    }
+    
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        /* margin: -10px;  */
+    }
+    .review-card {
+        height: 10vh;
+        width: 80vw;
+        margin-bottom: 2%;
+        margin-left: 2%;
+        padding: 1%;
+        border-radius: 4%;
+        border: 1px solid #2D316B;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    
+        /* flex: 0 0 calc(33% - 20px); 
+        margin:3% 0% 3% 11.5%; 
+        overflow: hidden;
+        border-radius: 4%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        border: 1px solid #2D316B;
+        height: 200px;
+        width: 10px; */
+    
+    }
+}
+
+@media (min-width: 801px) and (max-width: 1000px) {
+    #movie-container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(45, 49, 107, 0.8);
+    
+    }
+    
+    .text {
+        font-family: 'Raleway', sans-serif;
+    }
+    
+    #movie-background {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: -1; 
+        object-fit: cover;
+        filter: grayscale(100%);
+        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
+    
+    }
+    
+    #about-movie {
+        position: absolute;
+        top: 10%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        z-index:3;
+        text-align: left;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+
+        
+
+    
+    #movie-img {
+        position: absolute;
+        display: inline;
+        top: 35%;
+        left: 14%;
+        height: 23vh;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        object-fit: cover;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    #movie-trailer {
+        position: absolute;
+        display: inline;
+        top: 35%;
+        left: 62%;
+        height: 23vh;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        object-fit: cover;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    
+    #movie-title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 3em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+    
+    #movie-release {
+        font-size: small;
+    }
+    #movie-director {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 1.5em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+    
+    .movie-cast {
+        position: absolute;
+        display: inline;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 1em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    
+    #movie-description {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: left;
+        font-size: 1em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    
+    #review-container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        top: 80px;
+        bottom: auto;
+        left: 5%;
+    
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
+    }
+    
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        /* margin: -10px;  */
+    }
+    .review-card {
+        height: 10vh;
+        width: 80vw;
+        margin-bottom: 2%;
+        margin-left: 2%;
+        padding: 1%;
+        border-radius: 4%;
+        border: 1px solid #2D316B;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    
+        /* flex: 0 0 calc(33% - 20px); 
+        margin:3% 0% 3% 11.5%; 
+        overflow: hidden;
+        border-radius: 4%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        border: 1px solid #2D316B;
+        height: 200px;
+        width: 10px; */
+    
+    }
+}
+
+@media (min-width: 1001px) and (max-width: 1200px) {
+    #movie-container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(45, 49, 107, 0.8);
+    
+    }
+    
+    .text {
+        font-family: 'Raleway', sans-serif;
+    }
+    
+    #movie-background {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: -1; 
+        object-fit: cover;
+        filter: grayscale(100%);
+        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
+    
+    }
+    
+    #about-movie {
+        position: absolute;
+        top: 10%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        z-index:3;
+        text-align: left;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+
+        
+
+    
+    #movie-img {
+        position: absolute;
+        display: inline;
+        top: 35%;
+        left: 14%;
+        height: 27vh;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        object-fit: cover;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    #movie-trailer {
+        position: absolute;
+        display: inline;
+        top: 35%;
+        left: 62%;
+        height: 27vh;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        object-fit: cover;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    
+    #movie-title {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 3em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+    
+    #movie-release {
+        font-size: small;
+    }
+    #movie-director {
+        position: absolute;
+        top: 55%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 1.5em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+    
+    .movie-cast {
+        position: absolute;
+        display: inline;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 1em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    
+    #movie-description {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: left;
+        font-size: 1em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    
+    #review-container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        top: 80px;
+        bottom: auto;
+        left: 5%;
+    
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
+    }
+    
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        /* margin: -10px;  */
+    }
+    .review-card {
+        height: 10vh;
+        width: 80vw;
+        margin-bottom: 2%;
+        margin-left: 2%;
+        padding: 1%;
+        border-radius: 4%;
+        border: 1px solid #2D316B;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    
+        /* flex: 0 0 calc(33% - 20px); 
+        margin:3% 0% 3% 11.5%; 
+        overflow: hidden;
+        border-radius: 4%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        border: 1px solid #2D316B;
+        height: 200px;
+        width: 10px; */
+    
+    }
+}
+
+@media (min-width: 1201px) and (max-width: 1550px) {
+    #movie-container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(45, 49, 107, 0.8);
+    
+    }
+    
+    .text {
+        font-family: 'Raleway', sans-serif;
+    }
+    
+    #movie-background {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        z-index: -1; 
+        object-fit: cover;
+        filter: grayscale(100%);
+        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
+    
+    }
+    
+    #about-movie {
+        position: absolute;
+        top: 10%;
+        left: 25%;
+        transform: translate(-50%, -50%);
+        z-index:3;
+        text-align: left;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+
+        
+
+    
+    #movie-img {
+        position: absolute;
+        display: inline;
+        top: 35%;
+        left: 14%;
+        height: 35vh;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        object-fit: cover;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    #movie-trailer {
+        position: absolute;
+        display: inline;
+        top: 35%;
+        left: 62%;
+        height: 35vh;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        object-fit: cover;
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    
+    #movie-title {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 3em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+    
+    #movie-release {
+        font-size: small;
+    }
+    #movie-director {
+        position: absolute;
+        top: 65%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 1.5em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+    
+    .movie-cast {
+        position: absolute;
+        display: inline;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 1em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    
+    #movie-description {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: left;
+        font-size: 1em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
+    
+    
+    #review-container {
+        position: relative;
+        height: 100vh;
+        width: 100vw;
+        top: 80px;
+        bottom: auto;
+        left: 5%;
+    
+        overflow-y: scroll;
+        overflow-x: hidden;
+        background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
+    }
+    
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        /* margin: -10px;  */
+    }
+    .review-card {
+        height: 10vh;
+        width: 80vw;
+        margin-bottom: 2%;
+        margin-left: 2%;
+        padding: 1%;
+        border-radius: 4%;
+        border: 1px solid #2D316B;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    
+        /* flex: 0 0 calc(33% - 20px); 
+        margin:3% 0% 3% 11.5%; 
+        overflow: hidden;
+        border-radius: 4%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        border: 1px solid #2D316B;
+        height: 200px;
+        width: 10px; */
+    
+    }
 }
