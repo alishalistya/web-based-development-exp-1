@@ -1,4 +1,4 @@
-<form method="post" novalidate>
+<form method="post" class="login" novalidate>
     <h1 class="auth-title">
         Selamat Datang Kembali!
     </h1>

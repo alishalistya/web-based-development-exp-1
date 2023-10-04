@@ -88,7 +88,8 @@ class Movie {
         $sql = 'SELECT DISTINCT year(release_date) year FROM movie ORDER BY year';
 
         $this->db->query($sql);
-
+    } 
+    
     public function getAllMovies()
     {
         $this->db->query("SELECT * FROM movie");
