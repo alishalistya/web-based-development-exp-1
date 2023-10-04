@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/styles/others/navbar.css">
     <link rel="stylesheet" type="text/css" href="/styles/others/movie.css">
 
+    <script type="text/javascript" src="/js/others/debounce.js" defer></script>
     <script type="text/javascript" src="/js/search/search.js" defer></script>
 </head>
 

@@ -6,15 +6,20 @@ class UserController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    // if (post) {
-                    //     $_POST["email"]
-                    //     $_POST["password"]
-                            // $_SESSION["user_id"] 
-                    // }
+
+                    // Validasi Apakah Sudah Login ? 
+                    $auth = Utils::middleware("Authentication");
+                    try {
+                        $auth->isUserLogin();
+                        header("Location: http://localhost:8080/home");
+                    } catch (Exception $e) {
+                        if ($e->getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
                     $data['isLogin'] = true;
-                    // $data["errors"] = [
-                    //     "password" => "Email atau password salah."
-                    // ];
+
                     $loginView = Utils::view("auth", "AuthView", $data);
                     $loginView->render();
                     break;
@@ -30,12 +35,11 @@ class UserController
                     echo json_encode(['redirect' => "http://localhost:8080/home"]);
                     exit;
                     break;
-
                 default:
                     throw new Exception();
             }
         } catch (Exception $e) {
-            http_response_code(405);
+            http_response_code($e->getCode());
         }
     }
 

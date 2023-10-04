@@ -5,7 +5,9 @@
     <title>Login Page</title>
     <link rel="stylesheet" type="text/css" href="/styles/others/main.css">
     <link rel="stylesheet" type="text/css" href="/styles/others/auth.css">
+    <script type="text/javascript" src="/js/others/debounce.js" defer></script>
     <script type="text/javascript" src="/js/auth/login.js" defer></script>
+    <script type="text/javascript" src="/js/auth/register.js" defer></script>
 </head>
 
 <body>
