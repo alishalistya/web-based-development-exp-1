@@ -6,7 +6,7 @@
 }
 
 .auth-decor {
-    background: linear-gradient(359deg, #03034B 22.04%, #3822E1 232.48%);
+    background: linear-gradient(359deg, #03034b 22.04%, #3822e1 232.48%);
     position: relative;
 }
 
@@ -30,7 +30,7 @@ body {
 }
 
 .auth-form-container {
-    display:block;
+    display: block;
     position: relative;
     justify-content: center;
     align-items: center;
@@ -57,13 +57,12 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-
 }
 
 .alt-btn {
     justify-content: center;
     text-align: center;
-    background-color: #BBBBBB;
+    background-color: #bbbbbb;
     color: white;
     max-width: 280px;
 }
@@ -75,4 +74,18 @@ body {
 
 form {
     width: 100%;
+}
+
+.alert {
+    padding-left: 5px;
+    font-size: smaller;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+    color: red;
 }

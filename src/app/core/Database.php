@@ -24,14 +24,18 @@ class Database
 
         try {
             $this->conn = new PDO($db_url, $this->user, $this->pass);
-        } catch (PDOException $err) {
-            die($err->getMessage());
+        } catch (PDOException) {
+            throw new Exception('Bad Gateway', STATUS_BAD_GATEWAY);
         }
     }
 
     public function query(string $query) : void
     {
-        $this->statement = $this->conn->prepare($query);
+        try {
+            $this->statement = $this->conn->prepare($query);
+        } catch (PDOException) {
+            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+        }
     }
 
     public function bind($param, $value, $type = null) : void
@@ -54,23 +58,35 @@ class Database
             }
             $this->statement->bindValue($param, $value, $type);
         } catch (PDOException) {
-            throw new Error();
+            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
         }
     }
 
     public function execute() : void{
-        $this->statement->execute();
+        try {
+            $this->statement->execute();
+        } catch (PDOException) {
+            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+        }
     }
 
     public function resultSet()
     {
-        $this->execute();
-        return $this->statement->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $this->execute();
+            return $this->statement->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+        }
     }
 
     public function single()
     {
-        $this->execute();
-        return $this->statement->fetch(PDO::FETCH_ASSOC);
+        try {
+            $this->execute();
+            return $this->statement->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException) {
+            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+        }
     }
 }
