@@ -40,7 +40,7 @@ class Authentication {
 
         $admin = $this->db->single();
 
-        if (!$admin || !$admin['role']) {
+        if (!$admin || $admin['role'] === 'user') {
             throw new Exception('Unauthorized', STATUS_UNAUTHORIZED);
         }
     }

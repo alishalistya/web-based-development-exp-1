@@ -83,7 +83,7 @@ class AboutController {
         $data['reviewID'] = Utils::model("Movie")->getReviewByMovieIDWithLimit("$movieID", $initialReview, $reviewPerPage);
         foreach ($data['reviewID'] as $reviewID) {
             $reviewID = $reviewID['review_id'];
-            $data['reviews'][] = Utils::model("Review")->getReviewByID("$reviewID");
+            $data['reviews'][] = Utils::model("Review")->getReviewByReviewID("$reviewID");
         };
 
 
