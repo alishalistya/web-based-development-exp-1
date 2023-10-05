@@ -10,7 +10,7 @@
             <ul class="menu">
                 <li><a href="/home">Home</a></li>
                 <li><a href="/movie/search">Search</a> </li>
-                <li><a href="/review">Ratings</a></li>
+                <li><a href="/review/index/1">Ratings</a></li>
                 <li><a href="/user/login">Login</a></li>
             </ul>
         </nav>

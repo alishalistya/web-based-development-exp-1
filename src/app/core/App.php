@@ -23,7 +23,7 @@ class App
             $this->controller = new $controllerClass();
             unset($url[1]);
         }
-
+        
         $methodUrl = $url[2] ?? null;
         if (isset($methodUrl) && method_exists($this->controller, $methodUrl)) {
             $this->method = $methodUrl;
@@ -31,14 +31,14 @@ class App
         } else if (!method_exists($this->controller, $this->method)) {
             $this->controller = $notFoundController;
         }
-
+        
         if (!empty($url)) {
             $this->params = array_values($url);
         }
-
+    
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
-
+    
     public function parseURL(): ?array
     {
         $url = parse_url($_SERVER['REQUEST_URI'])["path"];

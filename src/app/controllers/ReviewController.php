@@ -2,7 +2,7 @@
 
 class ReviewController {
 
-    public function index() 
+    public function index($page) 
     {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
@@ -22,12 +22,14 @@ class ReviewController {
 
                     $review = Utils::model("Review");
                     if ($isAdmin) {
-                        $result = $review->getReviewByID($_SESSION['user_id']);
+                        $result = $review->getAllReview($page);
+                        $count = $review->getCountPage();
                     } else {
-                        $result = $review->getReviewByID($_SESSION['user_id']);
+                        $result = $review->getReviewByID($_SESSION['user_id'], $page);
+                        $count = $review->getCountPage($_SESSION['user_id']);
                     }
 
-                    $reviewView = Utils::view("review", "ReviewView", ['reviews' => $result, 'isAdmin' => $isAdmin]);
+                    $reviewView = Utils::view("review", "ReviewView", ['reviews' => $result, 'isAdmin' => $isAdmin, 'page' => $count]);
                     $reviewView->render();
                     break;
                 default:
