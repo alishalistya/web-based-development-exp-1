@@ -62,17 +62,39 @@
             <?php foreach ($this->data['reviews'] as $review): ?>
                 <?php if ($count >= 10) break; ?>
                     <div class="review-card text">
-                        <p> <?= $review ?> </p>
+                        <p> <?= $review['comment'] ?> </p>
+                        <p> Rating: <?= $review['rate'] ?> </p>
                     </div>
                     <?php $count++; ?>
             <?php endforeach; ?>
         </div>
-        <h3 id="review-end" class="text">
+        <!-- page navigation -->
+        <div class="page-navigation">
+            <div class="page">
+                <?php if ($this->data['page'] > 1): ?>
+                    <a href="movie?title=<?= $this->data['movie']['title'] ?>&page=<?= $this->data['page'] - 1 ?>">
+                        <span class="material-icons">
+                            <
+                        </span>
+                    </a>
+                <?php endif; ?>
+                <span class="page-number">
+                    <?= $this->data['page'] ?>
+                </span>
+                <?php if ($this->data['page'] < $this->data['totalPage']): ?>
+                    <a href="movie?title=<?= $this->data['movie']['title'] ?>&page=<?= $this->data['page'] + 1 ?>">
+                        <span class="material-icons">
+                            >
+                        </span>
+                    </a>
+                <?php endif; ?>
+            </div>
+        <!-- <h3 id="review-end" class="text">
             Reviews from MOI.
         </h3>
         <h4 id="review-end2" class="text">
             Reviews from MOI.
-        </h4>
+        </h4> -->
     </div>
     
 </body>

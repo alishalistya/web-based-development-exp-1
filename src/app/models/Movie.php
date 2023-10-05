@@ -125,6 +125,28 @@ class Movie {
         return $this->db->single();
     }
 
+    public function getReviewByMovieID($id)
+    {
+        $this->db->query("SELECT * FROM movie_review WHERE movie_id = :id");
+        $this->db->bind("id", $id);
+        return $this->db->resultSet();
+    }
+
+    public function getReviewByMovieIDWithLimit($id, $begin, $total)
+    {
+        $this->db->query("SELECT * FROM movie_review WHERE movie_id = :id LIMIT $begin, $total");
+        $this->db->bind("id", $id);
+        return $this->db->resultSet();
+    }
+
+    public function getCountReviewByMovieID($id)
+    {
+        $this->db->query("SELECT COUNT(*) count FROM movie_review WHERE movie_id = :id");
+        $this->db->bind("id", $id);
+        $count = $this->db->single();
+        return $count['count'];
+    }
+
     public function addMovie($data)
     {
         // echo 'okey';

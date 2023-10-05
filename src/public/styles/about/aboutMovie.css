@@ -179,6 +179,41 @@ a {
 
 }
 
+
+.page-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-number {
+    font-size: 18px;
+    margin: 0 10px;
+    color: #333; 
+}
+
+
+.page a {
+    text-decoration: none;
+    font-size: 24px;
+    color: #007BFF; 
+    margin: 0 10px;
+    transition: color 0.3s; 
+}
+
+
+.page a .material-icons {
+    font-size: 24px;
+    vertical-align: middle;
+}
+
+
+.page a:hover {
+    color: #0056b3; 
+}
+
+
 @media (min-width: 280px) and (max-width: 800px) {
     #movie-container {
         position: relative;
