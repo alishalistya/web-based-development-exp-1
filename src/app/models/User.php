@@ -1,5 +1,6 @@
 <?php
 
+// NOTE : UBAH JADI HASH PASSWORD
 class User {
     private $db;
 
@@ -21,5 +22,20 @@ class User {
         } else {
             throw new Exception();
         }
+    }
+
+    public function register($email, $username, $password) {
+        $sql = "INSERT INTO user(username, email, password_h, role)
+        VALUES (:username, :email, :password, 'user')";
+
+        $this->db->query($sql);
+        $this->db->bind('username', $username);
+        $this->db->bind('email', $email);
+        $this->db->bind('password', password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]));
+        // $this->db->bind('password', $password);
+
+        $this->db->execute();
+
+        // validasi row count (?)
     }
 }

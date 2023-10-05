@@ -44,8 +44,41 @@ class UserController
     }
 
     public function register() {
-        $data['isLogin'] = false;
-        $loginView = Utils::view("auth", "AuthView", $data);
-        $loginView->render();
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+
+                    // Validasi Apakah Sudah Login ? 
+                    $auth = Utils::middleware("Authentication");
+                    try {
+                        $auth->isUserLogin();
+                        header("Location: http://localhost:8080/home");
+                    } catch (Exception $e) {
+                        if ($e->getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
+                    $data['isLogin'] = false;
+                    $loginView = Utils::view("auth", "AuthView", $data);
+                    $loginView->render();
+                    break;
+
+                case 'POST':
+                    $userModel = Utils::model("User");
+                    $userModel->register($_POST['email'], $_POST['username'], $_POST['password']);
+
+                    header('Content-Type: application/json');
+                    http_response_code(201);
+                    echo json_encode(['redirect' => "http://localhost:8080/user/login"]);
+                    exit;
+                    break;
+                default:
+                    throw new Exception();
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+        }
+
     }
 }
