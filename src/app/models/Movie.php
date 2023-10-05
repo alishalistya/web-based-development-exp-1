@@ -8,11 +8,29 @@ class Movie {
         $this->db = new Database();
     }
 
+    public function getAllMovies()
+    {
+        $this->db->query("SELECT * FROM movie");
+        return $this->db->resultSet();
+    }
+
     public function getTopMovies() {
         $sql = 'SELECT * FROM movie LIMIT 5';
         $this->db->query($sql);
 
         return $this->db->resultSet();
+    }
+
+    public function getPaginate($page = 1){
+        $sql = 'SELECT * FROM movie';
+        $sql .= " LIMIT :limit OFFSET :offset";
+
+        $this->db->query($sql);
+        $this->db->bind('limit', LIMIT_PAGE);
+        $this->db->bind('offset', ($page - 1) * LIMIT_PAGE);
+        
+        $result = $this->db->resultSet();
+        return $result;
     }
 
     public function getByArgs($name, $sort = 1, $category = 'none', $year = 'none', $page = 1)
@@ -52,6 +70,14 @@ class Movie {
         
         return $result;
     }
+
+    public function getCountAll() {
+        $sql = "SELECT COUNT(*) count from movie";
+        $this->db->query($sql);
+        
+        $count = $this->db->single();
+        return ceil($count['count']/LIMIT_PAGE);
+    }
     
     public function getCountPage($name, $category = "none", $year = "none") 
     {
@@ -90,12 +116,6 @@ class Movie {
         $this->db->query($sql);
         return $this->db->resultSet();
     } 
-    
-    public function getAllMovies()
-    {
-        $this->db->query("SELECT * FROM movie");
-        return $this->db->resultSet();
-    }
 
     public function getMovieByID($id)
     {
@@ -123,6 +143,28 @@ class Movie {
         $this->db->query("SELECT * FROM movie_director WHERE movie_id = :id");
         $this->db->bind("id", $id);
         return $this->db->single();
+    }
+
+    public function getReviewByMovieID($id)
+    {
+        $this->db->query("SELECT * FROM movie_review WHERE movie_id = :id");
+        $this->db->bind("id", $id);
+        return $this->db->resultSet();
+    }
+
+    public function getReviewByMovieIDWithLimit($id, $begin, $total)
+    {
+        $this->db->query("SELECT * FROM movie_review WHERE movie_id = :id LIMIT $begin, $total");
+        $this->db->bind("id", $id);
+        return $this->db->resultSet();
+    }
+
+    public function getCountReviewByMovieID($id)
+    {
+        $this->db->query("SELECT COUNT(*) count FROM movie_review WHERE movie_id = :id");
+        $this->db->bind("id", $id);
+        $count = $this->db->single();
+        return $count['count'];
     }
 
     public function addMovie($data)

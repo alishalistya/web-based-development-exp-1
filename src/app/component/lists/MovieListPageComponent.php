@@ -7,6 +7,9 @@
     <link rel="stylesheet" type="text/css" href="/styles/others/movie.css">
     <link rel="stylesheet" type="text/css" href="/styles/others/navbar.css">
     <link rel="stylesheet" type="text/css" href="/styles/lists/lists.css">
+
+    <script type="text/javascript" src="/js/others/pagination.js" defer></script>
+
 </head>
 <body>
 <?php include(dirname(__DIR__) . '/others/NavbarComponent.php') ?>
@@ -24,5 +27,7 @@
                 <?php endforeach; ?>
             </div>
         </div>
+
+        <?php include(dirname(__DIR__) . '/others/PaginationGroup.php') ?>
 </body>
 </html>

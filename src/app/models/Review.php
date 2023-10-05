@@ -8,6 +8,26 @@ class Review {
         $this->db = new Database();
     }
 
+    public function getReviewByReviewID($id)
+    {
+        $this->db->query("SELECT * FROM review WHERE review_id = :id");
+        $this->db->bind("id", $id);
+        return $this->db->single();
+    }
+
+    public function getAllReviews()
+    {
+        $this->db->query("SELECT * FROM review");
+        return $this->db->resultSet();
+    }
+
+    public function getReviewByReviewID($id)
+    {
+        $this->db->query("SELECT * FROM review WHERE review_id = :id");
+        $this->db->bind("id", $id);
+        return $this->db->single();
+    }
+
     public function getReviewByID($userID, $page)
     {
         $sql = 'SELECT m.movie_id, m.title, m.img_path, r.comment, r.rate, r.review_id, r.created_at, r.update_at

@@ -42,6 +42,7 @@ searchInput &&
 
 prevPage &&
     prevPage.addEventListener("click", async () => {
+        console.log('halo');
         if (currPage === 1) {
             return;
         }
@@ -90,6 +91,9 @@ const searchDebounce = debounce(async () => {
 
     xhr.open("GET", `/movie/fetch/1?q=${searchInput.value}&category=${categoryInput.value}&sort=${sortInput.value}&year=${yearInput.value}`);
 
+    // console.log('\n\nhalo\n');
+    // console.log(categoryInput.value);
+
     xhr.send();
 
     xhr.onreadystatechange = function () {
@@ -103,6 +107,7 @@ const searchDebounce = debounce(async () => {
 
 const processResult = (data) => {
     totalPage = data.page;
+    // console.log(data);
     let resultHTML = "";
     if (data.page === 0) {
         console.log(data.page);

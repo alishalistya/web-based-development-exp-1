@@ -45,6 +45,27 @@
                     <?php $count++; ?>
             <?php endforeach; ?>
         </div>
+        <!-- page navigation -->
+        <div class="page-navigation">
+            <div class="page">
+                <?php if ($this->data['page'] > 1): ?>
+                    <a href="actor?name=<?= $this->data['people']['name'] ?>&page=<?= $this->data['page'] - 1 ?>">
+                        <span class="material-icons">
+                            <
+                        </span>
+                    </a>
+                <?php endif; ?>
+                <span class="page-number">
+                    <?= $this->data['page'] ?>
+                </span>
+                <?php if ($this->data['page'] < $this->data['totalPage']): ?>
+                    <a href="actor?name=<?= $this->data['people']['name'] ?>&page=<?= $this->data['page'] + 1 ?>">
+                        <span class="material-icons">
+                            >
+                        </span>
+                    </a>
+                <?php endif; ?>
+            </div>
     </div>
   
 </body>

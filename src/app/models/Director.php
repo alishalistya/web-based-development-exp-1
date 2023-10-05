@@ -35,6 +35,23 @@ class Director {
         return $this->db->resultSet();
     }
 
+    public function getMovieByDirectorIDWithLimit($id, $begin, $total)
+    {
+        $this->db->query("SELECT * FROM movie_director WHERE director_id = :id LIMIT :begin, :total");
+        $this->db->bind("id", $id);
+        $this->db->bind("begin", $begin);
+        $this->db->bind("total", $total);
+        return $this->db->resultSet();
+    }
+
+    public function getCountMovieByDirectorID($id)
+    {
+        $this->db->query("SELECT COUNT(*) count FROM movie_director WHERE director_id = :id");
+        $this->db->bind("id", $id);
+        $count = $this->db->single();
+        return $count['count'];
+    }
+
     public function addDirector($data)
     {
         // echo 'okey';

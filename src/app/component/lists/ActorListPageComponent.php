@@ -25,5 +25,7 @@
             <?php endforeach; ?>
         </div>
     </div>
+
+    <?php include(dirname(__DIR__) . '/others/PaginationGroup.php') ?>
 </body>
 </html>

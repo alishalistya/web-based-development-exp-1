@@ -35,7 +35,24 @@ class Actor
         $this->db->bind("id", $id);
         return $this->db->resultSet();
     }
-    
+
+    public function getMovieByActorIDWithLimit($id, $begin, $total)
+    {
+        $this->db->query("SELECT * FROM movie_actor WHERE actor_id = :id LIMIT :begin, :total");
+        $this->db->bind("id", $id);
+        $this->db->bind("begin", $begin);
+        $this->db->bind("total", $total);
+        return $this->db->resultSet();
+    }
+
+    public function getCountMovieByActorID($id)
+    {
+        $this->db->query("SELECT COUNT(*) count FROM movie_actor WHERE actor_id = :id");
+        $this->db->bind("id", $id);
+        $count = $this->db->single();
+        return $count['count'];
+    }
+
     public function addActor($data)
     {
         // echo 'okey';

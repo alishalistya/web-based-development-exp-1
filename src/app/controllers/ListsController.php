@@ -2,9 +2,9 @@
 
 class ListsController
 {
-    public function movies() {
+    public function movies($page) {
         $movieModel = Utils::model('Movie');
-        $data["movies"] = $movieModel->getAllMovies();
+        $data["movies"] = $movieModel->getPaginate($page);
         $movieView = Utils::view("lists", "MovieListView", $data);
         $movieView->render();
     }
