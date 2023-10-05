@@ -8,13 +8,6 @@ class Review {
         $this->db = new Database();
     }
 
-    public function getReviewByReviewID($id)
-    {
-        $this->db->query("SELECT * FROM review WHERE review_id = :id");
-        $this->db->bind("id", $id);
-        return $this->db->single();
-    }
-
     public function getAllReviews()
     {
         $this->db->query("SELECT * FROM review");
