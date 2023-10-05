@@ -97,6 +97,13 @@ class Movie {
         return $this->db->resultSet();
     }
 
+    public function getMovieByID($id)
+    {
+        $this->db->query("SELECT * FROM movie WHERE movie_id = :id");
+        $this->db->bind("id", $id);
+        return $this->db->single();
+    }
+
     public function getMovieByTitle($title)
     {
         $this->db->query("SELECT * FROM movie WHERE title = :title");

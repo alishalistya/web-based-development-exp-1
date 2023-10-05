@@ -28,6 +28,13 @@ class Director {
         return $this->db->single();
     }
 
+    public function getMovieByDirectorID($id)
+    {
+        $this->db->query("SELECT * FROM movie_director WHERE director_id = :id");
+        $this->db->bind("id", $id);
+        return $this->db->resultSet();
+    }
+
     public function addDirector($data)
     {
         // echo 'okey';
