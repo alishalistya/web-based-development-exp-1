@@ -8,11 +8,29 @@ class Movie {
         $this->db = new Database();
     }
 
+    public function getAllMovies()
+    {
+        $this->db->query("SELECT * FROM movie");
+        return $this->db->resultSet();
+    }
+
     public function getTopMovies() {
         $sql = 'SELECT * FROM movie LIMIT 5';
         $this->db->query($sql);
 
         return $this->db->resultSet();
+    }
+
+    public function getPaginate($page = 1){
+        $sql = 'SELECT * FROM movie';
+        $sql .= " LIMIT :limit OFFSET :offset";
+
+        $this->db->query($sql);
+        $this->db->bind('limit', LIMIT_PAGE);
+        $this->db->bind('offset', ($page - 1) * LIMIT_PAGE);
+        
+        $result = $this->db->resultSet();
+        return $result;
     }
 
     public function getByArgs($name, $sort = 1, $category = 'none', $year = 'none', $page = 1)
@@ -52,6 +70,14 @@ class Movie {
         
         return $result;
     }
+
+    public function getCountAll() {
+        $sql = "SELECT COUNT(*) count from movie";
+        $this->db->query($sql);
+        
+        $count = $this->db->single();
+        return ceil($count['count']/LIMIT_PAGE);
+    }
     
     public function getCountPage($name, $category = "none", $year = "none") 
     {
@@ -90,12 +116,6 @@ class Movie {
         $this->db->query($sql);
         return $this->db->resultSet();
     } 
-    
-    public function getAllMovies()
-    {
-        $this->db->query("SELECT * FROM movie");
-        return $this->db->resultSet();
-    }
 
     public function getMovieByID($id)
     {
