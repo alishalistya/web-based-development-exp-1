@@ -81,7 +81,6 @@ const processResult = (data) => {
     currPage = 1;
     pageText.innerHTML = `Page <span id="page-number">1</span> of ${data.page}`;
     updateComponentResult(data);
-    
 };
 
 const updateComponentResult = (data) => {
