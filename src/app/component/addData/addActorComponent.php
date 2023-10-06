@@ -1,4 +1,4 @@
-<form action="tambahActor" method="post" class="addMovie" novalidate>
+<form action="tambahActor" method="post" class="addDirector" novalidate>
     <h1 class="auth-title">
         Tambahkan Actor Baru
     </h1>
@@ -6,12 +6,18 @@
    <div class="form-group">
         <label for="title">Name</label>
         <input class="form-input" name="name" type="text" placeholder="Nama Director" />
+        <i>
+            <p id="name-warn" class="hide alert-text">Nggak boleh kosong!</p>
+        </i>
     </div>
 
     <!-- Description -->
     <div class="form-group">
         <label for="description">Description</label>
         <input class="form-input" name="description" type="text" placeholder="Sebuah Deskripsi"/>
+        <i>
+            <p id="description-warn" class="hide alert-text">Isi dulu description-nya woy</p>
+        </i>
     </div>
 
     <!-- Birthdate -->

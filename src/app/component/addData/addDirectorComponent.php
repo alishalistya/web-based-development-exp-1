@@ -1,17 +1,23 @@
-<form action="tambahDirector" method="post" class="addMovie" novalidate>
+<form action="tambahDirector" method="post" class="addDirector" novalidate>
     <h1 class="auth-title">
         Tambahkan Director Baru
     </h1>
     <!-- Name -->
     <div class="form-group">
         <label for="name">Name</label>
-        <input class="form-input" name="name" type="text" placeholder="Nama Director" />
+        <input id = "name" class="form-input" name="name" type="text" placeholder="Nama Director" />
+        <i>
+            <p id="name-warn" class="hide alert-text">Nggak boleh kosong!</p>
+        </i>
     </div>
 
     <!-- Description -->
     <div class="form-group">
         <label for="description">Description</label>
-        <input class="form-input" name="description" type="text" placeholder="Sebuah Deskripsi"/>
+        <input id = "description" class="form-input" name="description" type="text" placeholder="Sebuah Deskripsi"/>
+        <i>
+            <p id="description-warn" class="hide alert-text">isi desc dulu!</p>
+        </i>
     </div>
 
     <!-- Birthdate -->
