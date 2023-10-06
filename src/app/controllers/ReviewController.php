@@ -65,4 +65,28 @@ class ReviewController {
             http_response_code($e->getCode());
         }
     }
+
+    public function insert()
+    {
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    
+
+                    $addReviewView = Utils::view("review", "EditReviewView", ['action' => 'add']);
+                    $addReviewView->render();
+                    break;
+                case 'POST':
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        }
+    }
 }
