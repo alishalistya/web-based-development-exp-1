@@ -2,7 +2,7 @@
 
 class ReviewController {
 
-    public function index($page) 
+    public function index() 
     {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
@@ -22,10 +22,10 @@ class ReviewController {
 
                     $review = Utils::model("Review");
                     if ($isAdmin) {
-                        $result = $review->getAllReview($page);
+                        $result = $review->getAllReview(1);
                         $count = $review->getCountPage();
                     } else {
-                        $result = $review->getReviewByID($_SESSION['user_id'], $page);
+                        $result = $review->getReviewByID($_SESSION['user_id'], 1);
                         $count = $review->getCountPage($_SESSION['user_id']);
                     }
 
@@ -41,6 +41,28 @@ class ReviewController {
             } else {
                 http_response_code($e->getCode());
             }
+        }
+    }
+
+    public function delete()
+    {
+        try {
+            switch ($_SERVER['REQUEST_METHOD']){
+                case 'DELETE': 
+                    $reviewModel = Utils::model("Review");
+
+                    $reviewModel->deleteReviewByID($_GET['review_id']);
+
+                    header('Content-Type: application/json');
+                    echo json_encode(['error' => null ]);
+                    exit;
+                    break;
+
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
         }
     }
 }

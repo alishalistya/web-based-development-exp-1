@@ -25,7 +25,9 @@
         </div>
     </a>
     <div class="review-panel">
-        <button id="edit-btn" class="btn">Edit</button>
+        <?php if(!$isAdmin): ?>
+            <button id="edit-btn" class="btn" data="<?= $review['review_id'] ?>">Edit</button>
+        <?php endif; ?>
         <button id="delete-btn" class="btn" data="<?= $review['review_id'] ?>">Delete</button>
     </div>
 </div>

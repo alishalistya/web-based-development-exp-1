@@ -22,9 +22,11 @@
     <section class="review-section">                
         <div class="review-container">
             <?php foreach ($this->data['reviews'] as $index => $review) : ?>
+                <!-- <div class="review-card-wrap"> -->
                 <? extract(["review" => $review, "isAdmin" => $this->data['isAdmin']]);
                 include(dirname(__DIR__) . '/review/ReviewCardComponent.php');
                 ?>
+                <!-- </div> -->
             <?php endforeach; ?>
         </div>
         <dialog class="modal">

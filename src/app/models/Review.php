@@ -74,4 +74,18 @@ class Review {
         $count = $this->db->single();
         return ceil($count['count']/LIMIT_PAGE);
     }
+
+    public function deleteReviewByID($reviewID) 
+    {
+        $sql = 'DELETE FROM review r WHERE r.review_id = :review_id';
+
+        $this->db->query($sql);
+        $this->db->bind('review_id', $reviewID);
+        $this->db->execute();
+        
+        if ($this->db->rowCount() < 1)
+        {
+            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+        }
+    }  
 }

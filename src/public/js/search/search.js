@@ -42,7 +42,7 @@ searchInput &&
 
 prevPage &&
     prevPage.addEventListener("click", async () => {
-        console.log('halo');
+        console.log("halo");
         if (currPage === 1) {
             return;
         }
@@ -90,9 +90,6 @@ const searchDebounce = debounce(async () => {
     const xhr = new XMLHttpRequest();
 
     xhr.open("GET", `/movie/fetch/1?q=${searchInput.value}&category=${categoryInput.value}&sort=${sortInput.value}&year=${yearInput.value}`);
-
-    // console.log('\n\nhalo\n');
-    // console.log(categoryInput.value);
 
     xhr.send();
 

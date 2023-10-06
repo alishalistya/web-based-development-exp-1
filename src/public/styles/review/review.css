@@ -173,6 +173,9 @@ dialog::backdrop {
         display: flex;
         flex-wrap: wrap;
     }
+    /* .review-card-wrap {
+        display: flex;
+    } */
 
     .review-card {
         width: 100%;
@@ -183,14 +186,13 @@ dialog::backdrop {
         border-radius: 10px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: center;
     }
 
     .review-img img {
         width: 50vw;
         height: auto;
-        margin: 3vh;
-        border-radius: 10px;
+        margin: auto;
         border: 1px solid var(--white);
         /* box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19); */
     }
