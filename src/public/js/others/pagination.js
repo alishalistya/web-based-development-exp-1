@@ -1,4 +1,3 @@
-
 const resultContainer = document.querySelector(".movie-container");
 const pageText = document.querySelector(".page-text");
 const prevPage = document.querySelector(".prev-page");
@@ -30,7 +29,7 @@ const fetchAllData = () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetchAllData(); 
+    fetchAllData();
 });
 
 prevPage &&
@@ -78,7 +77,7 @@ nextPage &&
 const processResult = (data) => {
     console.log(data);
     totalPage = data.page;
-    currPage = 1;           
+    currPage = 1;
     pageText.innerHTML = `Page <span id="page-number">1</span> of ${data.page}`;
     updateComponentResult(data);
 };
@@ -90,11 +89,12 @@ const updateComponentResult = (data) => {
         resultHMTL += `
         <div class="movie-card">
             <a href="/movie/detail/${movie.movie_id}" class="movie-thumbnail">
-                <img src="/media/img/movie/${movie.img_path}" alt="${movie.title}" />
+                <img class="movie-img" src="/media/img/movie/${movie.img_path}" alt="${movie.title}" />
             </a>
             <div class="movie-header">
                 <h4 class="title">${movie.title}</p>
             </div>
+            <button class="card-delete-btn btn btn-primary" data="${movie.movie_id}">Delete</button>
         </div>
         `;
     }

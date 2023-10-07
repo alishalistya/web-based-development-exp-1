@@ -177,6 +177,27 @@ class MovieController
         }
     }
 
+    public function delete() {
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'DELETE':
+                    $movieModel = Utils::model('Movie');
+                    // var_dump();
+                    if ($movieModel -> addMovie($_POST) > 0){
+                        // var_dump($_POST);
+                        header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+                    }
+                    exit;
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+        }
+    }
+    
+
     public function detail() {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {

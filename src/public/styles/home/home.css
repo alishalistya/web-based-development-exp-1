@@ -37,7 +37,7 @@
     font-size: 43px;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px;
+    line-height: normal;
     margin-bottom: 20px;
 }
 
@@ -51,19 +51,40 @@
 .home-recommend-header {
     display: flex;
     justify-content: space-between;
+    flex-direction: row;
     align-items: center;
     margin-top: 32px;
     margin-bottom: 28px;
 }
 
-.home-recommend-header h1 {
+.title-content {
     font-size: 45px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    margin: auto;
+}
+
+.header-title {
+    margin: auto;
 }
 
 .header-buttons {
+    margin-top: 5vh;
     display: flex;
+    flex-direction: row;
     gap: 11px;
+    margin: auto;
+}
+
+@media (max-width: 900px) {
+    .home-recommend-header {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px) {
+    .header-buttons {
+        flex-direction: column;
+    }
 }

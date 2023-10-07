@@ -3,10 +3,13 @@
 
 <head>
     <title>Movie List Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/styles/others/main.css">
     <link rel="stylesheet" type="text/css" href="/styles/others/movie.css">
     <link rel="stylesheet" type="text/css" href="/styles/others/navbar.css">
     <link rel="stylesheet" type="text/css" href="/styles/lists/lists.css">
+    <!-- <link rel="stylesheet" type="text/css" href="/styles/movie/movie.css"> -->
 
     <script type="text/javascript" src="/js/others/pagination.js" defer></script>
 
@@ -20,14 +23,13 @@
                 <a href="/movie/insert" class="btn btn-primary">Add New</a>
             </div>
             <div class="movie-container">
-                <?php foreach ($this->data['movies'] as $index => $movie) : ?>
+                <!-- <?php foreach ($this->data['movies'] as $index => $movie) : ?>
                     <? extract(["movie" => $movie]);
                     include(dirname(__DIR__) . '/movie/MovieComponent.php');
                     ?>
-                <?php endforeach; ?>
+                <?php endforeach; ?> -->
             </div>
+            <?php include(dirname(__DIR__) . '/others/PaginationGroup.php') ?>
         </div>
-
-        <?php include(dirname(__DIR__) . '/others/PaginationGroup.php') ?>
 </body>
 </html>

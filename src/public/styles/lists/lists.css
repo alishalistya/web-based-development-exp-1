@@ -2,14 +2,17 @@
     max-width: 1024px;
     margin: 0 auto;
     margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
 }
 
 .list-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 32px;
-    margin-bottom: 28px;
+    margin: 32px 5vw 28px 5vw;
+    /* margin-top: 32px;
+    margin-bottom: 28px; */
 }
 
 .list-header h1 {

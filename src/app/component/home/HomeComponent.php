@@ -25,7 +25,9 @@
             </div>
         </header>
         <div class="home-recommend-header">
-            <h1>Top Movies For You</h1>
+            <div class="header-title">
+                <h1 class="title-content">Top Movies For You</h1>
+            </div>
             <div class="header-buttons">
                 <a href="movie/catalog/1" class="btn btn-primary">View Films</a>
                 <a href="director/catalog" class="btn btn-primary">View Directors</a>

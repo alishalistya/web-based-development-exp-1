@@ -59,6 +59,12 @@
     line-height: normal;
 } */
 
+.card-delete-btn {
+    background-color: var(--alert);
+    margin: auto;
+    width: 80%;
+}
+
 @media (max-width: 900px) {
     .movie-card {
         flex-basis: 30vw;

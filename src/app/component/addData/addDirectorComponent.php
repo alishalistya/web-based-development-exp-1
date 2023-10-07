@@ -1,12 +1,20 @@
 <form action="insert" method="post" class="addPeople" enctype="multipart/form-data" novalidate>
     <h1 class="auth-title">
-        Tambahkan Director Baru
+        <?php if($isEdit) : ?>
+            Edit Director        
+        <?php else : ?>    
+            Tambahkan Director Baru
+        <?php endif; ?>
     </h1>
 
     <!-- Name -->
     <div class="form-group">
         <label for="name">Name</label>
-        <input id ="name" class="form-input" name="name" type="text" placeholder="Nama Director" />
+        <input id ="name" class="form-input" name="name" type="text" placeholder="Nama Director" 
+            <?php if($isEdit) : ?>
+                value = "<?= $director['name'] ?>"
+            <?php endif; ?>
+        />
         <i>
             <p id="name-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
@@ -15,7 +23,11 @@
     <!-- Description -->
     <div class="form-group">
         <label for="description">Description</label>
-        <input id = "description" class="form-input" name="description" type="text" placeholder="Sebuah Deskripsi"/>
+        <input id = "description" class="form-input" name="description" type="text" placeholder="Sebuah Deskripsi"
+            <?php if($isEdit) : ?>
+                value = "<?= $director['description'] ?>"
+            <?php endif; ?>
+        />
         <i>
             <p id="description-warn" class="hide alert-text">isi desc dulu!</p>
         </i>
@@ -24,7 +36,11 @@
     <!-- Birthdate -->
     <div class="form-group">
         <label for="birthdate">Birthdate</label>
-        <input id = "birthdate" class="form-input" name="birthdate" type="date" placeholder="Sebuah Deskripsi"/>
+        <input id = "birthdate" class="form-input" name="birthdate" type="date" placeholder="Sebuah Deskripsi"
+            <?php if($isEdit) : ?>
+                value = "<?= $director['birth_date'] ?>"
+            <?php endif; ?>
+        />
         <i>
             <p id="birthdate-warn" class="hide alert-text">isi desc dulu!</p>
         </i>

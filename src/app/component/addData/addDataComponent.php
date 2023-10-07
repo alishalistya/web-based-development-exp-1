@@ -34,8 +34,10 @@
             <? if ($this->data["datatype"]== 'movies') {
                 include(dirname(__DIR__) . '/addData/addMovieComponent.php');
             } else if ($this->data["datatype"]== 'director') {
+                $director = $this->data['director'];
                 include(dirname(__DIR__) . '/addData/addDirectorComponent.php');
             } else if ($this->data["datatype"]== 'actor') {
+                $actor = $this->data['actor'];
                 include(dirname(__DIR__) . '/addData/addActorComponent.php');
             } ?>
         </div>

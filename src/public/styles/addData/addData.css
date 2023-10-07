@@ -4,6 +4,11 @@
     display: flexbox;
 }
 
+.auth-title {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+
 .addData-form-container {
     /* display:block;
     position: relative;
