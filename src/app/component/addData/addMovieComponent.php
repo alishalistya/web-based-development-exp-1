@@ -5,7 +5,11 @@
     <!-- Title -->
     <div class="form-group">
         <label for="title">Title</label>
-        <input id="title" class="form-input" name="title" type="text" placeholder="Nama Film" />
+        <input id="title" class="form-input" name="title" type="text" placeholder="Nama Film" 
+            <?php if($isEdit) : ?>
+                value = "<?= $movie['title'] ?>"
+            <?php endif; ?>
+        />
         <i>
             <p id="title-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
@@ -13,7 +17,11 @@
     <!-- Deskripsi -->
     <div class="form-group">
         <label for="description">Deskripsi</label>
-        <input id="description" class="form-input" name="description" type="text" placeholder="Sebuah Deskripsi"/>
+        <input id="description" class="form-input" name="description" type="text" placeholder="Sebuah Deskripsi"
+            <?php if($isEdit) : ?>
+                value = "<?= $movie['description'] ?>"
+            <?php endif; ?>
+        />
         <i>
             <p id="description-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
@@ -22,7 +30,11 @@
     <!-- Release Date -->
     <div class="form-group">
         <label for="release-year">Release Year</label>
-        <input id="year" class="form-input" name="release-year" type="text" placeholder="1996"/>
+        <input id="year" class="form-input" name="release-year" type="text" placeholder="1996"
+            <?php if($isEdit) : ?>
+                value = "<?php $movie['year'] ?>"
+            <?php endif; ?>
+        />
         <i>
             <p id="year-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
@@ -31,7 +43,14 @@
     <!-- Duration -->
     <div class="form-group">
         <label for="duration">Duration (minutes)</label>
-        <input id="duration" class="form-input" name="duration" type="text" placeholder="230"/>
+        <input id="duration" class="form-input" name="duration" type="text" placeholder="230"
+            <?php if($isEdit) : ?>
+                value = "<?php
+                        list($h, $m, $s) = explode(":", $movie['duration']);
+                        echo (($h * 60) + $m);
+                    ?>"
+            <?php endif; ?>
+        />
         <i>
             <p id="duration-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
@@ -52,7 +71,16 @@
             <p id="actors-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
         <div class="selected-actor-container">
-            <!-- <?php include(dirname(__DIR__) . '/others/TagComponent.php') ?> -->
+            <?php if($isEdit) : ?>
+                <?php 
+                    foreach ($movie_actor as $index => $value){
+                        extract(["type" => 'actor', "movie_actor" => $value, "actors" => $this->data["actors"]]);
+                        // print_r($value);
+
+                        include(dirname(__DIR__) . '/others/TagComponent.php'); 
+                    }
+                ?>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -71,7 +99,16 @@
             <p id="directors-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
         <div class="selected-director-container">
-            <!-- <?php include(dirname(__DIR__) . '/others/TagComponent.php') ?> -->
+
+            <?php if($isEdit) : ?>
+                <?php 
+                    foreach ($movie_director as $index => $value){
+                        extract(["type" => "director", "movie_director" => $value, "directors" => $this->data["directors"]]);
+                        // print_r($value);
+                        include(dirname(__DIR__) . '/others/TagComponent.php'); 
+                    }
+                ?>
+            <?php endif; ?>
         </div>
     </div>
 

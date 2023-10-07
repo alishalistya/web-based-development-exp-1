@@ -113,6 +113,48 @@ class MovieController
                     $directorModel = Utils::model('Director');
                     $data["directors"] = $directorModel->getAllDirectors();
 
+                    $data["isEdit"] = false;
+
+                    $addMovieView = Utils::view("addData", "AddDataView", $data);
+                    $addMovieView->render();
+                    break;
+                case 'POST':
+                    $movieModel = Utils::model('Movie');
+                    // var_dump();
+                    if ($movieModel -> addMovie($_POST) > 0){
+                        // var_dump($_POST);
+                        header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+                    }
+                    break;
+                    exit;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+        }
+    }
+
+    public function update() {
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    $movieModel = Utils::model('Movie');
+                    $data["movies"] = $movieModel->getAllMovies();
+                    $data["datatype"] = "movies";
+                    $data["movie"] = $movieModel->getMovieByID($_GET['movie_id']);
+
+                    $data["movie_actor"] = $movieModel->getActorByMovieID($_GET['movie_id']);
+                    $data["movie_director"] = $movieModel->getDirectorByMovieID($_GET['movie_id']);
+
+                    $actorModel = Utils::model('Actor');
+                    $data["actors"] = $actorModel->getAllActor();
+
+                    $directorModel = Utils::model('Director');
+                    $data["directors"] = $directorModel->getAllDirectors();
+
+                    $data["isEdit"] = true;
+
                     $addMovieView = Utils::view("addData", "AddDataView", $data);
                     $addMovieView->render();
                     break;

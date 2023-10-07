@@ -147,7 +147,7 @@ class Movie {
     {
         $this->db->query("SELECT * FROM movie_director WHERE movie_id = :id");
         $this->db->bind("id", $id);
-        return $this->db->single();
+        return $this->db->resultSet();
     }
 
     public function getReviewByMovieID($id)
