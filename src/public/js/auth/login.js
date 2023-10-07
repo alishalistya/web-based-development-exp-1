@@ -68,8 +68,8 @@ loginForm &&
         xhr.open("POST", `/user/login`);
 
         const formLogin = new FormData();
-        formLogin.append("username", usernameInput.value);
-        formLogin.append("password", passwordInput.value);
+        formLogin.append("username", username);
+        formLogin.append("password", password);
 
         xhr.send(formLogin);
 

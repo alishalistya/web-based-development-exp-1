@@ -1,6 +1,6 @@
 /* Header */
 .header {
-    background-color: var(--black);
+    background-color: var(--midnight-blue);
     box-shadow: 1px 1px 5px 0px var(--gray);
     position: sticky;
     top: 0;
@@ -9,7 +9,7 @@
 }
 
 .nav-wrapper {
-    max-width: 1024px;
+    max-width: 90%;
     margin: 0 auto;
 }
 /* Logo */
@@ -28,8 +28,9 @@
     overflow: hidden;
 }
 .menu a {
+    text-decoration: none;
     display: block;
-    padding: 30px;
+    padding: 10px 30px 10px 30px;
     color: var(--white);
 }
 .menu a:hover {
@@ -90,6 +91,7 @@
     transform: rotate(45deg);
     top: 0;
 }
+
 /* Responsiveness */
 @media (min-width: 768px) {
     .nav {

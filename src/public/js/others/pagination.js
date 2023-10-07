@@ -78,10 +78,9 @@ nextPage &&
 const processResult = (data) => {
     console.log(data);
     totalPage = data.page;
-    currPage = 1;
+    currPage = 1;           
     pageText.innerHTML = `Page <span id="page-number">1</span> of ${data.page}`;
     updateComponentResult(data);
-    
 };
 
 const updateComponentResult = (data) => {

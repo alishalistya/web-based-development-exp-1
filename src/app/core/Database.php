@@ -65,8 +65,10 @@ class Database
     public function execute() : void{
         try {
             $this->statement->execute();
-        } catch (PDOException) {
-            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+        } catch (PDOException $e) {
+            // throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+            var_dump($e->getMessage());
+            throw new Exception($e->getMessage(), STATUS_INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -93,5 +95,14 @@ class Database
     public function rowCount() 
     {
         return $this->statement->rowCount();
+    }
+
+    public function lastInsertID() 
+    {
+        try {
+            return $this->conn->lastInsertId();
+        } catch (PDOException) {
+            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+        }
     }
 }

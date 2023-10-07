@@ -41,13 +41,12 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-
 }
 
 .alt-btn {
     justify-content: center;
     text-align: center;
-    background-color: #BBBBBB;
+    background-color: #bbbbbb;
     color: white;
     max-width: 280px;
 }
@@ -59,4 +58,10 @@
 
 form {
     width: 100%;
+}
+
+@media (max-width: 800px) {
+    .addData-form-container {
+        width: 80%;
+    }
 }

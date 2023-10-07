@@ -17,12 +17,17 @@
             </div>
             <div class="review-date">
                 <p class="create-text">Created : (<?= $review['created_at'] ?>)</p>
-                <p class="create-text">Updated : (<?= $review['update_at'] ?>)</p>
+                <p class="update-text">Updated : (<?= $review['update_at'] ?>)</p>
+                <?php if($isAdmin): ?>
+                    <p class="username-text">Username : <?= $review['username'] ?></p>
+                <?php endif; ?>
             </div>
         </div>
     </a>
     <div class="review-panel">
-        <button id="edit-btn" class="btn">Edit</button>
-        <button id="delete-btn"class="btn">Delete</button>
+        <?php if(!$isAdmin): ?>
+            <button id="edit-btn" class="btn" data="<?= $review['review_id'] ?>">Edit</button>
+        <?php endif; ?>
+        <button id="delete-btn" class="btn" data="<?= $review['review_id'] ?>">Delete</button>
     </div>
 </div>
