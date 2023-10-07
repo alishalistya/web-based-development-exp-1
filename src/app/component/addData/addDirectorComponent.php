@@ -25,7 +25,7 @@
         <label for="birth_date">Birthdate</label>
         <input id = "birth_date" class="form-input" name="birth_date" type="date" placeholder="Sebuah Deskripsi"/>
         <i>
-            <p id="birth_date-warn" class="hide alert-text">isi desc dulu!</p>
+            <p id="birthdate-warn" class="hide alert-text">isi desc dulu!</p>
         </i>
     </div>
 

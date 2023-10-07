@@ -24,13 +24,20 @@
     <div class="form-group">
         <label for="birth_date">Birthdate</label>
         <input id = "birthdate" class="form-input" name="birth_date" type="date" placeholder="Sebuah Deskripsi"/>
+        <i>
+            <p id="birthdate-warn" class="hide alert-text">isi desc dulu!</p>
+        </i>
     </div>
 
     <!-- Image -->
     <div class="form-group">
         <label for="photo">Photo</label>
-        <input id = "description" class="form-input" name="photo" type="file" placeholder="Sebuah Deskripsi"/>
+        <input id = "photo" class="form-input" name="photo" type="file" placeholder="Sebuah Deskripsi"/>
+        <i>
+            <p id="photo-warn" class="hide alert-text">isi desc dulu!</p>
+        </i>
     </div>
+
     <button class="btn btn-primary">Submit</button>
 </form>
 
