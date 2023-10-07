@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php 
+    $movie = $this->data['movie'];
+    $edit = $this->data['edited'];
+    if ($edit) {
+        $review = $this->data['review'];
+    }
+?>
 <head>
     <title>Movie</title>
     <meta charset="UTF-8">
@@ -8,16 +15,19 @@
     <link rel="stylesheet" type="text/css" href="/styles/others/main.css">
     <link rel="stylesheet" type="text/css" href="/styles/others/navbar.css">
     <link rel="stylesheet" type="text/css" href="/styles/review/edit-review.css">    
-    <link rel="stylesheet" type="text/css" href="/styles/others/modal.css">    
-    <script type="text/javascript" src="/js/review/delete-review.js" defer></script>
-    <?php 
-        $movie = $this->data['movie'];
-        $edit = $this->data['edited'];
-        $review = [];
-        if ($edit) {
-            $review = $this->data['review'];
-        }
-    ?>
+    <link rel="stylesheet" type="text/css" href="/styles/others/modal.css">   
+    <script type="text/javascript" src="/js/others/debounce.js" defer></script>
+    <?php if($edit): ?>
+        <script type="text/javascript" src="/js/review/update-review.js" defer></script>
+        <script type="text/javascript" defer>
+            const reviewID = "<?= $review['review_id'] ?>";
+        </script>
+    <?php else: ?>
+        <script type="text/javascript" src="/js/review/insert-review.js" defer></script>
+        <script type="text/javascript" defer>
+            const movieID = "<?= $movie['movie_id'] ?>";
+        </script>
+    <?php endif; ?>
 </head>
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
@@ -47,6 +57,9 @@
                             value="10"
                         <?php endif; ?>
                         />
+                        <i>
+                            <p id="rate-warn" class="hide alert-text">Range rating hanya 1 - 10</p>
+                        </i>
                     </div>
                     <div class="form-group">
                         <label for="comment">Comment</label>
@@ -75,7 +88,19 @@
             </div>
         </div>
         <dialog class="modal">
-            <?php include(dirname(__DIR__) . '/modal/ModalComponent.php')?>
+            <?php 
+            if ($edit) {
+                extract([
+                    'titleInfo' => "Anda Akan Mengubah Review", 
+                    'descInfo' => "Data yang telah diubah tidak dapat dikembalikan lagi. Apakah anda ingin melanjutkan ?"
+                ]);
+            } else {
+                extract([
+                    'titleInfo' => "Anda Akan Menambahkan Review", 
+                    'descInfo' => "Data yang telah diunggah akan tertampil pada kolom komentar. Apakah anda ingin melanjutkan ?"
+                ]);
+            }
+            include(dirname(__DIR__) . '/modal/ModalComponent.php')?>
         </dialog>
     </section>
 </body>

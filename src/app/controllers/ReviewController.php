@@ -81,6 +81,13 @@ class ReviewController {
                     $addReviewView->render();
                     break;
                 case 'POST':
+                    $reviewModel = Utils::model("Review");
+
+                    $reviewModel->insertReview($_POST['rate'], $_POST['comment'], $_POST['blur'], $_POST['movie_id'], $_SESSION['user_id']);
+
+                    header('Content-Type: application/json');
+                    echo json_encode(['error' => null ]);
+                    exit;
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
@@ -114,6 +121,13 @@ class ReviewController {
                     $addReviewView->render();
                     break;
                 case 'POST':
+                    $reviewModel = Utils::model("Review");
+
+                    $reviewModel->updateReview($_POST['rate'], $_POST['comment'], $_POST['blur'], $_POST['review_id']);
+
+                    header('Content-Type: application/json');
+                    echo json_encode(['error' => null ]);
+                    exit;
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);

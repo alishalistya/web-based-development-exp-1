@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="modal-panel">
-        <button id="cancel-btn" class="btn">Cancel</button>
-        <button id="confirm-btn" class="btn">Confirm</button>
+        <button id="cancel-btn-modal" class="btn">Cancel</button>
+        <button id="confirm-btn-modal" class="btn">Confirm</button>
     </div>
 </div>

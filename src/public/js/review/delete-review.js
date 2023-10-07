@@ -1,7 +1,15 @@
 const deleteBtns = document.querySelectorAll("#delete-btn");
-const confirmBtn = document.querySelector("#confirm-btn");
-const cancelBtn = document.querySelector("#cancel-btn");
+const editBtns = document.querySelectorAll("#edit-btn");
+const confirmBtn = document.querySelector("#confirm-btn-modal");
+const cancelBtn = document.querySelector("#cancel-btn-modal");
 const modalDelete = document.querySelector(".modal");
+
+editBtns &&
+    editBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            location.replace(`http://localhost:8080/review/update?review_id=${btn.getAttribute("data")}`);
+        });
+    });
 
 deleteBtns &&
     deleteBtns.forEach((btn) => {

@@ -38,8 +38,8 @@ dialog::backdrop {
     color: var(--alert);
 }
 
-#cancel-btn,
-#confirm-btn {
+#cancel-btn-modal,
+#confirm-btn-modal {
     font-size: larger;
     padding: 20px;
     width: 40%;
@@ -51,7 +51,7 @@ dialog::backdrop {
     justify-content: space-around;
 }
 
-#confirm-btn {
+#confirm-btn-modal {
     background-color: var(--alert);
     color: var(--white);
 }
