@@ -1,4 +1,4 @@
-<form action = "tambahMovie" method="post" class="addMovie" novalidate>
+<form action = "insert" method="post" class="addMovie" novalidate>
     <h1 class="auth-title">
         Tambahkan Film Baru
     </h1>
@@ -41,18 +41,18 @@
     <div class="form-group">
         <label for="movie_img">Poster Film</label>
         <input id="poster" class="form-input" name="movie_img" type="file" placeholder="Sebuah Deskripsi"/>
-        <!-- <i>
+        <i>
             <p id="poster-warn" class="hide alert-text">Nggak boleh kosong!</p>
-        </i> -->
+        </i>
     </div>
 
     <!-- Trailer -->
     <div class="form-group">
         <label for="movie-trailer">Trailer</label>
         <input id="trailer" class="form-input" name="movie-trailer" type="file" placeholder="Sebuah Deskripsi"/>
-        <!-- <i>
+        <i>
             <p id="trailer-warn" class="hide alert-text">Nggak boleh kosong!</p>
-        </i> -->
+        </i>
     </div>
 
     <button class="btn btn-primary">Submit</button>

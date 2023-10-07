@@ -11,8 +11,8 @@
 
     <?php if ($this->data["datatype"]== 'movies') : ?>
         <script type="text/javascript" src="/js/addData/addMovie.js" defer></script>
-    <?php elseif ($this->data["datatype"]== 'director'): ?>
-        <script type="text/javascript" src="/js/addData/addDirector.js" defer></script>
+    <?php elseif ($this->data["datatype"]== 'director' || $this->data["datatype"]== 'actor'): ?>
+        <script type="text/javascript" src="/js/addData/addPeople.js" defer></script>
     <?php endif; ?>
     
 </head>

@@ -1,4 +1,4 @@
-<form action="tambahDirector" method="post" class="addDirector" novalidate>
+<form action="insert" method="post" class="addDirector" novalidate>
     <h1 class="auth-title">
         Tambahkan Director Baru
     </h1>
@@ -23,13 +23,19 @@
     <!-- Birthdate -->
     <div class="form-group">
         <label for="birth_date">Birthdate</label>
-        <input class="form-input" name="birth_date" type="date" placeholder="Sebuah Deskripsi"/>
+        <input id = "birth_date" class="form-input" name="birth_date" type="date" placeholder="Sebuah Deskripsi"/>
+        <i>
+            <p id="birth_date-warn" class="hide alert-text">isi desc dulu!</p>
+        </i>
     </div>
 
     <!-- Image -->
     <div class="form-group">
         <label for="photo">Photo</label>
-        <input class="form-input" name="photo" type="file" placeholder="Sebuah Deskripsi"/>
+        <input id = "photo" class="form-input" name="photo" type="file" placeholder="Sebuah Deskripsi"/>
+        <i>
+            <p id="photo-warn" class="hide alert-text">isi desc dulu!</p>
+        </i>
     </div>
 
     <button class="btn btn-primary">Submit</button>

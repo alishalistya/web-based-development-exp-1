@@ -2,24 +2,24 @@ const addForm = document.querySelector(".addDirector");
 
 const nameInput = document.querySelector("#name");
 const descriptionInput = document.querySelector("#description");
-// const birthdateInput = document.querySelector("");
-// const photoInput = document.querySelector("");
+const birthdateInput = document.querySelector("#birth_date");
+const photoInput = document.querySelector("photo");
 
 const nameWarn = document.querySelector("#name-warn");
 const descriptionWarn = document.querySelector("#description-warn");
-// const birthdateWarn = document.querySelector("");
-// const photoWarn = document.querySelector("");
+const birthdateWarn = document.querySelector("#birth_date-warn");
+const photoWarn = document.querySelector("photo-warn");
 
 const nameRegex = /^[a-zA-Z\s]*$/;
 
 let nameValid = false;
 let descriptionValid = false;
-// let birthdayValid = false;
+// let birthdateValid = false;
 // let photoValid = false;
 
 nameInput &&
     nameInput.addEventListener(
-        "keyup",
+        "input",
         debounce(() => {
             const input = nameInput.value;
             if (input == "") {
@@ -43,9 +43,10 @@ nameInput &&
 
 descriptionInput &&
 descriptionInput.addEventListener(
-    "keyup",
+    "input",
     debounce(() => {
         const input = descriptionInput.value;
+        
         if (input == "") {
             console.log(`Tidak Lolos ${input}`);
             descriptionWarn.innerHTML = "Description tidak bisa kosong!";
@@ -62,24 +63,27 @@ descriptionInput.addEventListener(
 
 addForm &&
     addForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
+    
         const name = nameInput.value;
         const desc = descriptionInput.value;
+        const birth_date = birthdateInput.value;
+        const photo = photoInput.value;
+        
+        console.log('test');
+
+        e.preventDefault();
 
         if (!isDataValid(name, desc)){
+            e.preventDefault();
             return;
         }
     });
 
 const isDataValid = (name, desc) => {
     // Name checking
+    console.log(name, desc);
     if (!name) {
         nameWarn.innerHTML = "Please fill out name!";
-        nameWarn.className = "show";
-        nameValid = false;
-    } else if (!nameRegex.test(name)){
-        nameWarn.innerHTML = "Name cannot contain any symbol or number!";
         nameWarn.className = "show";
         nameValid = false;
     } else {
@@ -96,4 +100,32 @@ const isDataValid = (name, desc) => {
         descriptionWarn.className = "hide";
         descriptionValid = true;
     }
+
+    // // Birthday checking
+    // if (!birth_date) {
+    //     birthdateWarn.innerHTML = "Please fill out description!";
+    //     birthdateWarn.className = "show";
+    //     birthdateValid = false;
+    // } else {
+    //     birthdateWarn.className = "hide";
+    //     birthdateValid = true;
+    // }
+
+    // // Birthday checking
+    // if (!photo) {
+    //     photoWarn.innerHTML = "Please fill out description!";
+    //     photoWarn.className = "show";
+    //     photoValid = false;
+    // } else {
+    //     photoWarn.className = "hide";
+    //     photoValid = true;
+    // }
+
+    console.log(nameValid, descriptionValid);
+
+    if (!nameValid || !descriptionValid){
+        return false;
+    }
+
+    return true;
 };

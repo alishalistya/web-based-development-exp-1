@@ -124,14 +124,15 @@ durationInput.addEventListener(
 addForm &&
     addForm.addEventListener("submit", async (e) => {
         console.log("submit");
-        e.preventDefault();
 
         const title = titleInput.value;
         const desc = descriptionInput.value;
         const year = yearInput.value;
         const duration = durationInput.value;
+        console.log(title, desc, year, duration)
 
         if (!isDataValid(title, desc, year, duration)){
+            e.preventDefault();
             console.log("checked");
             return;
         }
@@ -181,4 +182,11 @@ const isDataValid = (title, desc, year, duration) => {
         durationWarn.className = "hide";
         durationValid = true;
     }
+
+    if (!titleValid || !descriptionValid || !yearValid || !durationValid){
+        return false;
+    }
+
+    return true;
+
 };
