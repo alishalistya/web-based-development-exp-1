@@ -1,7 +1,7 @@
 <div class="review-card">
     <a class="review-detail" href="<?= $review['movie_id'] ?>">
         <div class="review-img">
-            <img src="<?= STORAGE_URL ?>/img/movie/<?= $review['img_path'] ?>.jpg" alt="<?= $review["img_path"] ?>" />
+            <img src="<?= STORAGE_URL ?>/img/movie/<?= $review['img_path'] ?>" alt="<?= $review["img_path"] ?>" />
         </div>
         <div class="review-info">
             <div class="review-title">

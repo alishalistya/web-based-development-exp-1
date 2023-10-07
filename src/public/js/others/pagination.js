@@ -90,7 +90,7 @@ const updateComponentResult = (data) => {
         resultHMTL += `
         <div class="movie-card">
             <a href="/movie/detail/${movie.movie_id}" class="movie-thumbnail">
-                <img src="/media/img/movie/${movie.img_path}.jpg" alt="${movie.title}" />
+                <img src="/media/img/movie/${movie.img_path}" alt="${movie.title}" />
             </a>
             <div class="movie-header">
                 <h4 class="title">${movie.title}</p>
