@@ -121,5 +121,10 @@ class Actor
 
     }
 
-   
+    public function getMovieActorbyMovieID ($id)
+    {
+        $this->db->query("SELECT * FROM movie_actor ma INNER JOIN actor a ON ma.actor_id = a.actor_id WHERE ma.movie_id = :id");
+        $this->db->bind("id", $id);
+        return $this->db->resultSet();
+    }
 }

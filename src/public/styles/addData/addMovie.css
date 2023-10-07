@@ -53,3 +53,8 @@ select {
 select:focus {
     outline: none;
 }
+
+.auth-title {
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}

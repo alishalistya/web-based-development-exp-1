@@ -118,4 +118,10 @@ class Director {
         return $pictureName;
     }
 
+    public function getMovieDirectorByMovieID($id)  {
+        $this->db->query("SELECT * FROM movie_director md INNER JOIN director d ON md.director_id = d.director_id WHERE md.movie_id = :id");
+        $this->db->bind("id", $id);
+        return $this->db->resultSet();
+    }
+    
 }

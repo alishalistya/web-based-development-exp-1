@@ -144,14 +144,16 @@ class MovieController
                     $data["datatype"] = "movies";
                     $data["movie"] = $movieModel->getMovieByID($_GET['movie_id']);
 
-                    $data["movie_actor"] = $movieModel->getActorByMovieID($_GET['movie_id']);
-                    $data["movie_director"] = $movieModel->getDirectorByMovieID($_GET['movie_id']);
+                    $movie_actor = $movieModel->getActorByMovieID($_GET['movie_id']);
+                    $movie_director= $movieModel->getDirectorByMovieID($_GET['movie_id']);
 
                     $actorModel = Utils::model('Actor');
                     $data["actors"] = $actorModel->getAllActor();
+                    $data["movie_actor"] = $actorModel->getMovieActorByMovieID($_GET['movie_id']);
 
                     $directorModel = Utils::model('Director');
                     $data["directors"] = $directorModel->getAllDirectors();
+                    $data["movie_director"] = $directorModel->getMovieDirectorByMovieID($_GET['movie_id']);
 
                     $data["isEdit"] = true;
 
