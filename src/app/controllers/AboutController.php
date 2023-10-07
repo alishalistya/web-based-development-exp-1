@@ -131,8 +131,11 @@ class AboutController {
         $movieID = $data['movie']['movie_id'];
 
         $data['directorID'] = Utils::model("Movie")->getDirectorByMovieID("$movieID");
-        $directorID = $data['directorID']['director_id'];
-        $data['director'] = Utils::model("Director")->getDirectorByID("$directorID");
+        foreach ($data['directorID'] as $directorID) {
+            $directorID = $directorID['director_id'];
+            $data['director'][] = Utils::model("Director")->getDirectorByID("$directorID");
+        };
+
 
         $data['actorID'] = Utils::model("Movie")->getActorByMovieID("$movieID");
         foreach ($data['actorID'] as $actorID) {
@@ -151,7 +154,7 @@ class AboutController {
         $data['reviewID'] = Utils::model("Movie")->getReviewByMovieIDWithLimit("$movieID", $initialReview, $reviewPerPage);
         foreach ($data['reviewID'] as $reviewID) {
             $reviewID = $reviewID['review_id'];
-            $data['reviews'][] = Utils::model("Review")->getReviewAndUserNameByReviewID("$reviewID");
+            $data['reviews'][] = Utils::model("Review")->getReviewByReviewID("$reviewID");
         };
 
         $movieView = Utils::view("about", "AboutMovieView", $data);

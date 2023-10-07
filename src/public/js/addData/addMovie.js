@@ -145,10 +145,10 @@ const isDataValid = (title, desc, year, duration) => {
         titleWarn.innerHTML = "Please fill out name!";
         titleWarn.className = "show";
         titleValid = false;
-        // } else if (!nameRegex.test(name)){
-        //     titleWarn.innerHTML = "Name cannot contain any symbol or number!";
-        //     titleWarn.className = "show";
-        //     titleValid = false;
+    } else if (!nameRegex.test(name)){
+        titleWarn.innerHTML = "Name cannot contain any symbol or number!";
+        titleWarn.className = "show";
+        titleValid = false;
     } else {
         titleWarn.className = "hide";
         titleValid = true;
