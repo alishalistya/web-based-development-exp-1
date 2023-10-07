@@ -16,8 +16,9 @@ class User {
         $this->db->bind('username', $username);
 
         $user_from_db = $this->db->single();
+        
 
-        if ($user_from_db && $user_from_db['password_h'] === $password) {
+        if ($user_from_db && password_verify($password, $user_from_db['password_h'])) {
             return $user_from_db['user_id'];
         } else {
             throw new Exception();

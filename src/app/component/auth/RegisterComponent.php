@@ -1,4 +1,4 @@
-<form class="register">
+<form action = "register" class="register">
     <h1 class="auth-title">
         Silahkan Daftarkan Dirimu!
     </h1>
