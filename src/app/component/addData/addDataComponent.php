@@ -9,7 +9,11 @@
 
     <script type="text/javascript" src="/js/others/debounce.js" defer></script>
 
-    <script type="text/javascript" src="/js/addData/addDirector.js" defer></script>
+    <?php if ($this->data["datatype"]== 'movies') : ?>
+        <script type="text/javascript" src="/js/addData/addMovie.js" defer></script>
+    <?php elseif ($this->data["datatype"]== 'director'): ?>
+        <script type="text/javascript" src="/js/addData/addDirector.js" defer></script>
+    <?php endif; ?>
     
 </head>
 

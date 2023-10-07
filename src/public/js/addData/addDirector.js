@@ -70,8 +70,6 @@ addForm &&
         if (!isDataValid(name, desc)){
             return;
         }
-
-
     });
 
 const isDataValid = (name, desc) => {
