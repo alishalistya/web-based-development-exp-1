@@ -107,6 +107,12 @@ class MovieController
                     $data["movies"] = $movieModel->getAllMovies();
                     $data["datatype"] = "movies";
                     
+                    $actorModel = Utils::model('Actor');
+                    $data["actors"] = $actorModel->getAllActor();
+
+                    $directorModel = Utils::model('Director');
+                    $data["directors"] = $directorModel->getAllDirectors();
+
                     $addMovieView = Utils::view("addData", "AddDataView", $data);
                     $addMovieView->render();
                     break;

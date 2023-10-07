@@ -11,7 +11,7 @@ class Actor
 
     public function getAllActor()
     {
-        $this->db->query("SELECT * FROM actor");
+        $this->db->query("SELECT * FROM actor ORDER BY name");
         return $this->db->resultSet();
     }
 

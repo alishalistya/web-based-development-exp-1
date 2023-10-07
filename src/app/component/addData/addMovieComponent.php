@@ -37,6 +37,44 @@
         </i>
     </div>
 
+    <div class="form-group">
+        <label for="actors">Actor</label>
+        <div class="select-actor">
+            <select name="actors" id="actors">
+                <?php foreach ($this->data["actors"] as $index => $actor) : ?>
+                    <option value="<?= htmlspecialchars(json_encode(array('id' => $actor['actor_id'], 'name' => $actor['name']))) ?>" >
+                        <?= $actor['name'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <i>
+            <p id="actors-warn" class="hide alert-text">Nggak boleh kosong!</p>
+        </i>
+        <div class="selected-actor-container">
+            <!-- <?php include(dirname(__DIR__) . '/others/TagComponent.php') ?> -->
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="directors">Actor</label>
+        <div class="select-director">
+            <select name="directors" id="directors">
+                <?php foreach ($this->data["directors"] as $index => $director) : ?>
+                    <option value="<?= htmlspecialchars(json_encode(array('id' => $director['director_id'], 'name' => $director['name']))) ?>" >
+                        <?= $director['name'] ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <i>
+            <p id="directors-warn" class="hide alert-text">Nggak boleh kosong!</p>
+        </i>
+        <div class="selected-director-container">
+            <!-- <?php include(dirname(__DIR__) . '/others/TagComponent.php') ?> -->
+        </div>
+    </div>
+
     <!-- Image -->
     <div class="form-group">
         <label for="movie_img">Poster Film</label>

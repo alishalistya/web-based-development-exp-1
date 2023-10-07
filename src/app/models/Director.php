@@ -10,7 +10,7 @@ class Director {
 
     public function getAllDirectors()
     {
-        $this->db->query("SELECT * FROM director");
+        $this->db->query("SELECT * FROM director ORDER BY name");
         return $this->db->resultSet();
     }
 
