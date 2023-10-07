@@ -33,7 +33,7 @@
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
     <section class="edit-section">                
         <div class="movie-container">
-            <img id="movie-img" src="../../../public/media/img/movie/<?= $movie['img_path'] ?>.jpg" alt="<?= $movie['title'] ?>">
+            <img id="movie-img" src="../../../public/media/img/movie/<?= $movie['img_path'] ?>" alt="<?= $movie['title'] ?>">
             <h2 class="movie-desc"><?= $movie['title'] ?> (<?= $movie['year']?>)</h2>
         </div>
         <div class="form-container">

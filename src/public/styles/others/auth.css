@@ -89,3 +89,21 @@ i p {
     display: block;
     color: red;
 }
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+
+    .auth-container {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    
+    .auth-decor {
+        display: none;
+    }
+
+    .auth-form-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+    }
+}

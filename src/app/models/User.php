@@ -17,7 +17,7 @@ class User {
 
         $user_from_db = $this->db->single();
 
-        if ($user_from_db && $user_from_db['password_h'] === $password) {
+        if ($user_from_db && password_verify($password, $user_from_db['password_h'])) {
             return $user_from_db['user_id'];
         } else {
             throw new Exception();
@@ -29,13 +29,14 @@ class User {
         VALUES (:username, :email, :password, 'user')";
 
         $this->db->query($sql);
+        // TODO : username harus unik
         $this->db->bind('username', $username);
         $this->db->bind('email', $email);
         $this->db->bind('password', password_hash($password, PASSWORD_BCRYPT, ['cost' => 12]));
         // $this->db->bind('password', $password);
 
         $this->db->execute();
-
+        // TODO : 
         // validasi row count (?)
     }
 

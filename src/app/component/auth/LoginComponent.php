@@ -1,4 +1,4 @@
-<form class="login">
+<form action= "login" class="login">
     <h1 class="auth-title">
         Selamat Datang Kembali!
     </h1>

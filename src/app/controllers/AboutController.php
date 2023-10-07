@@ -9,15 +9,15 @@ class AboutController {
     }
 
     public function actor() {
-        if (!isset($_GET['name'])) {
+        if (!isset($_GET['id'])) {
             $notFound = Utils::view("notfound", "NotFoundView");
             $notFound->render();
             exit;
         }
 
-        $actorChosen = $_GET['name'];
+        $actorChosen = $_GET['id'];
         $data['title'] = 'Actor';
-        $data['people'] = Utils::model("Actor")->getActorByName("$actorChosen");
+        $data['people'] = Utils::model("Actor")->getActorByID("$actorChosen");
 
         if ($data['people'] == null) {
             $notFound = Utils::view("notfound", "NotFoundView");
@@ -50,9 +50,9 @@ class AboutController {
     }
 
     public function updateActor() {
-       $actorChosen = $_POST['nameInput'];
+       $actorChosen = $_POST['idInput'];
        if(Utils::model("Actor")->updateActor($_POST, $_FILES) > 0) {
-            header('Location: actor?name='.$actorChosen);
+            header('Location: actor?id='.$actorChosen);
             exit;
         } else {
             header('Location: home');
@@ -61,15 +61,15 @@ class AboutController {
     }
 
     public function director() {
-        if (!isset($_GET['name'])) {
+        if (!isset($_GET['id'])) {
             $notFound = Utils::view("notfound", "NotFoundView");
             $notFound->render();
             exit;
         }
 
-        $directorChosen = $_GET['name'];
+        $directorChosen = $_GET['id'];
         $data['title'] = 'Director';
-        $data['people'] = Utils::model("Director")->getDirectorByName("$directorChosen");
+        $data['people'] = Utils::model("Director")->getDirectorByID("$directorChosen");
 
         if ($data['people'] == null) {
             $notFound = Utils::view("notfound", "NotFoundView");
@@ -101,9 +101,9 @@ class AboutController {
     }
 
     public function updateDirector() {
-       $directorChosen = $_POST['nameInput'];
+       $directorChosen = $_POST['idInput'];
        if(Utils::model("Director")->updateDirector($_POST, $_FILES) > 0) {
-            header('Location: director?name='.$directorChosen);
+            header('Location: director?id='.$directorChosen);
             exit;
         } else {
             header('Location: home');
@@ -113,14 +113,14 @@ class AboutController {
 
     public function movie() {
 
-        if (!isset($_GET['title'])) {
+        if (!isset($_GET['id'])) {
             $notFound = Utils::view("notfound", "NotFoundView");
             $notFound->render();
             exit;
         }
 
-        $movieChosen = $_GET['title'];
-        $data['movie'] = Utils::model("Movie")->getMovieByTitle("$movieChosen");
+        $movieChosen = $_GET['id'];
+        $data['movie'] = Utils::model("Movie")->getMovieByID("$movieChosen");
 
         if ($data['movie'] == null) {
             $notFound = Utils::view("notfound", "NotFoundView");
@@ -163,9 +163,9 @@ class AboutController {
     }
 
     public function updateMovie() {
-       $movieChosen = $_POST['titleInput'];
+       $movieChosen = $_POST['idInput'];
        if(Utils::model("Movie")->updateMovie($_POST, $_FILES) > 0) {
-            header('Location: movie?title='.$movieChosen);
+            header('Location: movie?id='.$movieChosen);
             exit;
         } else {
             header('Location: home');

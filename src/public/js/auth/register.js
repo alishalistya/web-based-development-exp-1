@@ -11,7 +11,7 @@ const registerWarn = document.querySelector("#register-warn");
 // NOTE : VALIDASI BELUM
 
 const regex = /^\w+$/;
-const emailRegex = /^\w+$/;
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 let usernameValid = false;
 let passwordValid = false;
@@ -24,7 +24,7 @@ emailInput &&
             const input = emailInput.value;
             if (!emailRegex.test(input)) {
                 // console.log(`Tidak Lolos ${input}`);
-                emailWarn.innerHTML = "Format Username Salah!";
+                emailWarn.innerHTML = "Masukkan email yang benar!";
                 emailWarn.className = "show";
                 emailValid = false;
             } else {
@@ -83,7 +83,7 @@ registerForm &&
         const username = usernameInput.value;
         const password = passwordInput.value;
 
-        if (!isValid(email, username, password)) {
+        if (!isRegisterValid(email, username, password)) {
             return;
         }
 
