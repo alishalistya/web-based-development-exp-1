@@ -1,4 +1,4 @@
-<form action="insert" method="post" class="addDirector" novalidate>
+<form action="insert" method="post" class="addDirector" enctype="multipart/form-data" novalidate>
     <h1 class="auth-title">
         Tambahkan Director Baru
     </h1>

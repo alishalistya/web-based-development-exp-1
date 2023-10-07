@@ -9,7 +9,6 @@ const loginWarn = document.querySelector("#login-warn");
 // NOTE : VALIDASI BELUM
 
 const regex = /^\w+$/;
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 let usernameValid = false;
 let passwordValid = false;
