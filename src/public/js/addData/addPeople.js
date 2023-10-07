@@ -11,11 +11,12 @@ const birthdateWarn = document.querySelector("#birthdate-warn");
 const photoWarn = document.querySelector("#photo-warn");
 
 const nameRegex = /^[a-zA-Z\s]*$/;
+const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
 
 let nameValid = false;
 let descriptionValid = false;
-// let birthdateValid = false;
-// let photoValid = false;
+let birthdateValid = false;
+let photoValid = false;
 
 nameInput &&
     nameInput.addEventListener(
@@ -87,9 +88,14 @@ addForm &&
         const desc = descriptionInput.value;
         const birth_date = birthdateInput.value;
 
-        if (photoInput.files.length == 0 && !isDataValid(name, desc, birth_date)){
-            e.preventDefault();
-            return;
+        // console.log(photoInput.files.length == 0);
+
+        if (!isDataValid(name, desc, birth_date)){
+            if (photoInput.files.length == 0){
+                e.preventDefault();
+                return;
+            }
+            
         }
     });
 
@@ -98,6 +104,10 @@ const isDataValid = (name, desc, birth_date) => {
     console.log(name, desc);
     if (!name) {
         nameWarn.innerHTML = "Please fill out name!";
+        nameWarn.className = "show";
+        nameValid = false;
+    } else if (!nameRegex.test(name)){
+        nameWarn.innerHTML = "Name cannot contain any symbol or number!";
         nameWarn.className = "show";
         nameValid = false;
     } else {
@@ -118,6 +128,10 @@ const isDataValid = (name, desc, birth_date) => {
     // Birthday checking
     if (!birth_date) {
         birthdateWarn.innerHTML = "Please fill out description!";
+        birthdateWarn.className = "show";
+        birthdateValid = false;
+    } else if (!dateRegex.test(birth_date)){
+        birthdateWarn.innerHTML = "Please include a valid date!";
         birthdateWarn.className = "show";
         birthdateValid = false;
     } else {
