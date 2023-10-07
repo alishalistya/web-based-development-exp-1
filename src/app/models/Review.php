@@ -16,7 +16,10 @@ class Review {
 
     public function getReviewByReviewID($id)
     {
-        $this->db->query("SELECT * FROM review WHERE review_id = :id");
+        $this->db->query("SELECT * FROM review r
+        INNER JOIN user_review ur ON ur.review_id = r.review_id
+        INNER JOIN movie_review mr ON mr.review_id = r.review_id 
+        WHERE r.review_id = :id");
         $this->db->bind("id", $id);
         return $this->db->single();
     }

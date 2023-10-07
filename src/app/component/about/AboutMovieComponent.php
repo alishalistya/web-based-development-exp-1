@@ -25,7 +25,7 @@
             <?= $this->data['movie']['title'] ?>
         </h1>
         <p id="movie-release" class="text">
-                <?= $this->data['movie']['release_date'] ?>
+                <?= $this->data['movie']['year'] ?>
         </p>
         <p id="movie-duration" class="text">
                 <?= $this->data['movie']['duration'] ?>

@@ -1,4 +1,4 @@
-<div class="modal-delete-group">
+<div class="modal-group">
     <div class="modal-delete-info">
         <div class="info-icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
@@ -7,14 +7,14 @@
             </svg>
         </div>
         <div class="info-title">
-            <h1>Anda Akan Menghapus Review</h1>
+            <h1><?= $titleInfo ?></h1>
         </div>
         <div class="info-desc">
-            <p>Data yang telah dihapus tidak dapat dikembalikan lagi. Apakah anda ingin melanjutkan ?</p>
+            <p><?= $descInfo ?></p>
         </div>
     </div>
-    <div class="modal-delete-panel">
+    <div class="modal-panel">
         <button id="cancel-btn" class="btn">Cancel</button>
-        <button id="confirm-btn" class="btn">Delete</button>
+        <button id="confirm-btn" class="btn">Confirm</button>
     </div>
 </div>

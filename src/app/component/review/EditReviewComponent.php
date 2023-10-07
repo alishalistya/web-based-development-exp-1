@@ -7,42 +7,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/styles/others/main.css">
     <link rel="stylesheet" type="text/css" href="/styles/others/navbar.css">
-    <link rel="stylesheet" type="text/css" href="/styles/review/review.css">    
+    <link rel="stylesheet" type="text/css" href="/styles/review/edit-review.css">    
+    <link rel="stylesheet" type="text/css" href="/styles/others/modal.css">    
     <script type="text/javascript" src="/js/review/delete-review.js" defer></script>
     <?php 
         $movie = $this->data['movie'];
-        $action = $this->data['action'];
+        $edit = $this->data['edited'];
+        $review = [];
+        if ($edit) {
+            $review = $this->data['review'];
+        }
     ?>
 </head>
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
     <section class="edit-section">                
         <div class="movie-container">
-            
+            <img id="movie-img" src="../../../public/media/img/movie/<?= $movie['img_path'] ?>.jpg" alt="<?= $movie['title'] ?>">
+            <h2 class="movie-desc"><?= $movie['title'] ?> (<?= $movie['year']?>)</h2>
         </div>
         <div class="form-container">
-            <form class="edit-form" data="<?= $movie_id ?>">
+            <div class="edit-form" data="<?= $movie_id ?>">
                 <header class="form-header">
                     <h1 class="form-title">
-                        <?php if($action === 'add') : ?>
+                        <?php if($edit) : ?>
                             Edit Review
                         <?php else : ?>
                             Add Review
                         <?php endif; ?>
                     </h1>
                 </header>
-                <div class="form-group">
-                    <label for="rate">Description</label>
-                    <input class="form" name="rate" type="number" placeholder="1" min="1" max="10" value="5"/>
+                <div class="form-body">
+                    <div class="form-group">
+                        <label for="rate">Rate</label>
+                        <input id="rate-input" class="form-input" name="rate" type="number" placeholder="1" min="1" max="10" 
+                        <?php if($edit) : ?>
+                            value=<?= $review['rate'] ?>
+                        <?php else : ?>
+                            value="10"
+                        <?php endif; ?>
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comment</label>
+                        <?php if($edit) : ?>
+                            <textarea id="comment-input" class="form-input" name="comment" type="text"><?= $review['comment'] ?></textarea>
+                        <?php else : ?>
+                            <textarea id="comment-input" class="form-input" name="comment" type="text" placeholder="Sebuah Deskripsi"></textarea>
+                        <?php endif; ?>
+                    </div>
+                    <div class="form-horizontal">
+                        <label for="blur">Blur your name ?</label>
+                        <input id="blur-input" class="form-input-checkbox" name="blur" type="checkbox" placeholder="Sebuah Deskripsi" value="1" 
+                        <?php if($edit && $review['is_blur_name']) : ?>
+                            checked
+                        <?php endif; ?>
+                        />
+                    </div>
+                <div class="form-btns">
+                    <div class="cancel-btn">
+                        <button class="btn btn-primary">Discard</button>
+                    </div>
+                    <div class="submit-btn">
+                        <button class="btn btn-primary">Submit</button>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <input class="form-input" name="description" type="text" placeholder="Sebuah Deskripsi" value="ini valu yang suddah ada"/>
-                </div>
-            </form>
+            </div>
         </div>
         <dialog class="modal">
-            <?php include(dirname(__DIR__) . '/modal/DeleteReviewModal.php')?>
+            <?php include(dirname(__DIR__) . '/modal/ModalComponent.php')?>
         </dialog>
     </section>
 </body>

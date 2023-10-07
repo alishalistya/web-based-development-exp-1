@@ -71,9 +71,46 @@ class ReviewController {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
 
-                    $addReviewView = Utils::view("review", "EditReviewView", ['action' => 'add']);
+                    $movieModel = Utils::model("Movie");
+                    $movie = $movieModel->getMovieByID($_GET['movie_id']);
+
+                    $addReviewView = Utils::view("review", "EditReviewView", ['edited' => false, 'movie' => $movie]);
+                    $addReviewView->render();
+                    break;
+                case 'POST':
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        }
+    }
+
+    public function update()
+    {
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
+                    $reviewModel = Utils::model("Review");
+                    $review = $reviewModel->getReviewByReviewID($_GET['review_id']);
+
+                    // var_dump($review);
+
+                    $movieModel = Utils::model("Movie");
+                    $movie = $movieModel->getMovieByID($review['movie_id']);
+
+                    $addReviewView = Utils::view("review", "EditReviewView", ['edited' => true, 'review' => $review, 'movie' => $movie ]);
                     $addReviewView->render();
                     break;
                 case 'POST':

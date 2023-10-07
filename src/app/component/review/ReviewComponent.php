@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="/styles/others/main.css">
     <link rel="stylesheet" type="text/css" href="/styles/others/navbar.css">
     <link rel="stylesheet" type="text/css" href="/styles/review/review.css">    
+    <link rel="stylesheet" type="text/css" href="/styles/others/modal.css">    
     <script type="text/javascript" src="/js/review/delete-review.js" defer></script>
 </head>
 <body>
@@ -30,7 +31,12 @@
             <?php endforeach; ?>
         </div>
         <dialog class="modal">
-            <?php include(dirname(__DIR__) . '/modal/DeleteReviewModal.php')?>
+            <?php extract([
+                'titleInfo' => "Anda Akan Menghapus Review", 
+                'descInfo' => "Data yang telah dihapus tidak dapat dikembalikan lagi. Apakah anda ingin melanjutkan ?"
+            ]);
+            include(dirname(__DIR__) . '/modal/ModalComponent.php')
+            ?>
         </dialog>
     </section>
 </body>

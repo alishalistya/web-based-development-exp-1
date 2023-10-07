@@ -1,0 +1,84 @@
+.modal {
+    position: fixed;
+    width: 50vw;
+    height: 40vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+dialog::backdrop {
+    background-color: rgba(26, 29, 78, 0.3);
+}
+
+.modal-group {
+    width: 100%;
+    height: 100%;
+}
+
+.info-icon {
+    width: 100%;
+    display: flex;
+}
+
+.info-title,
+.info-desc {
+    padding: 5px;
+    text-align: center;
+}
+
+.bi-exclamation-triangle {
+    margin: auto;
+    color: var(--alert);
+}
+
+#cancel-btn,
+#confirm-btn {
+    font-size: larger;
+    padding: 20px;
+    width: 40%;
+}
+
+.modal-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#confirm-btn {
+    background-color: var(--alert);
+    color: var(--white);
+}
+
+@media (max-width: 900px) {
+    .modal {
+        height: 50vh;
+    }
+}
+
+@media (max-width: 600px) {
+    .modal-panel {
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-around; */
+    }
+
+    #cancel-btn,
+    #confirm-btn {
+        margin: auto;
+        margin-top: 20px;
+        font-size: larger;
+        padding: 20px;
+        width: 80%;
+    }
+
+    .modal {
+        height: 70vh;
+    }
+}
