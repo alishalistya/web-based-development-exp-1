@@ -57,7 +57,7 @@
     </div>
 
     <div class="form-group">
-        <label for="directors">Actor</label>
+        <label for="directors">Director</label>
         <div class="select-director">
             <select name="directors" id="directors">
                 <?php foreach ($this->data["directors"] as $index => $director) : ?>

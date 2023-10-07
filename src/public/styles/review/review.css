@@ -30,10 +30,16 @@
     justify-content: space-between;
 }
 
-.review-img img {
+.review-img {
+    display: flex;
+    padding-left: 2vh;
+    padding-right: 2vh;
+}
+
+.review-img-content {
     width: 10vw;
     height: auto;
-    margin: 1vh;
+    margin: auto;
     border-radius: 10px;
     border: 1px solid var(--white);
     /* box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19); */
@@ -80,7 +86,8 @@
 }
 
 .review-panel {
-    margin: 0vh 3vh 0vh 3vh;
+    margin: auto;
+    margin-right: 3vh;
     display: flex;
     flex-direction: column;
 }
@@ -102,67 +109,50 @@
 }
 
 @media (max-width: 600px) {
-    .review-container {
-        width: 100%;
-        margin: auto;
-        display: flex;
-        flex-wrap: wrap;
-    }
-    /* .review-card-wrap {
-        display: flex;
-    } */
-
     .review-card {
-        width: 100%;
         height: auto;
-        margin: 3vh 0 3vh 0;
-        background-color: var(--midnight-blue);
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .review-img {
+        margin: auto;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+
+    .review-img-content {
+        width: 50vw;
+    }
+
+    .review-info {
         display: flex;
         flex-direction: column;
         justify-content: center;
-    }
-
-    .review-img img {
-        width: 50vw;
-        height: auto;
         margin: auto;
-        border: 1px solid var(--white);
-        /* box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2), 0 6px 20px 0 rgba(255, 255, 255, 0.19); */
     }
 
     .review-detail {
-        display: flex;
         flex-direction: column;
-        text-decoration: none;
-        /* width: 80%; */
+        margin: auto;
     }
 
     .review-title {
         font-size: small;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        margin: auto;
     }
 
     .movie-desc-box {
-        background-color: rgba(255, 255, 255, 0.13);
-        border-radius: 10px;
-
-        padding: 10px;
-        margin: 20px 10px 0px 0px;
         max-height: 70%;
-        overflow-y: auto;
     }
 
     .review-panel {
-        margin: 0vh 3vh 3vh 3vh;
+        margin: auto;
+        margin-bottom: 5vh;
         width: 80%;
     }
 
     .review-date {
-        display: flex;
         flex-direction: column-reverse;
         justify-content: space-between;
     }

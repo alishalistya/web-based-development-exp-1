@@ -24,7 +24,7 @@
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                     </svg>
                 </label>
-                <input type="text" id="search" placeholder="Cari disini ges" name="q">
+                <input type="text" id="search" placeholder="Cari disini ges, untuk menampilkan semua ketik '~all'" name="q">
             </div>
             <div class="container-filter">
                 <div class="filter sort-box">
@@ -32,9 +32,9 @@
                     <div class="select-box">
                         <select name="sort" id="sort">
                             <option value="title">Title (A-Z)</option>
-                            <option value="title">Title (Z-A)</option>
-                            <option value="release_date">Release Date (Newest)</option>
-                            <option value="release">Release Date (Oldest)</option>
+                            <option value="title desc">Title (Z-A)</option>
+                            <option value="year">Release Date (Newest)</option>
+                            <option value="year desc">Release Date (Oldest)</option>
                         </select>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
     <section class="result-container">
         <div class="movie-container">
             <h1 class="no-result">
-                <i>Kamu Belum Nyari :(</i>
+                <i>Kamu Belum Nyari :_(</i>
             </h1>
         </div>
 

@@ -68,7 +68,7 @@ select:focus {
 .result-container {
     padding: 20px;
     display: flex;
-    display: wrap;
+
     flex-direction: column;
     height: 70vh;
 }
@@ -82,5 +82,3 @@ select:focus {
     font-weight: 500;
     color: var(--gray);
 }
-
-

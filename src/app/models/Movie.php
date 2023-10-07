@@ -35,7 +35,6 @@ class Movie {
 
     public function getByArgs($name, $sort = 1, $category = 'none', $year = 'none', $page = 1)
     {
-        // NOTE : TAMBAHIN YEAR
         $sql = "SELECT DISTINCT m.movie_id, m.title, m.description, m.year, m.duration, m.img_path, m.trailer_path
             FROM movie AS m INNER JOIN movie_director AS md ON m.movie_id = md.movie_id
             INNER JOIN director AS d ON md.director_id = d.director_id
@@ -55,6 +54,9 @@ class Movie {
         
 
         $this->db->query($sql);
+
+        if ($name === '~all') { $name = ''; }
+
         $this->db->bind('name', "%$name%");
         if ($category !== 'none') {
             $this->db->bind('category', $category);
@@ -99,6 +101,9 @@ class Movie {
         $sql .= " ) t";
 
         $this->db->query($sql);
+
+        if ($name === '~all') { $name = ''; }
+
         $this->db->bind('name', "%$name%");
         if ($category !== 'none') {
             $this->db->bind('category', $category);

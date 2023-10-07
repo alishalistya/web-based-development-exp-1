@@ -13,36 +13,34 @@ let totalPage;
 let currPage = 1;
 sortInput &&
     sortInput.addEventListener("input", async (e) => {
-        if (searchInput.value != "") {
+        if (filterQuery(searchInput.value) != "") {
             searchDebounce();
         }
     });
 
 categoryInput &&
     categoryInput.addEventListener("input", async (e) => {
-        if (searchInput.value != "") {
+        if (filterQuery(searchInput.value) != "") {
             searchDebounce();
         }
     });
 
 yearInput &&
     yearInput.addEventListener("input", async (e) => {
-        if (searchInput.value != "") {
+        if (filterQuery(searchInput.value) != "") {
             searchDebounce();
         }
     });
 
 searchInput &&
     searchInput.addEventListener("input", async (e) => {
-        console.log(`INI : ${searchInput.value.trim().length}`);
-        if (searchInput.value != "") {
+        if (filterQuery(searchInput.value) != "") {
             searchDebounce();
         }
     });
 
 prevPage &&
     prevPage.addEventListener("click", async () => {
-        console.log("halo");
         if (currPage === 1) {
             return;
         }
@@ -50,7 +48,7 @@ prevPage &&
         currPage--;
         const xhr = new XMLHttpRequest();
 
-        xhr.open("GET", `/movie/fetch/${currPage}?q=${searchInput.value}&category=${categoryInput.value}&sort=${sortInput.value}&year=${yearInput.value}`);
+        xhr.open("GET", `/movie/fetch/${currPage}?q=${filterQuery(searchInput.value)}&category=${categoryInput.value}&sort=${sortInput.value}&year=${yearInput.value}`);
 
         xhr.send();
 
@@ -70,7 +68,7 @@ nextPage &&
         currPage++;
         const xhr = new XMLHttpRequest();
 
-        xhr.open("GET", `/movie/fetch/${currPage}?q=${searchInput.value}&category=${categoryInput.value}&sort=${sortInput.value}&year=${yearInput.value}`);
+        xhr.open("GET", `/movie/fetch/${currPage}?q=${filterQuery(searchInput.value)}&category=${categoryInput.value}&sort=${sortInput.value}&year=${yearInput.value}`);
 
         xhr.send();
 
@@ -83,19 +81,18 @@ nextPage &&
     });
 
 const searchDebounce = debounce(async () => {
-    if (searchInput.value == "") {
+    if (filterQuery(searchInput.value) == "") {
         return;
     }
 
     const xhr = new XMLHttpRequest();
 
-    xhr.open("GET", `/movie/fetch/1?q=${searchInput.value}&category=${categoryInput.value}&sort=${sortInput.value}&year=${yearInput.value}`);
+    xhr.open("GET", `/movie/fetch/1?q=${filterQuery(searchInput.value)}&category=${categoryInput.value}&sort=${sortInput.value}&year=${yearInput.value}`);
 
     xhr.send();
 
     xhr.onreadystatechange = function () {
         if (this.readyState === XMLHttpRequest.DONE) {
-            console.log(this.responseText);
             data = JSON.parse(this.responseText);
             processResult(data);
         }
@@ -104,10 +101,9 @@ const searchDebounce = debounce(async () => {
 
 const processResult = (data) => {
     totalPage = data.page;
-    // console.log(data);
+
     let resultHTML = "";
     if (data.page === 0) {
-        console.log(data.page);
         resultHTML = `
             <h1 class="no-result">
                 Gak ketemu ini :(
@@ -131,7 +127,7 @@ const updateComponentResult = (data) => {
         resultHMTL += `
         <div class="movie-card">
             <a href="/movie/detail/${movie.movie_id}" class="movie-thumbnail">
-                <img src="/media/images/anatomy.png" alt="${movie.title}" />
+                <img class="movie-img" src="/media/img/movie/${movie.img_path}.jpg" alt="${movie.title}" />
             </a>
             <div class="movie-header">
                 <h4 class="title">${movie.title}</p>
@@ -139,7 +135,7 @@ const updateComponentResult = (data) => {
         </div>
         `;
     }
-    console.log(currPage);
+
     resultContainer.innerHTML = resultHMTL;
     pageText.innerHTML = `Page <span id="page-number">${currPage}</span> of ${data.page}`;
     if (currPage != 1) {
@@ -154,3 +150,19 @@ const updateComponentResult = (data) => {
         nextPage.disabled = true;
     }
 };
+
+function filterQuery(query) {
+    const rawFilterQuery = query.split(" ");
+
+    let filteredQuery = "";
+
+    for (let i = 0; i < rawFilterQuery.length; i++) {
+        if (rawFilterQuery[i] && !filteredQuery) {
+            filteredQuery = filteredQuery + `${rawFilterQuery[i]}`;
+        } else if (rawFilterQuery[i]) {
+            filteredQuery = filteredQuery + ` ${rawFilterQuery[i]}`;
+        }
+    }
+
+    return filteredQuery;
+}
