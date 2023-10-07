@@ -1,8 +1,8 @@
-const addForm = document.querySelector(".addDirector");
+const addForm = document.querySelector(".addPeople");
 
 const nameInput = document.querySelector("#name");
 const descriptionInput = document.querySelector("#description");
-const birthdateInput = document.querySelector("#birth_date");
+const birthdateInput = document.querySelector("#birthdate");
 const photoInput = document.querySelector("#photo");
 
 const nameWarn = document.querySelector("#name-warn");
@@ -23,6 +23,7 @@ nameInput &&
         "input",
         debounce(() => {
             const input = nameInput.value;
+
             if (input == "") {
                 console.log(`Tidak Lolos ${input}`);
                 nameWarn.innerHTML = "Nama tidak bisa kosong!";
@@ -47,6 +48,11 @@ descriptionInput.addEventListener(
     "input",
     debounce(() => {
         const input = descriptionInput.value;
+
+        const name = nameInput.value;
+        const desc = descriptionInput.value;
+        const birth_date = birthdateInput.value;
+        console.log(name, desc, birth_date, photoInput.files.length);
         
         if (input == "") {
             console.log(`Tidak Lolos ${input}`);
@@ -84,24 +90,27 @@ birthdateInput.addEventListener(
 
 addForm &&
     addForm.addEventListener("submit", async (e) => {
+        // e.preventDefault();
         const name = nameInput.value;
         const desc = descriptionInput.value;
         const birth_date = birthdateInput.value;
 
-        // console.log(photoInput.files.length == 0);
+        // console.log(name, desc, birth_date, photoInput.files.length);
+        // console.log(photoInput.files.length);
+        // e.preventDefault();
 
-        if (!isDataValid(name, desc, birth_date)){
-            if (photoInput.files.length == 0){
-                e.preventDefault();
-                return;
-            }
-            
+        const checkData = isDataValid(name, desc, birth_date);
+
+        if (photoInput.files.length == 0 || !checkData){
+            e.preventDefault();
+            return;
         }
+
     });
 
 const isDataValid = (name, desc, birth_date) => {
     // Name checking
-    console.log(name, desc);
+    // console.log(name, desc);
     if (!name) {
         nameWarn.innerHTML = "Please fill out name!";
         nameWarn.className = "show";
@@ -150,7 +159,6 @@ const isDataValid = (name, desc, birth_date) => {
     }
 
     // console.log(nameValid, descriptionValid);
-
     if (!nameValid || !descriptionValid || !birthdateValid || !photoValid){
         return false;
     }

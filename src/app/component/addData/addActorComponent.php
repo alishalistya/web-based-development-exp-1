@@ -1,11 +1,12 @@
-<form action="insert" method="post" class="addDirector" enctype="multipart/form-data" novalidate>
+<form action="insert" method="post" class="addPeople" enctype="multipart/form-data" novalidate>
     <h1 class="auth-title">
         Tambahkan Actor Baru
     </h1>
+
    <!-- Name -->
    <div class="form-group">
-        <label for="title">Name</label>
-        <input id= "name" class="form-input" name="name" type="text" placeholder="Nama Director" />
+        <label for="name">Name</label>
+        <input id="name" class="form-input" name="name" type="text" placeholder="Nama Director" />
         <i>
             <p id="name-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
@@ -22,8 +23,8 @@
 
     <!-- Birthdate -->
     <div class="form-group">
-        <label for="birth_date">Birthdate</label>
-        <input id = "birthdate" class="form-input" name="birth_date" type="date" placeholder="Sebuah Deskripsi"/>
+        <label for="birthdate">Birthdate</label>
+        <input id = "birthdate" class="form-input" name="birthdate" type="date" placeholder="Sebuah Deskripsi"/>
         <i>
             <p id="birthdate-warn" class="hide alert-text">isi desc dulu!</p>
         </i>
