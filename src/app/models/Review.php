@@ -35,4 +35,19 @@ class Review {
 
         return $this->db->resultSet();
     }
+
+
+    public function getReviewAndUserNameByReviewID($id)
+    {
+        $sql = 'SELECT r.review_id as review_id, r.comment as comment, r.rate as rate, r.created_at as created_at, r.update_at as update_at, u.name as name
+        FROM review AS r INNER JOIN user_review AS ur ON r.review_id = ur.review_id
+        INNER JOIN user AS u ON ur.user_id = u.user_id
+        WHERE r.review_id = :review_id';
+
+        $this->db->query($sql);
+
+        $this->db->bind('review_id', $id);
+
+        return $this->db->single();
+    }
 }

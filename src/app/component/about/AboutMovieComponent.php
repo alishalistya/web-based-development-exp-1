@@ -6,6 +6,7 @@
     <title>About Movie</title>
     <link rel="stylesheet" href="../../../public/styles/about/aboutMovie.css">
     <link rel="stylesheet" type="text/css" href="../../../public/styles/others/Navbar.css">
+    <link rel="stylesheet" type="text/css" href="/styles/others/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
@@ -14,6 +15,7 @@
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
     <div id="movie-container">
         <img id="movie-background" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>.jpg" alt="<?= $this->data['movie']['title'] ?>">
+        <button type="button" id="updateContentButton" class="text" data-toggle="modal" data-target="myModal" data-id="<?= $this->data['movie']['movie_id'] ?>">EDIT</button>
         <h2 id="about-movie" class="text">
             about Movie,
         </h2>
@@ -25,7 +27,7 @@
             <?= $this->data['movie']['title'] ?>
         </h1>
         <p id="movie-release" class="text">
-                <?= $this->data['movie']['release_date'] ?>
+                <?= $this->data['movie']['year'] ?>
         </p>
         <p id="movie-duration" class="text">
                 <?= $this->data['movie']['duration'] ?>
@@ -58,16 +60,24 @@
             REVIEW:
         </h2>
         <div class="row">
-            <?php $count = 0; ?>
-            <?php foreach ($this->data['reviews'] as $review): ?>
-                <?php if ($count >= 10) break; ?>
-                    <div class="review-card text">
-                        <p> <?= $review['comment'] ?> </p>
-                        <p> Rating: <?= $review['rate'] ?> </p>
-                    </div>
-                    <?php $count++; ?>
-            <?php endforeach; ?>
+            <?php if (empty($this->data['reviews'])): ?>
+                <div class="review-card text">
+                    <p>There are no reviews.</p>
+                </div>
+            <?php else: ?>
+                <?php $count = 0; ?>
+                <?php foreach ($this->data['reviews'] as $review): ?>   
+                        <?php if ($count >= 10) break; ?>
+                            <div class="review-card text">
+                                <h3><?= $review['name'] ?></h3>
+                                <p class="review-content" ><?= $review['comment'] ?></p>
+                                <p>Rating: <?= $review['rate'] ?></p>
+                            </div>
+                            <?php $count++; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
+
         <!-- page navigation -->
         <div class="page-navigation">
             <div class="page">
@@ -89,13 +99,51 @@
                     </a>
                 <?php endif; ?>
             </div>
-        <!-- <h3 id="review-end" class="text">
-            Reviews from MOI.
-        </h3>
-        <h4 id="review-end2" class="text">
-            Reviews from MOI.
-        </h4> -->
+        
+            <form action="updateMovie" method="POST" enctype="multipart/form-data">
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <h2>Edit Content</h2>
+                        <input type="hidden" id="idInput" name="idInput" />
+                        <input type="hidden" id="oldImage" name="oldImage" value="<?= $this->data['movie']['img_path'] ?>"/>
+                        <input type="hidden" id="oldTrailer" name="oldTrailer" value="<?= $this->data['movie']['trailer_path'] ?>"/>
+                        <div class="form-group">
+                            <label for="titleInput">Title:</label>
+                            <input type="text" id="titleInput" class="form-control" name="titleInput"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="yearInput">Year:</label>
+                            <input type="text" id="yearInput" class="form-control" name="yearInput"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="durationInput">duration:</label>
+                            <input type="text" id="durationInput" class="form-control" name="durationInput"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="descriptionInput">Description:</label>
+                            <textarea id="descriptionInput" class="form-control" name="descriptionInput"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageInput">Image:</label>
+                            <img id="update-img" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>.jpg" alt="<?= $this->data['movie']['title'] ?>">
+                            <input type="file" id="imageInput" class="form-control" name="imageInput"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="trailerInput">Trailer:</label>
+                            <video id="update-trailer" controls>
+                                <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>.mp4" type="video/mp4">
+                            </video>
+                            <input type="file" id="trailerInput" class="form-control" name="trailerInput"/>
+                        </div>
+                        <button type="submit" id="saveButton" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
+
     </div>
+
+    <script src="../../../public/js/edit/editMovie.js"></script> 
     
 </body>
 </html>

@@ -53,6 +53,7 @@ class Actor
         return $count['count'];
     }
 
+
     public function addActor($data)
     {
         // echo 'okey';
@@ -73,4 +74,52 @@ class Actor
 
         return $this->db->rowCount();
     }
+
+    public function updateActor($data, $image) {
+        $oldImage = $data['oldImage'];
+
+        if ($image['imageInput']['error'] === 4) {
+            $img_path = $oldImage;
+        } else {
+            $img_path = $this->uploadActorImg();
+        }
+
+        $query = "UPDATE actor SET name = :name, birth_date = :birth_date, description = :description, img_path = :img_path WHERE actor_id = :actor_id";
+
+        $this->db->query($query);
+        $this->db->bind('actor_id', $data['idInput']);
+        $this->db->bind('name', $data['nameInput']);
+        $this->db->bind('birth_date', $data['birthDateInput']);
+        $this->db->bind('description', $data['descriptionInput']);
+        $this->db->bind('img_path', $img_path);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function uploadActorImg() {
+        $fileName = $_FILES['imageInput']['name'];
+        $fileTmp = $_FILES['imageInput']['tmp_name'];
+
+        $validPictureExtension = ['jpg', 'jpeg', 'png'];
+        $pictureExtension = explode('.', $fileName);
+        $pictureExtension = strtolower(end($pictureExtension));
+        $pictureName = explode('.', $fileName);
+        $pictureName = strtolower($pictureName[0]);
+
+        if (!in_array($pictureExtension, $validPictureExtension)) {
+            echo "<script>
+                    alert('Please upload a picture!');
+                </script>";
+            return false;
+        }
+
+        move_uploaded_file($fileTmp, '../public/media/img/actor/' . $fileName);
+
+        return $pictureName;
+
+    }
+
+   
 }

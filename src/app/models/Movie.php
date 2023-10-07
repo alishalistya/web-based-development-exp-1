@@ -189,4 +189,89 @@ class Movie {
 
         return $this->db->rowCount();
     }
+
+    public function updateMovie($data, $path) {
+        $oldImage = $data['oldImage'];
+        $oldTrailer = $data['oldTrailer'];
+
+        if ($path['imageInput']['error'] === 4) {
+            $img_path = $oldImage;
+        } else {
+            $img_path = $this->uploadMovieImg();
+        }
+
+        if ($path['trailerInput']['error'] === 4) {
+            $trailer_path = $oldTrailer;
+        } else {
+            $trailer_path = $this->uploadMovieTrailer();
+        }
+
+
+        $query = "UPDATE movie SET title = :title, description = :description, year = :year, duration = :duration, img_path = :img_path, trailer_path = :trailer_path WHERE movie_id = :movie_id";
+
+        $this->db->query($query);
+        $this->db->bind('movie_id', $data['idInput']);
+        $this->db->bind('title', $data['titleInput']);
+        $this->db->bind('description', $data['descriptionInput']);
+        $this->db->bind('year', $data['yearInput']);
+        $this->db->bind('duration', $data['durationInput']);
+        $this->db->bind('img_path', $img_path);
+        $this->db->bind('trailer_path', $trailer_path);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
+
+    public function uploadMovieImg() {
+        $fileName = $_FILES['imageInput']['name'];
+        $fileTmp = $_FILES['imageInput']['tmp_name'];
+
+        $validPictureExtension = ['jpg', 'jpeg', 'png'];
+        $pictureExtension = explode('.', $fileName);
+        $pictureExtension = strtolower(end($pictureExtension));
+        $pictureName = explode('.', $fileName);
+        $pictureName = strtolower($pictureName[0]);
+
+        if (!in_array($pictureExtension, $validPictureExtension)) {
+            echo "<script>
+                    alert('Please upload a picture!');
+                </script>";
+            return false;
+        }
+
+        move_uploaded_file($fileTmp, '../public/media/img/movie/' . $fileName);
+
+        return $pictureName;
+    }
+
+    public function uploadMovieTrailer() {
+        $fileName = $_FILES['trailerInput']['name'];
+        $fileSize = $_FILES['trailerInput']['size'];
+        $fileTmp = $_FILES['trailerInput']['tmp_name'];
+
+        $validVideoExtension = ['mp4'];
+        $videoExtension = explode('.', $fileName);
+        $videoExtension = strtolower(end($videoExtension));
+        $videoName = explode('.', $fileName);
+        $videoName = strtolower($videoName[0]);
+
+        if ($fileSize > 8000000) {
+            echo "<script>
+                    alert('File is too large!');
+                </script>";
+            return false;
+        }
+
+        if (!in_array($videoExtension, $validVideoExtension)) {
+            echo "<script>
+                    alert('Please upload a video!');
+                </script>";
+            return false;
+        }
+
+        move_uploaded_file($fileTmp, '../public/media/img/trailer/' . $fileName);
+
+        return $videoName;
+    }
 }

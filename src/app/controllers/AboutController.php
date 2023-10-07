@@ -2,8 +2,6 @@
 
 class AboutController {
 
-    
-
     public function index() {
         
         $notFound = Utils::view("notfound", "NotFoundView");
@@ -11,9 +9,23 @@ class AboutController {
     }
 
     public function actor() {
+        if (!isset($_GET['name'])) {
+            $notFound = Utils::view("notfound", "NotFoundView");
+            $notFound->render();
+            exit;
+        }
+
         $actorChosen = $_GET['name'];
         $data['title'] = 'Actor';
         $data['people'] = Utils::model("Actor")->getActorByName("$actorChosen");
+
+        if ($data['people'] == null) {
+            $notFound = Utils::view("notfound", "NotFoundView");
+            $notFound->render();
+            exit;
+        }
+
+        $data['peopleID'] = $data['people']['actor_id'];
 
         //pagination for movies
         $moviePerPage = 6;
@@ -33,10 +45,39 @@ class AboutController {
         $actorView->render();
     }
 
+    public function editActor() {
+        echo json_encode(Utils::model("Actor")->getActorByID($_GET['id']));
+    }
+
+    public function updateActor() {
+       $actorChosen = $_POST['nameInput'];
+       if(Utils::model("Actor")->updateActor($_POST, $_FILES) > 0) {
+            header('Location: actor?name='.$actorChosen);
+            exit;
+        } else {
+            header('Location: home');
+            exit;
+        }
+    }
+
     public function director() {
+        if (!isset($_GET['name'])) {
+            $notFound = Utils::view("notfound", "NotFoundView");
+            $notFound->render();
+            exit;
+        }
+
         $directorChosen = $_GET['name'];
         $data['title'] = 'Director';
         $data['people'] = Utils::model("Director")->getDirectorByName("$directorChosen");
+
+        if ($data['people'] == null) {
+            $notFound = Utils::view("notfound", "NotFoundView");
+            $notFound->render();
+            exit;
+        }
+
+        $data['peopleID'] = $data['people']['director_id'];
 
         //pagination for movies
         $moviePerPage = 6;
@@ -55,10 +96,37 @@ class AboutController {
         $directorView->render();
     }
 
+    public function editDirector() {
+        echo json_encode(Utils::model("Director")->getDirectorByID($_GET['id']));
+    }
+
+    public function updateDirector() {
+       $directorChosen = $_POST['nameInput'];
+       if(Utils::model("Director")->updateDirector($_POST, $_FILES) > 0) {
+            header('Location: director?name='.$directorChosen);
+            exit;
+        } else {
+            header('Location: home');
+            exit;
+        }
+    }
+
     public function movie() {
+
+        if (!isset($_GET['title'])) {
+            $notFound = Utils::view("notfound", "NotFoundView");
+            $notFound->render();
+            exit;
+        }
 
         $movieChosen = $_GET['title'];
         $data['movie'] = Utils::model("Movie")->getMovieByTitle("$movieChosen");
+
+        if ($data['movie'] == null) {
+            $notFound = Utils::view("notfound", "NotFoundView");
+            $notFound->render();
+            exit;
+        }
 
         $movieID = $data['movie']['movie_id'];
 
@@ -83,25 +151,28 @@ class AboutController {
         $data['reviewID'] = Utils::model("Movie")->getReviewByMovieIDWithLimit("$movieID", $initialReview, $reviewPerPage);
         foreach ($data['reviewID'] as $reviewID) {
             $reviewID = $reviewID['review_id'];
-            $data['reviews'][] = Utils::model("Review")->getReviewByReviewID("$reviewID");
+            $data['reviews'][] = Utils::model("Review")->getReviewAndUserNameByReviewID("$reviewID");
         };
-
-
-
-        // $data['reviews'] = [
-        //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-        //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-        //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-        //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-        //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-        //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-        //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-        //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-        //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time."
-        // ];
-         
 
         $movieView = Utils::view("about", "AboutMovieView", $data);
         $movieView->render();
     }
+
+    public function editMovie() {
+        echo json_encode(Utils::model("Movie")->getMovieByID($_GET['id']));
     }
+
+    public function updateMovie() {
+       $movieChosen = $_POST['titleInput'];
+       if(Utils::model("Movie")->updateMovie($_POST, $_FILES) > 0) {
+            header('Location: movie?title='.$movieChosen);
+            exit;
+        } else {
+            header('Location: home');
+            exit;
+        }
+    }
+}
+
+ 
+

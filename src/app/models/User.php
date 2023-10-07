@@ -38,4 +38,13 @@ class User {
 
         // validasi row count (?)
     }
+
+    public function getUserByID($id) {
+        $sql = 'SELECT * FROM user WHERE user_id = :id';
+
+        $this->db->query($sql);
+        $this->db->bind('id', $id);
+
+        return $this->db->single();
+    }
 }
