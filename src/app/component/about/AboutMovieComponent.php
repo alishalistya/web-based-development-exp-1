@@ -14,12 +14,12 @@
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
     <div id="movie-container">
-        <img id="movie-background" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>" alt="<?= $this->data['movie']['title'] ?>">
+        <img id="movie-background" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>.jpg" alt="<?= $this->data['movie']['title'] ?>">
         <button type="button" id="updateContentButton" class="text" data-toggle="modal" data-target="myModal" data-id="<?= $this->data['movie']['movie_id'] ?>">EDIT</button>
         <h2 id="about-movie" class="text">
             about Movie,
         </h2>
-        <img id="movie-img" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>" alt="<?= $this->data['movie']['title'] ?>">
+        <img id="movie-img" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>.jpg" alt="<?= $this->data['movie']['title'] ?>">
         <video id="movie-trailer" controls>
             <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>.mp4" type="video/mp4">
         </video>
@@ -32,21 +32,25 @@
         <p id="movie-duration" class="text">
                 <?= $this->data['movie']['duration'] ?>
         </p>
-        <a href="director?name=<?= $this->data['director']['name'] ?>" >
-            <h2 id="movie-director" class="text">
-                <?= $this->data['director']['name'] ?>
-            </h2>
-        </a>
+        <div class="movie-director text">
+            <?php foreach ($this->data['director'] as $key => $director): ?>
+                <a href="director?id=<?= $director['director_id'] ?>" class="cast-link">
+                    <h3><?= $director['name'] ?></h3>
+                </a>
+                <?php if ($key !== array_key_last($this->data['director'])): ?>
+                    <span> , </span>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
         <div class="movie-cast text">
             <?php foreach ($this->data['actor'] as $key => $actor): ?>
-                <a href="actor?name=<?= $actor['name'] ?>" class="cast-link">
+                <a href="actor?id=<?= $actor['actor_id'] ?>" class="cast-link">
                     <span><?= $actor['name'] ?></span>
                 </a>
                 <?php if ($key !== array_key_last($this->data['actor'])): ?>
                     <span> | </span>
                 <?php endif; ?>
             <?php endforeach; ?>
-
         </div>
         <p id="movie-description" class="text">
             <?= $this->data['movie']['description'] ?>
@@ -69,7 +73,6 @@
                 <?php foreach ($this->data['reviews'] as $review): ?>   
                         <?php if ($count >= 10) break; ?>
                             <div class="review-card text">
-                                <h3><?= $review['name'] ?></h3>
                                 <p class="review-content" ><?= $review['comment'] ?></p>
                                 <p>Rating: <?= $review['rate'] ?></p>
                             </div>
@@ -82,7 +85,7 @@
         <div class="page-navigation">
             <div class="page">
                 <?php if ($this->data['page'] > 1): ?>
-                    <a href="movie?title=<?= $this->data['movie']['title'] ?>&page=<?= $this->data['page'] - 1 ?>">
+                    <a href="movie?id=<?= $this->data['movie']['movie_id'] ?>&page=<?= $this->data['page'] - 1 ?>">
                         <span class="material-icons">
                             <
                         </span>
@@ -92,7 +95,7 @@
                     <?= $this->data['page'] ?>
                 </span>
                 <?php if ($this->data['page'] < $this->data['totalPage']): ?>
-                    <a href="movie?title=<?= $this->data['movie']['title'] ?>&page=<?= $this->data['page'] + 1 ?>">
+                    <a href="movie?id=<?= $this->data['movie']['movie_id'] ?>&page=<?= $this->data['page'] + 1 ?>">
                         <span class="material-icons">
                             >
                         </span>

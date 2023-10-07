@@ -40,8 +40,8 @@
             <?php foreach ($this->data['movie'] as $movie): ?>
                 <?php if ($count >= 6) break; ?>
                     <div class="picture">
-                        <a href="movie?title=<?= $movie['title'] ?>">
-                            <img src="../../../public/media/img/movie/<?= $movie['img_path']; ?>" alt="<?php echo $movie['title']; ?>">
+                        <a href="movie?id=<?= $movie['movie_id'] ?>">
+                            <img src="../../../public/media/img/movie/<?= $movie['img_path']; ?>.jpg" alt="<?php echo $movie['title']; ?>">
                         </a>
                     </div>
                     <?php $count++; ?>
@@ -51,7 +51,7 @@
         <div class="page-navigation">
             <div class="page">
                 <?php if ($this->data['page'] > 1): ?>
-                    <a href="actor?name=<?= $this->data['people']['name'] ?>&page=<?= $this->data['page'] - 1 ?>">
+                    <a href="actor?id=<?= $this->data['people']['actor_id'] ?>&page=<?= $this->data['page'] - 1 ?>">
                         <span class="material-icons">
                             <
                         </span>
@@ -61,7 +61,7 @@
                     <?= $this->data['page'] ?>
                 </span>
                 <?php if ($this->data['page'] < $this->data['totalPage']): ?>
-                    <a href="actor?name=<?= $this->data['people']['name'] ?>&page=<?= $this->data['page'] + 1 ?>">
+                    <a href="actor?id=<?= $this->data['people']['actor_id'] ?>&page=<?= $this->data['page'] + 1 ?>">
                         <span class="material-icons">
                             >
                         </span>

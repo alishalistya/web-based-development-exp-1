@@ -56,9 +56,9 @@
 #movie-img {
     position: absolute;
     display: inline;
-    top: 45%;
+    top: 40%;
     left: 14%;
-    height: 40vh;
+    height: 45vh;
     transform: translate(-50%, -50%);
     z-index: 1;
     object-fit: cover;
@@ -68,9 +68,10 @@
 #movie-trailer {
     position: absolute;
     display: inline;
-    top: 45%;
+    top: 40%;
     left: 62%;
-    height: 40vh;
+    height: 45vh;
+    width: 90vh;
     transform: translate(-50%, -50%);
     z-index: 1;
     object-fit: cover;
@@ -80,19 +81,19 @@
 
 #movie-title {
     position: absolute;
-    top: 66%;
+    top: 68%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.7rem;
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
 }
 
 #movie-release {
     position: absolute;
-    top: 70%;
+    top: 71%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -103,7 +104,7 @@
 
 #movie-duration {
     position: absolute;
-    top: 72%;
+    top: 73%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -113,15 +114,15 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
 }
 
-#movie-director {
+.movie-director {
     position: absolute;
     display: inline;
-    top: 77%;
+    top: 80%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
     text-align: center;
-    font-size: 1.5em;
+    font-size: 1.3rem;
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
 }
@@ -129,7 +130,7 @@
 .movie-cast {
     position: absolute;
     display: inline;
-    top: 81%;
+    top: 83%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -140,14 +141,14 @@
 }
 
 a {
-    text-decoration: none; /* Remove underline */
-    color: inherit; /* Use the parent's color */
+    text-decoration: none; 
+    color: inherit; 
 }
 
 
 #movie-description {
     position: absolute;
-    top: 86%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -157,12 +158,11 @@ a {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-
 #review-container {
     position: fixed;
-    height: 100vh;
+    height: 93vh;
     width: 28vw;
-    top: 80px;
+    top: 65px;
     bottom: auto;
     left: 75%;
 
@@ -172,11 +172,20 @@ a {
     z-index: 1;
 }
 
+#review {
+    position: relative;
+    display: block;
+    left: 7%;
+    color: #1A1D4E;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
 .row {
     display: flex;
     flex-wrap: wrap;
-    /* margin: -10px;  */
 }
+
 .review-card {
     height: 10vh;
     width: 22vw;
@@ -187,17 +196,6 @@ a {
     border: 1px solid #2D316B;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     overflow: hidden;
-
-    /* flex: 0 0 calc(33% - 20px); 
-    margin:3% 0% 3% 11.5%; 
-    overflow: hidden;
-    border-radius: 4%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    border: 1px solid #2D316B;
-    height: 200px;
-    width: 10px; */
-
 }
 
 
@@ -307,33 +305,18 @@ button#saveButton {
         height: 100vh;
         width: 100vw;
         background-color: rgba(45, 49, 107, 0.8);
-    
-    }
-    
-    .text {
-        font-family: 'Raleway', sans-serif;
-    }
-    
-    #movie-background {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        z-index: -1; 
-        object-fit: cover;
-        filter: grayscale(100%);
-        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
-    
     }
     
     #about-movie {
         position: absolute;
-        top: 1%;
-        left: 25%;
+        top: 5%;
+        left: 35%;
         transform: translate(-50%, -50%);
-        z-index:3;
+        z-index:1;
         text-align: left;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        font-size: 1.2rem;
     }
 
         
@@ -347,30 +330,29 @@ button#saveButton {
         left: 50%;
         height: 40vh;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         object-fit: cover;
         box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
     }
-
     
     #movie-title {
         position: absolute;
-        top: 48%;
+        top: 53%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: center;
-        font-size: 3em;
+        font-size: 1.5rem;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
     }
     
-    /* #movie-release {
+    #movie-release {
         position: absolute;
-        top: 51%;
+        top: 58%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: center;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
@@ -378,23 +360,24 @@ button#saveButton {
     
     #movie-duration {
         position: absolute;
-        top: 52%;
+        top: 60%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: center;
         font-size: smaller;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
-    } */
+    } 
+
     #movie-director {
         position: absolute;
-        top: 54%;
+        top: 68%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: center;
-        font-size: 1.5em;
+        font-size: 1.3em;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
     }
@@ -402,28 +385,22 @@ button#saveButton {
     .movie-cast {
         position: absolute;
         display: inline;
-        top: 60%;
+        top: 73%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: center;
         font-size: 1em;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-
-    a {
-        text-decoration: none; /* Remove underline */
-        color: inherit; /* Use the parent's color */
-    }
-
     
     #movie-description {
         position: absolute;
-        top: 70%;
+        top: 90%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: left;
         font-size: 1em;
         color: #ffffff;
@@ -444,11 +421,6 @@ button#saveButton {
         background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
     }
     
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        /* margin: -10px;  */
-    }
     .review-card {
         height: 10vh;
         width: 80vw;
@@ -459,17 +431,6 @@ button#saveButton {
         border: 1px solid #2D316B;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         overflow: hidden;
-    
-        /* flex: 0 0 calc(33% - 20px); 
-        margin:3% 0% 3% 11.5%; 
-        overflow: hidden;
-        border-radius: 4%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        padding: 10px;
-        border: 1px solid #2D316B;
-        height: 200px;
-        width: 10px; */
-    
     }
 }
 
@@ -478,47 +439,28 @@ button#saveButton {
         position: relative;
         height: 100vh;
         width: 100vw;
-        background-color: rgba(45, 49, 107, 0.8);
-    
+        background-color: rgba(45, 49, 107, 0.8);  
     }
-    
-    .text {
-        font-family: 'Raleway', sans-serif;
-    }
-    
-    #movie-background {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        z-index: -1; 
-        object-fit: cover;
-        filter: grayscale(100%);
-        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
-    
-    }
-    
+         
     #about-movie {
         position: absolute;
         top: 10%;
         left: 25%;
         transform: translate(-50%, -50%);
-        z-index:3;
+        z-index: 1;
         text-align: left;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
-        
-
-    
     #movie-img {
         position: absolute;
         display: inline;
         top: 35%;
         left: 14%;
-        height: 23vh;
+        height: 40vh;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         object-fit: cover;
         box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
     }
@@ -528,37 +470,58 @@ button#saveButton {
         display: inline;
         top: 35%;
         left: 62%;
-        height: 23vh;
+        height: 40vh;
+        width: 68vh;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         object-fit: cover;
         box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
     }
 
-    
     #movie-title {
         position: absolute;
-        top: 50%;
+        top: 65%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: center;
-        font-size: 3em;
+        font-size: 1.7rem;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
     }
     
     #movie-release {
-        font-size: small;
-    }
-    #movie-director {
         position: absolute;
-        top: 55%;
+        top: 70%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: center;
-        font-size: 1.5em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+
+    #movie-duration {
+        position: absolute;
+        top: 72%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        text-align: center;
+        font-size: smaller;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    } 
+
+
+    #movie-director {
+        position: absolute;
+        top: 79%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        text-align: center;
+        font-size: 1.3em;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
     }
@@ -566,23 +529,22 @@ button#saveButton {
     .movie-cast {
         position: absolute;
         display: inline;
-        top: 60%;
+        top: 83%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: center;
         font-size: 1em;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
     
-    
     #movie-description {
         position: absolute;
-        top: 70%;
+        top: 90%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: left;
         font-size: 1em;
         color: #ffffff;
@@ -603,11 +565,6 @@ button#saveButton {
         background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
     }
     
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        /* margin: -10px;  */
-    }
     .review-card {
         height: 10vh;
         width: 80vw;
@@ -618,17 +575,6 @@ button#saveButton {
         border: 1px solid #2D316B;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         overflow: hidden;
-    
-        /* flex: 0 0 calc(33% - 20px); 
-        margin:3% 0% 3% 11.5%; 
-        overflow: hidden;
-        border-radius: 4%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        padding: 10px;
-        border: 1px solid #2D316B;
-        height: 200px;
-        width: 10px; */
-    
     }
 }
 
@@ -638,22 +584,6 @@ button#saveButton {
         height: 100vh;
         width: 100vw;
         background-color: rgba(45, 49, 107, 0.8);
-    
-    }
-    
-    .text {
-        font-family: 'Raleway', sans-serif;
-    }
-    
-    #movie-background {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        z-index: -1; 
-        object-fit: cover;
-        filter: grayscale(100%);
-        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
-    
     }
     
     #about-movie {
@@ -661,21 +591,18 @@ button#saveButton {
         top: 10%;
         left: 25%;
         transform: translate(-50%, -50%);
-        z-index:3;
+        z-index: 1;
         text-align: left;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
-        
-
-    
     #movie-img {
         position: absolute;
         display: inline;
-        top: 35%;
+        top: 37%;
         left: 14%;
-        height: 27vh;
+        height: 45vh;
         transform: translate(-50%, -50%);
         z-index: 3;
         object-fit: cover;
@@ -685,39 +612,58 @@ button#saveButton {
     #movie-trailer {
         position: absolute;
         display: inline;
-        top: 35%;
+        top: 37%;
         left: 62%;
-        height: 27vh;
+        height: 45vh;
+        width: 80vh;
         transform: translate(-50%, -50%);
         z-index: 3;
         object-fit: cover;
         box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
     }
 
-    
     #movie-title {
         position: absolute;
-        top: 50%;
+        top: 65%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 3;
         text-align: center;
-        font-size: 3em;
+        font-size: 1.7em;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
     }
     
     #movie-release {
-        font-size: small;
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
     }
+
+    #movie-duration {
+        position: absolute;
+        top: 72%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    } 
+
     #movie-director {
         position: absolute;
-        top: 55%;
+        top: 79%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 3;
         text-align: center;
-        font-size: 1.5em;
+        font-size: 1.3em;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
     }
@@ -725,23 +671,22 @@ button#saveButton {
     .movie-cast {
         position: absolute;
         display: inline;
-        top: 60%;
+        top: 83%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: center;
         font-size: 1em;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
     
-    
     #movie-description {
         position: absolute;
-        top: 70%;
+        top: 90%;
         left: 50%;
         transform: translate(-50%, -50%);
-        z-index: 3;
+        z-index: 1;
         text-align: left;
         font-size: 1em;
         color: #ffffff;
@@ -762,11 +707,6 @@ button#saveButton {
         background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
     }
     
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        /* margin: -10px;  */
-    }
     .review-card {
         height: 10vh;
         width: 80vw;
@@ -777,17 +717,6 @@ button#saveButton {
         border: 1px solid #2D316B;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         overflow: hidden;
-    
-        /* flex: 0 0 calc(33% - 20px); 
-        margin:3% 0% 3% 11.5%; 
-        overflow: hidden;
-        border-radius: 4%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        padding: 10px;
-        border: 1px solid #2D316B;
-        height: 200px;
-        width: 10px; */
-    
     }
 }
 
@@ -797,23 +726,7 @@ button#saveButton {
         height: 100vh;
         width: 100vw;
         background-color: rgba(45, 49, 107, 0.8);
-    
-    }
-    
-    .text {
-        font-family: 'Raleway', sans-serif;
-    }
-    
-    #movie-background {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        z-index: -1; 
-        object-fit: cover;
-        filter: grayscale(100%);
-        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
-    
-    }
+    }  
     
     #about-movie {
         position: absolute;
@@ -826,15 +739,12 @@ button#saveButton {
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
-        
-
-    
     #movie-img {
         position: absolute;
         display: inline;
-        top: 35%;
-        left: 14%;
-        height: 35vh;
+        top: 37%;
+        left: 20%;
+        height: 45vh;
         transform: translate(-50%, -50%);
         z-index: 3;
         object-fit: cover;
@@ -844,9 +754,10 @@ button#saveButton {
     #movie-trailer {
         position: absolute;
         display: inline;
-        top: 35%;
+        top: 37%;
         left: 62%;
-        height: 35vh;
+        height: 45vh;
+        width: 90vh;
         transform: translate(-50%, -50%);
         z-index: 3;
         object-fit: cover;
@@ -856,27 +767,46 @@ button#saveButton {
     
     #movie-title {
         position: absolute;
-        top: 60%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 3;
-        text-align: center;
-        font-size: 3em;
-        color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
-    }
-    
-    #movie-release {
-        font-size: small;
-    }
-    #movie-director {
-        position: absolute;
         top: 65%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 3;
         text-align: center;
-        font-size: 1.5em;
+        font-size: 1.7em;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+
+    #movie-release {
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    }
+
+    #movie-duration {
+        position: absolute;
+        top: 72%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+        text-align: center;
+        color: #ffffff;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    } 
+
+    #movie-director {
+        position: absolute;
+        top: 79%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3;
+        text-align: center;
+        font-size: 1.3em;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
     }
@@ -884,7 +814,7 @@ button#saveButton {
     .movie-cast {
         position: absolute;
         display: inline;
-        top: 70%;
+        top: 83%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 3;
@@ -897,7 +827,7 @@ button#saveButton {
     
     #movie-description {
         position: absolute;
-        top: 80%;
+        top: 90%;
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 3;
@@ -921,11 +851,6 @@ button#saveButton {
         background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
     }
     
-    .row {
-        display: flex;
-        flex-wrap: wrap;
-        /* margin: -10px;  */
-    }
     .review-card {
         height: 10vh;
         width: 80vw;
@@ -936,16 +861,5 @@ button#saveButton {
         border: 1px solid #2D316B;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         overflow: hidden;
-    
-        /* flex: 0 0 calc(33% - 20px); 
-        margin:3% 0% 3% 11.5%; 
-        overflow: hidden;
-        border-radius: 4%;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        padding: 10px;
-        border: 1px solid #2D316B;
-        height: 200px;
-        width: 10px; */
-    
     }
 }
