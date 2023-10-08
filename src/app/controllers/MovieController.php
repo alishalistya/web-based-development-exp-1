@@ -376,9 +376,10 @@ class MovieController
                     
                     // TODO: Kayaknya ada yg salah disini
                     $data['directorID'] = Utils::model("Movie")->getDirectorByMovieID($movieID);
-
-                    $directorID = $data['directorID']['director_id'];
-                    $data['director'] = Utils::model("Director")->getDirectorByID("$directorID");
+                    foreach ($data['directorID'] as $directorID) {
+                        $directorID = $directorID['director_id'];
+                        $data['director'][] = Utils::model("Director")->getDirectorByID("$directorID");
+                    };
             
                     $data['actorID'] = Utils::model("Movie")->getActorByMovieID("$movieID");
                     foreach ($data['actorID'] as $actorID) {
