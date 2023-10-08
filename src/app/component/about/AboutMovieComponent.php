@@ -74,14 +74,20 @@
                 </div>
             <?php else: ?>
                 <?php $count = 0; ?>
-                <?php foreach ($this->data['reviews'] as $review): ?>   
-                        <?php if ($count >= 10) break; ?>
-                            <div class="review-card text">
-                                <p class="review-content" ><?= $review['comment'] ?></p>
-                                <p>Rating: <?= $review['rate'] ?></p>
-                            </div>
-                            <?php $count++; ?>
-                <?php endforeach; ?>
+                <?php if ($this->data['reviews'][0] == false) :?>
+                    <div class="review-card text">
+                    <p>There are no reviews.</p>
+                    </div>
+                <?php else: ?>
+                    <?php foreach ($this->data['reviews'] as $review): ?>   
+                            <?php if ($count >= 10) break; ?>
+                                <div class="review-card text">
+                                    <p class="review-content" ><?= $review['comment'] ?></p>
+                                    <p>Rating: <?= $review['rate'] ?></p>
+                                </div>
+                                <?php $count++; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
 

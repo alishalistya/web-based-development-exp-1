@@ -59,11 +59,6 @@ titleInput &&
                 titleWarn.innerHTML = "Nama tidak bisa kosong!";
                 titleWarn.className = "show";
                 titleValid = false;
-                // } else if (!textRegex.test(input)) {
-                //     console.log(`Tidak Lolos ${input}`);
-                //     titleWarn.innerHTML = "Nama hanya bisa berupa huruf!";
-                //     titleWarn.className = "show";
-                //     titleValid = false;
             } else {
                 console.log(`Lolos ${input}`);
                 titleWarn.innerHTML = "";
@@ -173,10 +168,6 @@ const isDataValid = (title, desc, year, duration) => {
     // Name checking
     if (!title) {
         titleWarn.innerHTML = "Please fill out name!";
-        titleWarn.className = "show";
-        titleValid = false;
-    } else if (!textRegex.test(title)) {
-        titleWarn.innerHTML = "Title cannot contain any symbol or number!";
         titleWarn.className = "show";
         titleValid = false;
     } else {
