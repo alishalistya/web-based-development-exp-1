@@ -50,6 +50,12 @@ class User {
     }
 
     public function getAllUsers($page) {
+        $sql = "SELECT * FROM user LIMIT :limit OFFSET :offset";
 
+        $this->db->query($sql);
+        $this->db->bind('limit', LIMIT_PAGE);
+        $this->db->bind('offset', ($page - 1) * LIMIT_PAGE);
+        
+        return $this->db->resultSet();
     }
 }

@@ -107,13 +107,9 @@ class UserController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
-                    
-                    
 
-
-                    $movieView = Utils::view("lists", "MovieListView", ['data' => $movies, 'isAdmin' => $isAdmin, 'page' => $count]);
+                    $movieView = Utils::view("lists", "UserListView");
                     $movieView->render();
-
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
