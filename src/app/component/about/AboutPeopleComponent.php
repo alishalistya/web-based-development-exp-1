@@ -41,7 +41,7 @@
                 <?php if ($count >= 6) break; ?>
                     <div class="picture">
                         <a href="movie?id=<?= $movie['movie_id'] ?>">
-                            <img src="../../../public/media/img/movie/<?= $movie['img_path']; ?>.jpg" alt="<?php echo $movie['title']; ?>">
+                            <img src="../../../public/media/img/movie/<?= $movie['img_path']; ?>" alt="<?php echo $movie['title']; ?>">
                         </a>
                     </div>
                     <?php $count++; ?>

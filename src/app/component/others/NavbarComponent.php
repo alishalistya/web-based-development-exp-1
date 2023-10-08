@@ -1,6 +1,5 @@
 <header class="header">
     <div class="nav-wrapper">
-
         <a href="#" class="home"><img src="/logo.svg" alt="MOI logo" /></a>
 
         <input class="side-menu" type="checkbox" id="side-menu" />
