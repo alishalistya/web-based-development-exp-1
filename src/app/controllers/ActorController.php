@@ -168,7 +168,7 @@ class ActorController
         }
     }
 
-    public function detail() {
+    public function detail($actorID) {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
@@ -176,9 +176,9 @@ class ActorController
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
 
-                    $actorChosen = $_GET['name'];
+                    // $actorChosen = $_GET['name'];
                     $data['title'] = 'Actor';
-                    $data['people'] = Utils::model("Actor")->getActorByName("$actorChosen");
+                    $data['people'] = Utils::model("Actor")->getActorByID($actorID);
             
                     //pagination for movies
                     $moviePerPage = 6;
