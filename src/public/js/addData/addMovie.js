@@ -1,30 +1,53 @@
-const addForm = document.querySelector(".addMovie");
+// const addForm = document.querySelector(".addMovie");
 
 const titleInput = document.querySelector("#title");
 const descriptionInput = document.querySelector("#description");
 const yearInput = document.querySelector("#year");
 const durationInput = document.querySelector("#duration");
-// const posterInput = document.querySelector("");
-// const trailerInput = document.querySelector("");
+const posterInput = document.querySelector("#poster");
+const trailerInput = document.querySelector("#trailer");
 
 const titleWarn = document.querySelector("#title-warn");
 const descriptionWarn = document.querySelector("#description-warn");
 const yearWarn = document.querySelector("#year-warn");
 const durationWarn = document.querySelector("#duration-warn");
-// const posterWarn = document.querySelector("");
-// const trailerWarn = document.querySelector("");
+const actorWarn = document.querySelector("#actors-warn");
+const directorWarn = document.querySelector("#directors-warn");
+const posterWarn = document.querySelector("#poster-warn");
+const trailerWarn = document.querySelector("#trailer-warn");
+
 const actorsInput = document.querySelector("#actors");
 const directorsInput = document.querySelector("#directors");
+
+const discardBtn = document.querySelector("#discard-btn");
+const submitBtn = document.querySelector("#submit-btn");
+
+const confirmBtn = document.querySelector("#confirm-btn-modal");
+const cancelBtn = document.querySelector("#cancel-btn-modal");
+const modal = document.querySelector(".modal");
 
 const textRegex = /^[a-zA-Z\s]*$/;
 const numberRegex = /^[0-9]+$/;
 
-let titleValid = false;
-let descriptionValid = false;
-let yearValid = false;
-let durationValid = false;
-// let posterValid = false;
-// let trailerValid = false;
+let titleValid = EDIT ? true : false;
+let descriptionValid = EDIT ? true : false;
+let yearValid = EDIT ? true : false;
+let durationValid = EDIT ? true : false;
+let actorValid = EDIT ? true : false;
+let directorValid = EDIT ? true : false;
+
+let posterValid = EDIT ? true : false;
+let trailerValid = EDIT ? true : false;
+
+let selectedActor = [];
+if (EDIT && currActors) {
+    selectedActor = currActors;
+}
+
+let selectedDirector = [];
+if (EDIT && currDirectors) {
+    selectedDirector = currDirectors;
+}
 
 titleInput &&
     titleInput.addEventListener(
@@ -122,21 +145,28 @@ durationInput &&
         }, 300)
     );
 
-addForm &&
-    addForm.addEventListener("submit", async (e) => {
+cancelBtn &&
+    cancelBtn.addEventListener("click", () => {
+        modal.close();
+    });
+
+submitBtn &&
+    submitBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
         console.log("submit");
 
         const title = titleInput.value;
         const desc = descriptionInput.value;
         const year = yearInput.value;
         const duration = durationInput.value;
-        console.log(title, desc, year, duration);
 
         if (!isDataValid(title, desc, year, duration)) {
-            e.preventDefault();
+            // e.preventDefault();
             console.log("checked");
             return;
         }
+
+        modal.showModal();
     });
 
 const isDataValid = (title, desc, year, duration) => {
@@ -145,8 +175,8 @@ const isDataValid = (title, desc, year, duration) => {
         titleWarn.innerHTML = "Please fill out name!";
         titleWarn.className = "show";
         titleValid = false;
-    } else if (!nameRegex.test(name)){
-        titleWarn.innerHTML = "Name cannot contain any symbol or number!";
+    } else if (!textRegex.test(title)) {
+        titleWarn.innerHTML = "Title cannot contain any symbol or number!";
         titleWarn.className = "show";
         titleValid = false;
     } else {
@@ -184,7 +214,43 @@ const isDataValid = (title, desc, year, duration) => {
         durationValid = true;
     }
 
-    if (!titleValid || !descriptionValid || !yearValid || !durationValid) {
+    if (!selectedActor.length) {
+        actorWarn.innerHTML = "Please fill out actor!";
+        actorWarn.className = "show";
+        actorValid = false;
+    } else {
+        actorWarn.className = "hide";
+        actorValid = true;
+    }
+
+    if (!selectedDirector.length) {
+        directorWarn.innerHTML = "Please fill out director!";
+        directorWarn.className = "show";
+        directorValid = false;
+    } else {
+        directorWarn.className = "hide";
+        directorValid = true;
+    }
+
+    if (!EDIT && !posterInput.files[0]) {
+        posterWarn.innerHTML = "Please fill out Poster!";
+        posterWarn.className = "show";
+        posterValid = false;
+    } else {
+        posterWarn.className = "hide";
+        posterValid = true;
+    }
+
+    if (!EDIT && !trailerInput.files[0]) {
+        trailerWarn.innerHTML = "Please fill out Trailer!";
+        trailerWarn.className = "show";
+        trailerValid = false;
+    } else {
+        trailerWarn.className = "hide";
+        trailerValid = true;
+    }
+
+    if (!titleValid || !descriptionValid || !yearValid || !durationValid || !actorValid || !directorValid || !posterValid || !trailerValid) {
         return false;
     }
 
@@ -221,13 +287,89 @@ const drawTag = (input, type) => {
     if (tagContainer.includes(`<p>${input.name}</p>`)) {
         return;
     }
-    tagContainer += selectedElement;
 
+    if (type === "actor" && selectedActor.includes(input.id)) {
+        return;
+    }
+    if (type === "director" && selectedDirector.includes(input.id)) {
+        return;
+    }
+
+    if (type === "director") {
+        selectedDirector.push(input.id);
+    } else if (type === "actor") {
+        selectedActor.push(input.id);
+    } else {
+        return;
+    }
+
+    tagContainer += selectedElement;
+    console.log(`Actor : ${selectedActor}`);
+    console.log(`Director : ${selectedDirector}`);
     document.querySelector(`.selected-${type}-container`).innerHTML = tagContainer;
 };
 
 const deleteTagHandler = (element, type) => {
     let Id = element.getAttribute("data");
     const tag = document.querySelector(`.option-${type}-tag[data="${Id}"]`);
+
+    if (type === "director") {
+        selectedDirector = selectedDirector.filter(function (id) {
+            return id != Id;
+        });
+    } else if (type === "actor") {
+        selectedActor = selectedActor.filter(function (id) {
+            return id != Id;
+        });
+    } else {
+        return;
+    }
+
+    console.log(`Actor : ${selectedActor}`);
+    console.log(`Director : ${selectedDirector}`);
+
     tag.remove();
 };
+
+discardBtn &&
+    discardBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        location.replace(`http://localhost:8080/movie/catalog/1`);
+    });
+
+confirmBtn &&
+    confirmBtn.addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const title = titleInput.value;
+        const desc = descriptionInput.value;
+        const year = yearInput.value;
+        const duration = durationInput.value;
+        const actors = selectedActor;
+        const directors = selectedDirector;
+        const poster = posterInput.files[0];
+        const trailer = trailerInput.files[0];
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("POST", `/movie/insert`);
+
+        const formUpdate = new FormData();
+        formUpdate.append("title", title);
+        formUpdate.append("description");
+        formUpdate.append("blur", blur);
+        formUpdate.append("movie_id", movieID);
+
+        xhr.send(formUpdate);
+
+        xhr.onreadystatechange = async function () {
+            if (this.readyState === XMLHttpRequest.DONE) {
+                data = JSON.parse(this.responseText);
+
+                if (!data.error && this.status == 200) {
+                    location.replace("http://localhost:8080/review/index/1");
+                }
+            }
+        };
+    });

@@ -31,10 +31,10 @@
                     <label for="sort">Sort By</label>
                     <div class="select-box">
                         <select name="sort" id="sort">
-                            <option value="title">Title (A-Z)</option>
-                            <option value="title desc">Title (Z-A)</option>
-                            <option value="year">Release Date (Newest)</option>
-                            <option value="year desc">Release Date (Oldest)</option>
+                            <option value="m.title">Title (A-Z)</option>
+                            <option value="m.title desc">Title (Z-A)</option>
+                            <option value="m.year desc">Release Date (Newest)</option>
+                            <option value="m.year">Release Date (Oldest)</option>
                         </select>
                     </div>
                 </div>

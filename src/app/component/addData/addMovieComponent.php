@@ -1,4 +1,5 @@
-<form action = "insert" method="post" class="addMovie" novalidate>
+<!-- <form action = "insert" method="post" class="addMovie" novalidate> -->
+<form class="addMovie" novalidate>
     <h1 class="auth-title">
         <?php if($isEdit) : ?>
             Edit Film        
@@ -130,10 +131,8 @@
             <p id="trailer-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
     </div>
-
-    <button class="btn btn-primary">Submit</button>
+    <div class="form-panel">
+        <button id="discard-btn" class="btn btn-primary">Discard</button>
+        <button id="submit-btn" class="btn btn-primary">Submit</button>
+    </div>
 </form>
-
-<!-- <div class="register-btn">
-    <a href="/auth/register" class="btn alt-btn">tombol lain</a>
-</div> -->

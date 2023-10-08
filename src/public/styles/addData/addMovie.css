@@ -58,3 +58,20 @@ select:focus {
     margin-top: 5vh;
     margin-bottom: 5vh;
 }
+
+.form-panel {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 10vh;
+}
+
+#discard-btn,
+#submit-btn {
+    max-width: 20vw;
+    margin: auto;
+}
+
+#discard-btn {
+    background-color: var(--alert);
+}

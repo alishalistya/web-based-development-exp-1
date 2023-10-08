@@ -120,7 +120,28 @@ class MovieController
                     break;
                 case 'POST':
                     $movieModel = Utils::model('Movie');
-                    // var_dump();
+
+                    if (isset($_FILES["poster"]) && isset($_FILES["trailer"])) {
+                        $poster = $_FILES["poster"];
+                        $trailer = $_FILES["trailer"];
+
+                        if ($poster["error"] == UPLOAD_ERR_OK && $trailer["error"] == UPLOAD_ERR_OK) {
+                            $uploadDir = "media/img/movie";
+
+                            $file["poster"] = basename($poster["name"]);
+                            $file["trailer"] = basename($trailer["name"]);
+
+                            $uploadPoster = $uploadDir . "/" . $file["poster"];
+                            $uploadTrailer = $uploadDir . "/" . $file["trailer"];
+
+                            if (move_uploaded_file($poster["tmp_name"], $uploadPoster)
+                            && move_uploaded_file($trailer["tmp_name"], $uploadTrailer)){
+                                if ($movieModel->addMovie()){
+                                    
+                                }
+                            }
+                        }
+                    }
                     if ($movieModel -> addMovie($_POST) > 0){
                         // var_dump($_POST);
                         header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');

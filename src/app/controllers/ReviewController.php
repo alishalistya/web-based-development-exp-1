@@ -44,6 +44,45 @@ class ReviewController {
         }
     }
 
+    public function fetch($page)
+    {
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+                    
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
+                    $review = Utils::model("Review");
+                    if ($isAdmin) {
+                        $result = $review->getAllReview($page);
+                        $count = $review->getCountPage();
+                    } else {
+                        $result = $review->getReviewByID($_SESSION['user_id'], $page);
+                        $count = $review->getCountPage($_SESSION['user_id']);
+                    }
+
+                    header('Content-Type: application/json');
+                    echo json_encode(['review' => $result, 'page' => $count ]);
+                    exit;
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+        }
+    }
+
     public function delete()
     {
         try {

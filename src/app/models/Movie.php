@@ -33,7 +33,7 @@ class Movie {
         return $result;
     }
 
-    public function getByArgs($name, $sort = 1, $category = 'none', $year = 'none', $page = 1)
+    public function getByArgs($name, $sort = "m.title", $category = 'none', $year = 'none', $page = 1)
     {
         $sql = "SELECT DISTINCT m.movie_id, m.title, m.description, m.year, m.duration, m.img_path, m.trailer_path
             FROM movie AS m INNER JOIN movie_director AS md ON m.movie_id = md.movie_id
@@ -50,7 +50,7 @@ class Movie {
         if ($year != "none") {
             $sql .= " AND m.year = :year";
         }
-        $sql .= " ORDER BY :sort LIMIT :limit OFFSET :offset";
+        $sql .= " ORDER BY $sort LIMIT :limit OFFSET :offset";
         
 
         $this->db->query($sql);
@@ -64,7 +64,7 @@ class Movie {
         if ($year !== 'none') {
             $this->db->bind('year', $year);
         }
-        $this->db->bind('sort', $sort);
+        // $this->db->bind('sortby', $sort);
         $this->db->bind('limit', LIMIT_PAGE);
         $this->db->bind('offset', ($page - 1) * LIMIT_PAGE);
         

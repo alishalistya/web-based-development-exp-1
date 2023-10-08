@@ -10,6 +10,15 @@
     <link rel="stylesheet" type="text/css" href="/styles/review/review.css">    
     <link rel="stylesheet" type="text/css" href="/styles/others/modal.css">    
     <script type="text/javascript" src="/js/review/delete-review.js" defer></script>
+    <script type="text/javascript" src="/js/review/review.js" defer></script>
+    <script type="text/javascript" defer>
+        <?php if($this->data['isAdmin']): ?>            
+            const ADMIN = true;
+        <?php else: ?>
+            const ADMIN = false;
+        <?php endif; ?>
+    </script>
+
 </head>
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
@@ -21,15 +30,8 @@
         <?php endif; ?>
     </header>
     <section class="review-section">                
-        <div class="review-container">
-            <?php foreach ($this->data['reviews'] as $index => $review) : ?>
-                <!-- <div class="review-card-wrap"> -->
-                <? extract(["review" => $review, "isAdmin" => $this->data['isAdmin']]);
-                include(dirname(__DIR__) . '/review/ReviewCardComponent.php');
-                ?>
-                <!-- </div> -->
-            <?php endforeach; ?>
-        </div>
+        <div class="review-container"></div>
+        <?php include(dirname(__DIR__) . '/others/PaginationGroup.php') ?>
         <dialog class="modal">
             <?php extract([
                 'titleInfo' => "Anda Akan Menghapus Review", 

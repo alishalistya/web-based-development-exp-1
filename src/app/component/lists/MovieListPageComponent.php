@@ -23,11 +23,6 @@
                 <a href="/movie/insert" class="btn btn-primary">Add New</a>
             </div>
             <div class="movie-container">
-                <!-- <?php foreach ($this->data['movies'] as $index => $movie) : ?>
-                    <? extract(["movie" => $movie]);
-                    include(dirname(__DIR__) . '/movie/MovieComponent.php');
-                    ?>
-                <?php endforeach; ?> -->
             </div>
             <?php include(dirname(__DIR__) . '/others/PaginationGroup.php') ?>
         </div>
