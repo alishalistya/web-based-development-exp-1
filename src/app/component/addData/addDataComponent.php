@@ -24,15 +24,18 @@
         <script type="text/javascript" src="/js/addData/addPeople.js" defer></script>
     
     <?php endif; ?>
-
+    
 </head>
 
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php') ?>
     <div class="auth-container">
+        
         <div class="addData-form-container">
+            <!-- <? print_r($this->data) ?> -->
             <? if ($this->data["datatype"]== 'movies') {
                 include(dirname(__DIR__) . '/addData/addMovieComponent.php');
+                // print_r($this->data); 
             } else if ($this->data["datatype"]== 'director') {
                 $director = $this->data['director'];
                 include(dirname(__DIR__) . '/addData/addDirectorComponent.php');

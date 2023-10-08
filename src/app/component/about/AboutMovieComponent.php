@@ -14,6 +14,7 @@
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
     <div id="movie-container">
+       
         <img id="movie-background" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>" alt="<?= $this->data['movie']['title'] ?>">
         <button type="button" id="updateContentButton" class="text" data-toggle="modal" data-target="myModal" data-id="<?= $this->data['movie']['movie_id'] ?>">EDIT</button>
         <h2 id="about-movie" class="text">

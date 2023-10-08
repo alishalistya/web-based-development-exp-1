@@ -324,19 +324,22 @@ class MovieController
     }
     
 
-    public function detail() {
+    public function detail($movieID) {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
 
-                    $movieChosen = $_GET['title'];
-                    $data['movie'] = Utils::model("Movie")->getMovieByTitle("$movieChosen");
-            
-                    $movieID = $data['movie']['movie_id'];
-            
-                    $data['directorID'] = Utils::model("Movie")->getDirectorByMovieID("$movieID");
+                    // $movieChosen = $_GET['title'];
+                    $data['movie'] = Utils::model("Movie")->getMovieByID($movieID);
+                    
+                    // var_dump($_GET);
+                    // $movieID = $data['movie']['movie_id'];
+                    
+                    // TODO: Kayaknya ada yg salah disini
+                    $data['directorID'] = Utils::model("Movie")->getDirectorByMovieID($movieID);
+
                     $directorID = $data['directorID']['director_id'];
                     $data['director'] = Utils::model("Director")->getDirectorByID("$directorID");
             
