@@ -186,11 +186,12 @@ class ActorController
                     $currentPage = $_GET['page'] ?? 1;
                     $data['page'] = $currentPage;
                     $initialMovie = ($moviePerPage * $currentPage) - $moviePerPage;
-            
+                    
+                    $data['movie'] = [];
                     $data['movieID'] = Utils::model("Actor")->getMovieByActorIDWithLimit($data['people']['actor_id'], $initialMovie, $moviePerPage);
                     foreach ($data['movieID'] as $movieID) {
                         $movieID = $movieID['movie_id'];
-                        $data['movie'][] = Utils::model("Movie")->getMovieByID("$movieID");
+                        $data['movie'][] = Utils::model("Movie")->getMovieByID($movieID);
                     };
             
                     $actorView = Utils::view("about", "AboutPeopleView", $data);

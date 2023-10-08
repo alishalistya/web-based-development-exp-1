@@ -20,7 +20,7 @@
     <?php endif; ?>
     <div class="home-container">
         <header class="home-header">
-            <img src="/media/images/anatomy-header.png" alt="Header movie"/>
+            <img src="/media/img/movie/anatomy_of_a_fall.jpeg" alt="Header movie"/>
             <div class="header-desc">
                 <h3>Anatomy of a Fall (2023)</h3>
                 <p>Directed by Justine Triet</p>

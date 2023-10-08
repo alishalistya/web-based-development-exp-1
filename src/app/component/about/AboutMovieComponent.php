@@ -16,13 +16,13 @@
     <div id="movie-container">
        
         <img id="movie-background" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>" alt="<?= $this->data['movie']['title'] ?>">
-        <button type="button" id="updateContentButton" class="text" data-toggle="modal" data-target="myModal" data-id="<?= $this->data['movie']['movie_id'] ?>">EDIT</button>
+        <button id="updateContentButton"> <a href="http://localhost:8080/movie/update?movie_id=<?= $this->data['movie']['movie_id'] ?>">EDIT</a></button>
         <h2 id="about-movie" class="text">
             about Movie,
         </h2>
         <img id="movie-img" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>" alt="<?= $this->data['movie']['title'] ?>">
         <video id="movie-trailer" controls>
-            <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>.mp4" type="video/mp4">
+            <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>" type="video/mp4">
         </video>
         <h1 id="movie-title" class="text">
             <?= $this->data['movie']['title'] ?>
@@ -139,7 +139,7 @@
                         <div class="form-group">
                             <label for="trailerInput">Trailer:</label>
                             <video id="update-trailer" controls>
-                                <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>.mp4" type="video/mp4">
+                                <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>" type="video/mp4">
                             </video>
                             <input type="file" id="trailerInput" class="form-control" name="trailerInput"/>
                         </div>
@@ -149,8 +149,6 @@
             </form>
 
     </div>
-
-    <script src="../../../public/js/edit/editMovie.js"></script> 
     
 </body>
 </html>

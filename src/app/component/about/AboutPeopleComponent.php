@@ -51,14 +51,20 @@
         </h1>
         <div class="row">
             <?php $count = 0; ?>
-
-            <?php foreach ($this->data['movie'] as $index => $movie) : ?>
-                <?php if ($count >= 6) break; ?>
-                <? extract(["movie" => $movie]);
-                include(dirname(__DIR__) . '/movie/MovieComponent.php');
-                ?>
-                <?php $count++; ?>
-            <?php endforeach; ?>
+            
+            <?php if(count($this->data['movie']) == 0) : ?>
+                <h3 id="known-for" class="text">
+            There are no movies.
+                </h3>
+            <?php else : ?>
+                <?php foreach ($this->data['movie'] as $index => $movie) : ?>
+                    <?php if ($count >= 6) break; ?>
+                    <? extract(["movie" => $movie]);
+                    include(dirname(__DIR__) . '/movie/MovieComponent.php');
+                    ?>
+                    <?php $count++; ?>
+                <?php endforeach; ?>
+            <?php endif;?>
 
         </div>
         <!-- page navigation -->
