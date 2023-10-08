@@ -64,6 +64,9 @@
         <h2 id="review" class="text">
             REVIEW:
         </h2>
+        <button id="addReviewButton">
+            <a href="http://localhost:8080/review/insert?movie_id=<?= $this->data['movie']['movie_id'] ?>">Add Review</a>
+        </button>
         <div class="row">
             <?php if (empty($this->data['reviews'])): ?>
                 <div class="review-card text">

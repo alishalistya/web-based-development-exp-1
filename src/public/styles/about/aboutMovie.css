@@ -176,6 +176,28 @@ a {
     margin-bottom: 3%;
 }
 
+#addReviewButton {
+    position: relative;
+    display: block;
+    left: 19%;
+    transform: translate(-50%, -50%);
+    background-color: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin-top: 5%;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+#addReviewButton:hover {
+    background-color: #ffffff;
+    color: #0056b3;
+    border: #1a1d4e solid 1px;
+}
+
 .row {
     display: flex;
     flex-wrap: wrap;
