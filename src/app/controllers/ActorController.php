@@ -32,6 +32,12 @@ class ActorController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
@@ -40,6 +46,10 @@ class ActorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    // Authentication
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
                     // Actor model
                     $actorModel = Utils::model('Actor');
                     $data["actor"] = $actorModel->getAllActor();
@@ -85,6 +95,12 @@ class ActorController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
@@ -93,6 +109,11 @@ class ActorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    // Authentication
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
+                    // Model
                     $actorModel = Utils::model('Actor');
                     $data["actor"] = $actorModel->getActorByID($_GET['actor_id']);
                     $data["datatype"] = "actor";
@@ -137,6 +158,12 @@ class ActorController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
@@ -145,6 +172,10 @@ class ActorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    // Authentication
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
                     $actorChosen = $_GET['name'];
                     $data['title'] = 'Actor';
                     $data['people'] = Utils::model("Actor")->getActorByName("$actorChosen");
@@ -167,6 +198,12 @@ class ActorController
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
             }
         } catch (Exception $e) {
             http_response_code($e->getCode());

@@ -101,6 +101,12 @@ class ReviewController {
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }

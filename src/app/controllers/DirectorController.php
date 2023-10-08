@@ -32,6 +32,12 @@ class DirectorController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
@@ -40,6 +46,9 @@ class DirectorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                // Authentication
+                $auth = Utils::middleware("Authentication");
+                $auth->isUserLogin();
 
                 // Director Model
                     $directorModel = Utils::model('Director');
@@ -51,6 +60,7 @@ class DirectorController
                     $addDirectorView = Utils::view("addData", "AddDataView", $data);
                     $addDirectorView->render();
                     break;
+
                 case 'POST':
                     $directorModel = Utils::model('Director');
                     // var_dump($_POST['photo']);
@@ -91,6 +101,12 @@ class DirectorController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
@@ -99,6 +115,10 @@ class DirectorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    // Authentication
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
                     $directorModel = Utils::model('Director');
                     $data["director"] = $directorModel->getDirectorByID($_GET['director_id']);
                     $data["datatype"] = "director";
@@ -149,6 +169,12 @@ class DirectorController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
@@ -157,6 +183,11 @@ class DirectorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    // Authentication
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
+                    // Direction
                     $directorChosen = $_GET['name'];
                     $data['title'] = 'Director';
                     $data['people'] = Utils::model("Director")->getDirectorByName("$directorChosen");
@@ -179,6 +210,12 @@ class DirectorController
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
             }
         } catch (Exception $e) {
             http_response_code($e->getCode());

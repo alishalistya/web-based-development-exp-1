@@ -49,6 +49,7 @@ class MovieController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
 
@@ -77,6 +78,8 @@ class MovieController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
                     $movieModel = Utils::model("Movie");
                     
                     $movies = $movieModel->getByArgs($_GET['q'], $_GET['sort'], $_GET['category'], $_GET['year'],$page);
@@ -88,6 +91,12 @@ class MovieController
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
             }
         } catch (Exception $e) {
             http_response_code($e->getCode());
@@ -147,6 +156,12 @@ class MovieController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
@@ -155,6 +170,9 @@ class MovieController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getAllMovies();
                     $data["datatype"] = "movies";
@@ -215,6 +233,12 @@ class MovieController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
@@ -223,6 +247,9 @@ class MovieController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getAllMovies();
                     $data["datatype"] = "movies";
@@ -257,6 +284,12 @@ class MovieController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
@@ -265,6 +298,9 @@ class MovieController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'DELETE':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
                     $movieModel = Utils::model('Movie');
                     // var_dump();
                     if ($movieModel -> addMovie($_POST) > 0){
@@ -277,21 +313,33 @@ class MovieController
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
         } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
             http_response_code($e->getCode());
         }
     }
     
 
-    public function detail() {
+    public function detail($movieID) {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
-                    $movieChosen = $_GET['title'];
-                    $data['movie'] = Utils::model("Movie")->getMovieByTitle("$movieChosen");
-            
-                    $movieID = $data['movie']['movie_id'];
-            
-                    $data['directorID'] = Utils::model("Movie")->getDirectorByMovieID("$movieID");
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+
+                    // $movieChosen = $_GET['title'];
+                    $data['movie'] = Utils::model("Movie")->getMovieByID($movieID);
+                    
+                    // var_dump($_GET);
+                    // $movieID = $data['movie']['movie_id'];
+                    
+                    // TODO: Kayaknya ada yg salah disini
+                    $data['directorID'] = Utils::model("Movie")->getDirectorByMovieID($movieID);
+
                     $directorID = $data['directorID']['director_id'];
                     $data['director'] = Utils::model("Director")->getDirectorByID("$directorID");
             
@@ -315,26 +363,17 @@ class MovieController
                         $data['reviews'][] = Utils::model("Review")->getReviewByReviewID("$reviewID");
                     };
             
-            
-            
-                    // $data['reviews'] = [
-                    //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-                    //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-                    //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-                    //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-                    //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-                    //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-                    //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-                    //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time.",
-                    //     "I love this movie. It's so good. I love the songs and the characters. I love the story and the animation. I love the voice acting. I love everything about it. It's one of my favorite movies of all time."
-                    // ];
-                     
-            
                     $movieView = Utils::view("about", "AboutMovieView", $data);
                     $movieView->render();
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
             }
         } catch (Exception $e) {
             http_response_code($e->getCode());
