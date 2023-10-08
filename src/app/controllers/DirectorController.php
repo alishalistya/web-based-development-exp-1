@@ -179,7 +179,7 @@ class DirectorController
         }
     }
 
-    public function detail() {
+    public function detail($directorID) {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
@@ -188,9 +188,9 @@ class DirectorController
                     $auth->isUserLogin();
 
                     // Direction
-                    $directorChosen = $_GET['name'];
+                    // $directorChosen = $_GET['name'];
                     $data['title'] = 'Director';
-                    $data['people'] = Utils::model("Director")->getDirectorByName("$directorChosen");
+                    $data['people'] = Utils::model("Director")->getDirectorByID($directorID);
             
                     //pagination for movies
                     $moviePerPage = 6;

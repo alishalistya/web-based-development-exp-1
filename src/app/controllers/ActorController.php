@@ -168,7 +168,7 @@ class ActorController
         }
     }
 
-    public function detail() {
+    public function detail($actorID) {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
@@ -176,9 +176,9 @@ class ActorController
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
 
-                    $actorChosen = $_GET['name'];
+                    // $actorChosen = $_GET['name'];
                     $data['title'] = 'Actor';
-                    $data['people'] = Utils::model("Actor")->getActorByName("$actorChosen");
+                    $data['people'] = Utils::model("Actor")->getActorByID($actorID);
             
                     //pagination for movies
                     $moviePerPage = 6;
@@ -186,11 +186,12 @@ class ActorController
                     $currentPage = $_GET['page'] ?? 1;
                     $data['page'] = $currentPage;
                     $initialMovie = ($moviePerPage * $currentPage) - $moviePerPage;
-            
+                    
+                    $data['movie'] = [];
                     $data['movieID'] = Utils::model("Actor")->getMovieByActorIDWithLimit($data['people']['actor_id'], $initialMovie, $moviePerPage);
                     foreach ($data['movieID'] as $movieID) {
                         $movieID = $movieID['movie_id'];
-                        $data['movie'][] = Utils::model("Movie")->getMovieByID("$movieID");
+                        $data['movie'][] = Utils::model("Movie")->getMovieByID($movieID);
                     };
             
                     $actorView = Utils::view("about", "AboutPeopleView", $data);

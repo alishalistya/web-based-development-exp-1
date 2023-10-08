@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About <?= $this->data['title']; ?></title>
     <link rel="stylesheet" href="../../../public/styles/about/aboutPeople.css">
+    <link rel="stylesheet" type="text/css" href="/styles/others/movie.css">
+
     <link rel="stylesheet" type="text/css" href="../../../public/styles/others/Navbar.css">
     <link rel="stylesheet" type="text/css" href="/styles/others/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,12 +16,24 @@
 <body>
     <?php include(dirname(__DIR__) . '/others/NavbarComponent.php')?>
     <div id="people-container">
-        <img id="people-background" src="../../../public/media/img/<?= $this->data['title']; ?>/<?= $this->data['people']['img_path'] ?>.jpeg" alt="<?= $this->data['people']['img_path'] ?>">
-        <button type="button" id="updateContentButton" class="text" data-toggle="modal" data-target="myModal" data-id="<?= $this->data['peopleID'] ?>" data-title="<?= $this->data['title']; ?>">EDIT</button>
+        <img id="people-background" src="../../../public/media/img/<?= $this->data['title']; ?>/<?= $this->data['people']['img_path'] ?>" alt="<?= $this->data['people']['img_path'] ?>">
+
+        <!-- Edit -->
+        <button id="updateContentButton">
+            <?php if($this->data['title'] == 'Director') : ?>
+            <a href="http://localhost:8080/director/update?director_id=<?= $this->data['people']['director_id'] ?>">Edit</a>
+
+            <?php elseif($this->data['title'] == 'Actor') : ?>
+                <a href="http://localhost:8080/actor/update?actor_id=<?= $this->data['people']['actor_id'] ?>">Edit</a>
+            
+            <?php endif; ?>
+        </button>
+
+        <!-- About -->
         <h2 id="about-people" class="text">
             about <?= $this->data['title']; ?>,
         </h2>
-        <img id="people-img" src="../../../public/media/img/<?= $this->data['title']; ?>/<?= $this->data['people']['img_path'] ?>.jpeg" alt="<?= $this->data['people']['img_path'] ?>">
+        <img id="people-img" src="../../../public/media/img/<?= $this->data['title']; ?>/<?= $this->data['people']['img_path'] ?>" alt="<?= $this->data['people']['img_path'] ?>">
         <h1 id="people-name" class="text">
             <?= $this->data['people']['name'] ?>
         </h1>
@@ -37,15 +51,21 @@
         </h1>
         <div class="row">
             <?php $count = 0; ?>
-            <?php foreach ($this->data['movie'] as $movie): ?>
-                <?php if ($count >= 6) break; ?>
-                    <div class="picture">
-                        <a href="movie?id=<?= $movie['movie_id'] ?>">
-                            <img src="../../../public/media/img/movie/<?= $movie['img_path']; ?>" alt="<?php echo $movie['title']; ?>">
-                        </a>
-                    </div>
+            
+            <?php if(count($this->data['movie']) == 0) : ?>
+                <h3 id="known-for" class="text">
+            There are no movies.
+                </h3>
+            <?php else : ?>
+                <?php foreach ($this->data['movie'] as $index => $movie) : ?>
+                    <?php if ($count >= 6) break; ?>
+                    <? extract(["movie" => $movie]);
+                    include(dirname(__DIR__) . '/movie/MovieComponent.php');
+                    ?>
                     <?php $count++; ?>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            <?php endif;?>
+
         </div>
         <!-- page navigation -->
         <div class="page-navigation">
@@ -94,7 +114,7 @@
                         <!-- Input field for Image URL -->
                         <div class="form-group">
                             <label for="imageInput">Image:</label>
-                            <img id="update-img" src="../../../public/media/img/<?= $this->data['title']; ?>/<?= $this->data['people']['img_path'] ?>.jpeg" alt="<?= $this->data['people']['img_path'] ?>">
+                            <img id="update-img" src="../../../public/media/img/<?= $this->data['title']; ?>/<?= $this->data['people']['img_path'] ?>" alt="<?= $this->data['people']['img_path'] ?>">
                             <input type="file" id="imageInput" class="form-control" name="imageInput"/>
                             
                         </div>
@@ -106,6 +126,6 @@
 
     </div>
 
-    <script src="../../../public/js/edit/editPeople.js"></script>
+   
 </body>
 </html>
