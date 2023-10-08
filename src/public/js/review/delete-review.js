@@ -4,22 +4,6 @@ const confirmBtn = document.querySelector("#confirm-btn-modal");
 const cancelBtn = document.querySelector("#cancel-btn-modal");
 const modalDelete = document.querySelector(".modal");
 
-editBtns &&
-    editBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            location.replace(`http://localhost:8080/review/update?review_id=${btn.getAttribute("data")}`);
-        });
-    });
-
-deleteBtns &&
-    deleteBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            // console.log(btn.getAttribute("dat"));
-            modalDelete.setAttribute("review_id", btn.getAttribute("data"));
-            modalDelete.showModal();
-        });
-    });
-
 cancelBtn &&
     cancelBtn.addEventListener("click", () => {
         console.log(`you close ${modalDelete.getAttribute("review_id")}`);

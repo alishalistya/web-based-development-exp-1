@@ -48,4 +48,8 @@ class User {
 
         return $this->db->single();
     }
+
+    public function getAllUsers($page) {
+
+    }
 }

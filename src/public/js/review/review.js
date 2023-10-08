@@ -79,7 +79,7 @@ const updateComponentResult = (data) => {
 
     for (let review of data.review.values()) {
         const adminTag1 = ADMIN ? `<p class="username-text">Username : ${review.username}</p>` : "";
-        const userTag1 = ADMIN ? "" : `<button id="edit-btn" class="btn" data="${review.review_id}">Edit</button>`;
+        const userTag1 = ADMIN ? "" : `<button id="edit-btn" class="btn" onclick="editReviewCard(${review.review_id})" data="${review.review_id}">Edit</button>`;
         resultHMTL += `
         <div class="review-card">
             <a class="review-detail" href="${review.img_path}">
@@ -107,7 +107,7 @@ const updateComponentResult = (data) => {
             </a>
             <div class="review-panel">
                 ${userTag1}
-                <button id="delete-btn" class="btn" data="${review.review_id}">Delete</button>
+                <button id="delete-btn" class="btn" onclick="deleteReviewCard('${review.review_id}')" data="${review.review_id}">Delete</button>
             </div>
         </div>
         `;
@@ -126,4 +126,15 @@ const updateComponentResult = (data) => {
     } else {
         nextPage.disabled = true;
     }
+};
+
+const deleteReviewCard = (id) => {
+    console.log("delete");
+    modalDelete.setAttribute("review_id", id);
+    modalDelete.showModal();
+};
+
+const editReviewCard = (id) => {
+    console.log("edit");
+    location.replace(`http://localhost:8080/review/update?review_id=${id}`);
 };

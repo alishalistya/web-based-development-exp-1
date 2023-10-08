@@ -81,4 +81,49 @@ class UserController
         }
 
     }
+
+    public function logout() {
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'POST':
+                    unset($_SESSION['user_id']);
+
+                    header('Content-Type: application/json');
+                    http_response_code(STATUS_OK);
+                    header("Location: http://localhost:8080/home");
+                    exit;
+                    break;
+                default:
+                    throw new Exception();
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+        }
+    }
+
+    public function index() {
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isAdminLogin();
+                    
+                    
+
+
+                    $movieView = Utils::view("lists", "MovieListView", ['data' => $movies, 'isAdmin' => $isAdmin, 'page' => $count]);
+                    $movieView->render();
+
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        }
+    }
 }

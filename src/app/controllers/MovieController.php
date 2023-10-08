@@ -126,7 +126,7 @@ class MovieController
         }
     }
 
-    public function catalog($page) {
+    public function catalog() {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
@@ -144,7 +144,7 @@ class MovieController
                     }
 
                     $movieModel = Utils::model('Movie');
-                    $data["movies"] = $movieModel->getPaginate($page);
+                    // $data["movies"] = $movieModel->getPaginate($page);
                     $data['isAdmin'] = $isAdmin;
                     $data["datatype"] = "movies";
 
@@ -171,7 +171,7 @@ class MovieController
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
-                    $auth->isUserLogin();
+                    $auth->isAdminLogin();
 
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getAllMovies();
@@ -191,15 +191,11 @@ class MovieController
                 case 'POST':
                     $movieModel = Utils::model('Movie');
 
-                    // var_dump(isset($_FILES["poster"]), isset($_FILES["trailer"]));
-
                     if (isset($_FILES["poster"]) && isset($_FILES["trailer"])) {
                         $poster = $_FILES["poster"];
                         $trailer = $_FILES["trailer"];
-                        var_dump($trailer);
 
-
-                        if ($poster["error"] == UPLOAD_ERR_OK) {
+                        if ($poster["error"] == UPLOAD_ERR_OK && $trailer["error"] == UPLOAD_ERR_OK) {
                             $uploadPosterDir = "media/img/movie";
                             $posterName = basename($poster["name"]);
                             $uploadPoster = $uploadPosterDir .'/'. $posterName;
@@ -216,9 +212,11 @@ class MovieController
                                 // Add mvooe
                                 if ($movieModel -> addMovie($_POST, $posterName, $trailerName) > 0){
                                     // var_dump($_POST);
-                                    header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
-                                break;
-                                exit;
+                                    header('Content-Type: application/json');
+                                    http_response_code(STATUS_OK);
+                                    echo json_encode(['error' => null ]);
+                                    break;
+                                    exit;
                                 }
 
                             } else {
@@ -248,7 +246,7 @@ class MovieController
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
-                    $auth->isUserLogin();
+                    $auth->isAdminLogin();
 
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getAllMovies();
@@ -267,19 +265,56 @@ class MovieController
                     $data["movie_director"] = $directorModel->getMovieDirectorByMovieID($_GET['movie_id']);
 
                     $data["isEdit"] = true;
+                    $data["movie_id"] = $_GET['movie_id'];
 
                     $addMovieView = Utils::view("addData", "AddDataView", $data);
                     $addMovieView->render();
                     break;
                 case 'POST':
                     $movieModel = Utils::model('Movie');
-                    // var_dump();
-                    if ($movieModel -> addMovie($_POST) > 0){
-                        // var_dump($_POST);
-                        header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+
+                    $posterName = "";
+                    $trailerName = "";
+
+                    if (isset($_FILES['poster'])){
+                        $poster = $_FILES["poster"];
+                        if ($poster["error"] == UPLOAD_ERR_OK) {
+                            $uploadTrailerDir = "media/img/trailer";
+                            $trailerName = basename($trailer["name"]);
+                            $uploadTrailer = $uploadTrailerDir .'/'. $trailerName;
+
+                            if (!move_uploaded_file($poster["tmp_name"], $uploadPoster)){
+                                throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+                            }
+                        } else {
+                            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+                        }
                     }
-                    break;
-                    exit;
+
+                    if (isset($_FILES['trailer'])){
+                        $trailer = $_FILES["trailer"];
+                        if ($trailer["error"] == UPLOAD_ERR_OK) {
+                            $uploadTrailerDir = "media/img/movie";
+                            $posterName = basename($poster["name"]);
+                            $uploadPoster = $uploadPosterDir .'/'. $posterName;
+
+                            if (!move_uploaded_file($trailer["tmp_name"], $uploadTrailer)){
+                                throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+                            }
+                        } else {
+                            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+                        }
+                    }
+
+                    // Add mvooe
+                    if ($movieModel->updateMovie($_POST, $posterName, $trailerName) > 0){
+                        // var_dump($_POST);
+                        header('Content-Type: application/json');
+                        http_response_code(STATUS_OK);
+                        echo json_encode(['error' => null ]);
+                        break;
+                        exit;
+                    }
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
@@ -296,16 +331,18 @@ class MovieController
 
     public function delete() {
         try {
+            // var_dump($_SERVER['REQUEST_METHOD']);
             switch ($_SERVER['REQUEST_METHOD']) {
-                case 'DELETE':
+                case "DELETE":
                     $auth = Utils::middleware("Authentication");
-                    $auth->isUserLogin();
+                    $auth->isAdminLogin();
 
                     $movieModel = Utils::model('Movie');
-                    // var_dump();
-                    if ($movieModel -> addMovie($_POST) > 0){
+                    if ($movieModel->deleteMovie($_GET['movie_id']) > 0){
                         // var_dump($_POST);
-                        header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+                        // header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/movie/catalog');
+                        header('Content-Type: application/json');
+                        echo json_encode(['error' => null ]);
                     }
                     exit;
                     break;

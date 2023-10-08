@@ -26,6 +26,7 @@
         <script type="text/javascript" src="/js/addData/addMovie.js" defer></script>
         <?php if($isEdit) : ?>
             <script type="text/javascript" defer>
+                const movieID = "<?= $this->data['movie_id'] ?>"
                 let currActors = [];
                 <?php foreach($movie_actor as $idx => $value) : ?> 
                     currActors.push("<?= $value['actor_id'] ?>");

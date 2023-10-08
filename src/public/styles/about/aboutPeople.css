@@ -3,23 +3,21 @@
     height: 100vh;
     width: 50vw;
     background-color: rgba(45, 49, 107, 0.8);
-
 }
 
 #people-background {
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: -1; 
+    z-index: -1;
     object-fit: cover;
     filter: grayscale(100%);
     box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
-
 }
 
-.text {
+/* .text {
     font-family: 'Raleway', sans-serif;
-}
+} */
 
 #about-people {
     position: absolute;
@@ -32,28 +30,25 @@
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-
 #updateContentButton {
     position: absolute;
     top: 5%;
     left: 10%;
     transform: translate(-50%, -50%);
-    background-color: #fcbe11; 
-    color: black; 
-    border: none; 
-    border-radius: 4px; 
-    padding: 10px 20px; 
+    background-color: #fcbe11;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
     font-size: 16px;
-    cursor: pointer; 
-    transition: background-color 0.3s, color 0.3s; 
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
-
 
 #updateContentButton:hover {
-    background-color: #007BFF; 
-    color: #fff; 
+    background-color: #007bff;
+    color: #fff;
 }
-
 
 #people-img {
     position: absolute;
@@ -77,7 +72,7 @@
     text-align: center;
     font-size: 2rem;
     color: #ffffff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 #people-birth {
@@ -89,13 +84,13 @@
     text-align: center;
     font-size: 1em;
     color: #ffffff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 #people-description {
     position: absolute;
     top: 75%;
-    left: 50%; 
+    left: 50%;
     width: 80%;
     transform: translate(-50%, 0);
     z-index: 1;
@@ -115,14 +110,13 @@
     overflow-x: hidden;
     background: linear-gradient(to right, #ffffff, #ffffff, rgba(26, 29, 78, 0.7));
     z-index: 1;
-
 }
 
 #known-for {
     position: relative;
     display: block;
     left: 7%;
-    color: #1A1D4E;
+    color: #1a1d4e;
     margin-top: 3%;
     margin-bottom: 3%;
 }
@@ -137,14 +131,14 @@
     margin-left: 2%;
     padding: 1%;
     border-radius: 4%;
-    border: 1px solid #2D316B;
+    border: 1px solid #2d316b;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
 
 .picture img {
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
     display: inline-block;
 }
 
@@ -152,7 +146,6 @@
     transform: scale(1.1);
     transition: all 0.5s ease-in-out;
 }
-
 
 .page-navigation {
     display: flex;
@@ -164,26 +157,24 @@
 .page-number {
     font-size: 18px;
     margin: 0 10px;
-    color: #333; 
+    color: #333;
 }
 
 .page a {
     text-decoration: none;
     font-size: 24px;
-    color: #007BFF; 
+    color: #007bff;
     margin: 0 10px;
-    transition: color 0.3s; 
+    transition: color 0.3s;
 }
-
 
 .page a .material-icons {
     font-size: 24px;
     vertical-align: middle;
 }
 
-
 .page a:hover {
-    color: #0056b3; 
+    color: #0056b3;
 }
 
 /* Modal styles */
@@ -203,7 +194,7 @@
     padding: 20px;
     border-radius: 5px;
     width: 60%;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
 .close {
@@ -227,7 +218,7 @@ textarea {
 }
 
 button#saveButton {
-    background-color: #007BFF;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -244,9 +235,6 @@ button#saveButton {
     border-radius: 5%;
 }
 
-
-
-
 @media (min-width: 280px) and (max-width: 900px) {
     #people-container {
         position: relative;
@@ -260,7 +248,7 @@ button#saveButton {
         top: 15%;
         left: 25%;
         transform: translate(-50%, -50%);
-        z-index:3;
+        z-index: 3;
         text-align: left;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -275,7 +263,7 @@ button#saveButton {
         text-align: center;
         font-size: 1.5rem;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
     #people-birth {
@@ -287,13 +275,13 @@ button#saveButton {
         text-align: center;
         font-size: 1rem;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
     #people-description {
         position: absolute;
         top: 73%;
-        left: 50%; 
+        left: 50%;
         width: 80%;
         transform: translate(-50%, 0);
         z-index: 1;
@@ -321,7 +309,7 @@ button#saveButton {
         margin-left: 6%;
         padding: 1%;
         border-radius: 4%;
-        border: 1px solid #2D316B;
+        border: 1px solid #2d316b;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         overflow: hidden;
     }
@@ -329,13 +317,12 @@ button#saveButton {
     .picture img {
         width: 100%;
         height: 100%;
-        object-fit: cover; 
+        object-fit: cover;
         display: block;
     }
 }
 
 @media (min-width: 901px) and (max-width: 1200px) {
-
     #about-people {
         position: absolute;
         top: 15%;
@@ -345,7 +332,6 @@ button#saveButton {
         text-align: left;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
-    
     }
 
     #people-name {
@@ -357,13 +343,13 @@ button#saveButton {
         text-align: center;
         font-size: 1.5rem;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     #people-description {
         position: absolute;
         top: 75%;
-        left: 50%; 
+        left: 50%;
         width: 80%;
         transform: translate(-50%, 0);
         z-index: 1;
@@ -372,15 +358,15 @@ button#saveButton {
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     .picture {
         height: 35vh;
         margin-bottom: 2%;
         margin-left: 6%;
         padding: 1%;
         border-radius: 4%;
-        border: 1px solid #2D316B;
+        border: 1px solid #2d316b;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-        overflow: hidden;    
+        overflow: hidden;
     }
 }

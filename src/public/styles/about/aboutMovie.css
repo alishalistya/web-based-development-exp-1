@@ -3,22 +3,20 @@
     height: 100vh;
     width: 72vw;
     background-color: rgba(45, 49, 107, 0.8);
-
 }
 
-.text {
+/* .text {
     font-family: 'Raleway', sans-serif;
-}
+} */
 
 #movie-background {
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: -1; 
+    z-index: -1;
     object-fit: cover;
     filter: grayscale(100%);
     box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
-
 }
 
 #updateContentButton {
@@ -26,20 +24,19 @@
     top: 5%;
     left: 10%;
     transform: translate(-50%, -50%);
-    background-color: #fcbe11; 
-    color: black; 
-    border: none; 
-    border-radius: 4px; 
-    padding: 10px 20px; 
+    background-color: #fcbe11;
+    color: black;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
     font-size: 16px;
-    cursor: pointer; 
-    transition: background-color 0.3s, color 0.3s; 
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-
 #updateContentButton:hover {
-    background-color: #007BFF; 
-    color: #fff; 
+    background-color: #007bff;
+    color: #fff;
 }
 
 #about-movie {
@@ -47,7 +44,7 @@
     top: 15%;
     left: 15%;
     transform: translate(-50%, -50%);
-    z-index:1;
+    z-index: 1;
     text-align: left;
     color: #ffffff;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -78,7 +75,6 @@
     box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
 }
 
-
 #movie-title {
     position: absolute;
     top: 68%;
@@ -88,7 +84,7 @@
     text-align: center;
     font-size: 1.7rem;
     color: #ffffff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 #movie-release {
@@ -99,7 +95,7 @@
     z-index: 1;
     text-align: center;
     color: #ffffff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 #movie-duration {
@@ -111,7 +107,7 @@
     text-align: center;
     font-size: smaller;
     color: #ffffff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .movie-director {
@@ -124,7 +120,7 @@
     text-align: center;
     font-size: 1.3rem;
     color: #ffffff;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .movie-cast {
@@ -141,10 +137,9 @@
 }
 
 a {
-    text-decoration: none; 
-    color: inherit; 
+    text-decoration: none;
+    color: inherit;
 }
-
 
 #movie-description {
     position: absolute;
@@ -176,7 +171,7 @@ a {
     position: relative;
     display: block;
     left: 7%;
-    color: #1A1D4E;
+    color: #1a1d4e;
     margin-top: 3%;
     margin-bottom: 3%;
 }
@@ -193,11 +188,10 @@ a {
     margin-left: 2%;
     padding: 1%;
     border-radius: 4%;
-    border: 1px solid #2D316B;
+    border: 1px solid #2d316b;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
-
 
 .page-navigation {
     display: flex;
@@ -209,27 +203,24 @@ a {
 .page-number {
     font-size: 18px;
     margin: 0 10px;
-    color: #333; 
+    color: #333;
 }
-
 
 .page a {
     text-decoration: none;
     font-size: 24px;
-    color: #007BFF; 
+    color: #007bff;
     margin: 0 10px;
-    transition: color 0.3s; 
+    transition: color 0.3s;
 }
-
 
 .page a .material-icons {
     font-size: 24px;
     vertical-align: middle;
 }
 
-
 .page a:hover {
-    color: #0056b3; 
+    color: #0056b3;
 }
 
 /* Modal styles */
@@ -249,7 +240,7 @@ a {
     padding: 20px;
     border-radius: 5px;
     width: 60%;
-    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
 .close {
@@ -273,7 +264,7 @@ textarea {
 }
 
 button#saveButton {
-    background-color: #007BFF;
+    background-color: #007bff;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -297,8 +288,6 @@ button#saveButton {
     border-radius: 5%;
 }
 
-
-
 @media (min-width: 280px) and (max-width: 800px) {
     #movie-container {
         position: relative;
@@ -306,24 +295,23 @@ button#saveButton {
         width: 100vw;
         background-color: rgba(45, 49, 107, 0.8);
     }
-    
+
     #about-movie {
         position: absolute;
         top: 5%;
         left: 35%;
         transform: translate(-50%, -50%);
-        z-index:1;
+        z-index: 1;
         text-align: left;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
         font-size: 1.2rem;
     }
 
-        
     #movie-trailer {
         display: none;
     }
-    
+
     #movie-img {
         position: absolute;
         top: 27%;
@@ -334,7 +322,7 @@ button#saveButton {
         object-fit: cover;
         box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
     }
-    
+
     #movie-title {
         position: absolute;
         top: 53%;
@@ -344,9 +332,9 @@ button#saveButton {
         text-align: center;
         font-size: 1.5rem;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     #movie-release {
         position: absolute;
         top: 58%;
@@ -355,9 +343,9 @@ button#saveButton {
         z-index: 1;
         text-align: center;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     #movie-duration {
         position: absolute;
         top: 60%;
@@ -367,8 +355,8 @@ button#saveButton {
         text-align: center;
         font-size: smaller;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
-    } 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
 
     #movie-director {
         position: absolute;
@@ -379,9 +367,9 @@ button#saveButton {
         text-align: center;
         font-size: 1.3em;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     .movie-cast {
         position: absolute;
         display: inline;
@@ -394,7 +382,7 @@ button#saveButton {
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     #movie-description {
         position: absolute;
         top: 90%;
@@ -406,8 +394,7 @@ button#saveButton {
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
-    
+
     #review-container {
         position: relative;
         height: 100vh;
@@ -415,12 +402,12 @@ button#saveButton {
         top: 80px;
         bottom: auto;
         left: 5%;
-    
+
         overflow-y: scroll;
         overflow-x: hidden;
         background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
     }
-    
+
     .review-card {
         height: 10vh;
         width: 80vw;
@@ -428,7 +415,7 @@ button#saveButton {
         margin-left: 2%;
         padding: 1%;
         border-radius: 4%;
-        border: 1px solid #2D316B;
+        border: 1px solid #2d316b;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         overflow: hidden;
     }
@@ -439,9 +426,9 @@ button#saveButton {
         position: relative;
         height: 100vh;
         width: 100vw;
-        background-color: rgba(45, 49, 107, 0.8);  
+        background-color: rgba(45, 49, 107, 0.8);
     }
-         
+
     #about-movie {
         position: absolute;
         top: 10%;
@@ -487,9 +474,9 @@ button#saveButton {
         text-align: center;
         font-size: 1.7rem;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     #movie-release {
         position: absolute;
         top: 70%;
@@ -498,7 +485,7 @@ button#saveButton {
         z-index: 1;
         text-align: center;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
     #movie-duration {
@@ -510,9 +497,8 @@ button#saveButton {
         text-align: center;
         font-size: smaller;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
-    } 
-
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
 
     #movie-director {
         position: absolute;
@@ -523,9 +509,9 @@ button#saveButton {
         text-align: center;
         font-size: 1.3em;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     .movie-cast {
         position: absolute;
         display: inline;
@@ -538,7 +524,7 @@ button#saveButton {
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     #movie-description {
         position: absolute;
         top: 90%;
@@ -550,8 +536,7 @@ button#saveButton {
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
-    
+
     #review-container {
         position: relative;
         height: 100vh;
@@ -559,12 +544,12 @@ button#saveButton {
         top: 80px;
         bottom: auto;
         left: 5%;
-    
+
         overflow-y: scroll;
         overflow-x: hidden;
         background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
     }
-    
+
     .review-card {
         height: 10vh;
         width: 80vw;
@@ -572,7 +557,7 @@ button#saveButton {
         margin-left: 2%;
         padding: 1%;
         border-radius: 4%;
-        border: 1px solid #2D316B;
+        border: 1px solid #2d316b;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         overflow: hidden;
     }
@@ -585,7 +570,7 @@ button#saveButton {
         width: 100vw;
         background-color: rgba(45, 49, 107, 0.8);
     }
-    
+
     #about-movie {
         position: absolute;
         top: 10%;
@@ -631,9 +616,9 @@ button#saveButton {
         text-align: center;
         font-size: 1.7em;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     #movie-release {
         position: absolute;
         top: 70%;
@@ -642,7 +627,7 @@ button#saveButton {
         z-index: 1;
         text-align: center;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
     #movie-duration {
@@ -653,8 +638,8 @@ button#saveButton {
         z-index: 1;
         text-align: center;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
-    } 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
 
     #movie-director {
         position: absolute;
@@ -665,9 +650,9 @@ button#saveButton {
         text-align: center;
         font-size: 1.3em;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     .movie-cast {
         position: absolute;
         display: inline;
@@ -680,7 +665,7 @@ button#saveButton {
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     #movie-description {
         position: absolute;
         top: 90%;
@@ -692,8 +677,7 @@ button#saveButton {
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
-    
+
     #review-container {
         position: relative;
         height: 100vh;
@@ -701,12 +685,12 @@ button#saveButton {
         top: 80px;
         bottom: auto;
         left: 5%;
-    
+
         overflow-y: scroll;
         overflow-x: hidden;
         background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
     }
-    
+
     .review-card {
         height: 10vh;
         width: 80vw;
@@ -714,7 +698,7 @@ button#saveButton {
         margin-left: 2%;
         padding: 1%;
         border-radius: 4%;
-        border: 1px solid #2D316B;
+        border: 1px solid #2d316b;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         overflow: hidden;
     }
@@ -726,14 +710,14 @@ button#saveButton {
         height: 100vh;
         width: 100vw;
         background-color: rgba(45, 49, 107, 0.8);
-    }  
-    
+    }
+
     #about-movie {
         position: absolute;
         top: 10%;
         left: 25%;
         transform: translate(-50%, -50%);
-        z-index:3;
+        z-index: 3;
         text-align: left;
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
@@ -764,7 +748,6 @@ button#saveButton {
         box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.3);
     }
 
-    
     #movie-title {
         position: absolute;
         top: 65%;
@@ -774,7 +757,7 @@ button#saveButton {
         text-align: center;
         font-size: 1.7em;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
     #movie-release {
@@ -785,7 +768,7 @@ button#saveButton {
         z-index: 1;
         text-align: center;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
 
     #movie-duration {
@@ -796,8 +779,8 @@ button#saveButton {
         z-index: 1;
         text-align: center;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
-    } 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    }
 
     #movie-director {
         position: absolute;
@@ -808,9 +791,9 @@ button#saveButton {
         text-align: center;
         font-size: 1.3em;
         color: #ffffff;
-        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3); 
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
+
     .movie-cast {
         position: absolute;
         display: inline;
@@ -823,8 +806,7 @@ button#saveButton {
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
-    
+
     #movie-description {
         position: absolute;
         top: 90%;
@@ -836,8 +818,7 @@ button#saveButton {
         color: #ffffff;
         text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
     }
-    
-    
+
     #review-container {
         position: relative;
         height: 100vh;
@@ -845,12 +826,12 @@ button#saveButton {
         top: 80px;
         bottom: auto;
         left: 5%;
-    
+
         overflow-y: scroll;
         overflow-x: hidden;
         background: linear-gradient(to bottom, #ffffff, #ffffff, #ffffff);
     }
-    
+
     .review-card {
         height: 10vh;
         width: 80vw;
@@ -858,7 +839,7 @@ button#saveButton {
         margin-left: 2%;
         padding: 1%;
         border-radius: 4%;
-        border: 1px solid #2D316B;
+        border: 1px solid #2d316b;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         overflow: hidden;
     }

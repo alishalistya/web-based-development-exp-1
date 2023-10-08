@@ -86,6 +86,8 @@ const updateComponentResult = (data) => {
     let resultHMTL = "";
 
     for (let movie of data.movies.values()) {
+        const adminTag = ADMIN ? `<button class="card-delete-btn btn btn-primary" onclick="deleteMovieCard(${movie.movie_id})" data="${movie.movie_id}">Delete</button>` : "";
+
         resultHMTL += `
         <div class="movie-card">
             <a href="/movie/detail/${movie.movie_id}" class="movie-thumbnail">
@@ -94,7 +96,7 @@ const updateComponentResult = (data) => {
             <div class="movie-header">
                 <h4 class="title">${movie.title}</p>
             </div>
-            <button class="card-delete-btn btn btn-primary" data="${movie.movie_id}">Delete</button>
+            ${adminTag}
         </div>
         `;
     }
@@ -112,4 +114,9 @@ const updateComponentResult = (data) => {
     } else {
         nextPage.disabled = true;
     }
+};
+
+const deleteMovieCard = (id) => {
+    modalDelete.setAttribute("movie_id", id);
+    modalDelete.showModal();
 };

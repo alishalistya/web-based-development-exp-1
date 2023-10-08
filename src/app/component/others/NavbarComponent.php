@@ -1,17 +1,29 @@
-<header class="header">
-    <div class="nav-wrapper">
-        <a href="#" class="home"><img src="/logo.svg" alt="MOI logo" /></a>
+<head>
+    <link rel="stylesheet" type="text/css" href="/styles/others/navbar.css">
+    <script type="text/javascript" src="/js/others/navbar.js" defer></script>
+</head>
 
-        <input class="side-menu" type="checkbox" id="side-menu" />
-        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
-
-        <nav class="nav">
-            <ul class="menu">
-                <li><a href="/home">Home</a></li>
-                <li><a href="/movie/search">Search</a> </li>
-                <li><a href="/review/index/1">Ratings</a></li>
+<header class="navbar">
+    <!-- <nav class="nav-wrapper"> -->
+        <div class="navbar-title">
+            <a href="/home">
+                <img class="navbar-img" src="/logo.svg" alt="MOI logo" />
+            </a>
+        </div>
+        
+        <a href="#" class="toggle-button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </a>
+        <div class="navbar-links">
+            <ul >
+                <li><a href="/movie/search">Search</a></li>
+                <li><a href="/review">Review</a></li>
                 <li><a href="/user/login">Login</a></li>
+                <li><a href="/user/register">Register</a></li>
+                <li><a href="/home">Home</a></li>
             </ul>
-        </nav>
-    </div>
+        </div>
+    <!-- </nav> -->
 </header>

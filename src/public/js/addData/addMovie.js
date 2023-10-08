@@ -233,39 +233,43 @@ const isDataValid = (title, desc, year, duration) => {
     }
 
     // photo checking
-    if (posterInput.files.length == 0) {
-        posterWarn.innerHTML = "Please choose photo!";
-        posterWarn.className = "show";
-        posterValid = false;
-    } else if (!posterInput.files[0].type.match("image.*")) {
-        posterWarn.innerHTML = "Insert valid image!";
-        posterWarn.className = "show";
-        posterValid = false;
-    } else if (posterInput.files[0].size > 8000000) {
-        posterWarn.innerHTML = "File too big!";
-        posterWarn.className = "show";
-        posterValid = false;
-    } else {
-        posterWarn.className = "hide";
-        posterValid = true;
+    if (!EDIT) {
+        if (posterInput.files.length == 0) {
+            posterWarn.innerHTML = "Please choose photo!";
+            posterWarn.className = "show";
+            posterValid = false;
+        } else if (!posterInput.files[0].type.match("image.*")) {
+            posterWarn.innerHTML = "Insert valid image!";
+            posterWarn.className = "show";
+            posterValid = false;
+        } else if (posterInput.files[0].size > 8000000) {
+            posterWarn.innerHTML = "File too big!";
+            posterWarn.className = "show";
+            posterValid = false;
+        } else {
+            posterWarn.className = "hide";
+            posterValid = true;
+        }
     }
 
     // photo checking
-    if (trailerInput.files.length == 0) {
-        trailerWarn.innerHTML = "Please choose video!";
-        trailerWarn.className = "show";
-        trailerValid = false;
-    } else if (!trailerInput.files[0].type.match("video.*")) {
-        trailerWarn.innerHTML = "Insert valid video!";
-        trailerWarn.className = "show";
-        trailerValid = false;
-    } else if (trailerInput.files[0].size > 8000000) {
-        trailerWarn.innerHTML = "File too big!";
-        trailerWarn.className = "show";
-        trailerValid = false;
-    } else {
-        trailerWarn.className = "hide";
-        trailerValid = true;
+    if (!EDIT) {
+        if (trailerInput.files.length == 0) {
+            trailerWarn.innerHTML = "Please choose video!";
+            trailerWarn.className = "show";
+            trailerValid = false;
+        } else if (!trailerInput.files[0].type.match("video.*")) {
+            trailerWarn.innerHTML = "Insert valid video!";
+            trailerWarn.className = "show";
+            trailerValid = false;
+        } else if (trailerInput.files[0].size > 8000000) {
+            trailerWarn.innerHTML = "File too big!";
+            trailerWarn.className = "show";
+            trailerValid = false;
+        } else {
+            trailerWarn.className = "hide";
+            trailerValid = true;
+        }
     }
 
     if (!titleValid || !descriptionValid || !yearValid || !durationValid || !actorValid || !directorValid || !posterValid || !trailerValid) {
@@ -371,7 +375,11 @@ confirmBtn &&
 
         const xhr = new XMLHttpRequest();
 
-        xhr.open("POST", `/movie/insert`);
+        if (EDIT) {
+            xhr.open("POST", `/movie/update`);
+        } else {
+            xhr.open("POST", `/movie/insert`);
+        }
 
         const formInsert = new FormData();
         formInsert.append("poster", poster);
@@ -387,17 +395,22 @@ confirmBtn &&
         });
 
         directors.forEach(function (value) {
-            formInsert.append("actors[]", value);
+            formInsert.append("directors[]", value);
         });
+
+        if (EDIT) {
+            formInsert.append("movie_id", movieID);
+        }
 
         xhr.send(formInsert);
 
         xhr.onreadystatechange = async function () {
             if (this.readyState === XMLHttpRequest.DONE) {
+                console.log(this.responseText);
                 data = JSON.parse(this.responseText);
 
                 if (!data.error && this.status == 200) {
-                    location.replace("http://localhost:8080/review/index/1");
+                    location.replace("http://localhost:8080/movie/catalog/1");
                 }
             }
         };

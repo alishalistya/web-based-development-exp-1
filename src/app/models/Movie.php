@@ -174,6 +174,7 @@ class Movie {
 
     public function addMovie($data, $photo_name, $video_name)
     {
+        $rowCount = 0;
         // echo 'okey';
         // var_dump($data);
         $query = "INSERT INTO movie(title, description, year, duration, img_path, trailer_path)
@@ -184,7 +185,7 @@ class Movie {
         $this->db->bind('title', $data['title']);
         $this->db->bind('deskripsi', $data['description']);
         $this->db->bind('rdate', $data['release-year']);
-        $this->db->bind('duration', $data['duration']);
+        $this->db->bind('duration', sprintf('%02d:%02d:%02d', floor($data['duration'] / 60), $data['duration'] % 60, 0));
         $this->db->bind('img_path', $photo_name);
         $this->db->bind('trailer_path', $video_name);
 
@@ -192,41 +193,158 @@ class Movie {
 
         $this->db->execute();
 
-        return $this->db->rowCount();
+        $rowCount += $this->db->rowCount();
+
+        $movieID = $this->db->lastInsertID();
+        
+        // add movie_actor
+        $sql = "INSERT INTO movie_actor(movie_id, actor_id) VALUES (:movie_id, :actor_id)";
+        
+        foreach ($data['actors'] as $idx => $actorID) {
+            $this->db->query($sql);
+            $this->db->bind("movie_id", $movieID);
+            $this->db->bind("actor_id", $actorID);
+
+            $this->db->execute();
+
+            $rowCount += $this->db->lastInsertID();
+        }
+
+        // add movie_director
+        $sql = "INSERT INTO movie_director(movie_id, director_id) VALUES (:movie_id, :director_id)";
+        
+        foreach ($data['directors'] as $idx => $directorID) {
+            $this->db->query($sql);
+            $this->db->bind("movie_id", $movieID);
+            $this->db->bind("director_id", $directorID);
+
+            $this->db->execute();
+
+            $rowCount += $this->db->lastInsertID();
+        }
+
+        return $rowCount;
     }
 
-    public function updateMovie($data, $path) {
-        $oldImage = $data['oldImage'];
-        $oldTrailer = $data['oldTrailer'];
+    public function updateMovie($data, $photo_name = "", $video_name = "")
+    {
+        $rowCount = 0;
+        // echo 'okey';
+        // var_dump($data);
+        $query = "UPDATE movie m SET ";
 
-        if ($path['imageInput']['error'] === 4) {
-            $img_path = $oldImage;
-        } else {
-            $img_path = $this->uploadMovieImg();
-        }
+        if ($photo_name) {
+            $query .= " m.img_path = :img_path , ";
+        } 
 
-        if ($path['trailerInput']['error'] === 4) {
-            $trailer_path = $oldTrailer;
-        } else {
-            $trailer_path = $this->uploadMovieTrailer();
-        }
+        if ($video_name) {
+            $query .= " m.trailer_path = :trailer_path , ";
+        } 
 
-
-        $query = "UPDATE movie SET title = :title, description = :description, year = :year, duration = :duration, img_path = :img_path, trailer_path = :trailer_path WHERE movie_id = :movie_id";
+        $query .= " m.title = :title , m.description = :description , m.year = :year , m.duration = :duration WHERE m.movie_id = :movie_id";
 
         $this->db->query($query);
-        $this->db->bind('movie_id', $data['idInput']);
-        $this->db->bind('title', $data['titleInput']);
-        $this->db->bind('description', $data['descriptionInput']);
-        $this->db->bind('year', $data['yearInput']);
-        $this->db->bind('duration', $data['durationInput']);
-        $this->db->bind('img_path', $img_path);
-        $this->db->bind('trailer_path', $trailer_path);
+        $this->db->bind('title', $data['title']);
+        $this->db->bind('description', $data['description']);
+        $this->db->bind('year', $data['release-year']);
+        $this->db->bind('duration', sprintf('%02d:%02d:%02d', floor($data['duration'] / 60), $data['duration'] % 60, 0));
+        $this->db->bind('movie_id', $data['movie_id']);
+
+        if ($photo_name) {
+            $this->db->bind('img_path', $photo_name);
+        }
+        if ($video_name) {
+            $this->db->bind('trailer_path', $video_name);
+        }
+
+        $this->db->execute();
+        
+        $rowCount += $this->db->rowCount();
+        
+        $movieID = $this->db->lastInsertID();
+        
+        // add movie_actor
+        $sql = "DELETE FROM movie_actor ma WHERE ma.movie_id = :movie_id";
+        $this->db->query($sql);
+        $this->db->bind("movie_id", $data['movie_id']);
+        $this->db->execute();
+        
+        $sql = "INSERT INTO movie_actor(movie_id, actor_id) VALUES (:movie_id, :actor_id)";
+        
+        foreach ($data['actors'] as $idx => $actorID) {
+            $this->db->query($sql);
+            $this->db->bind("movie_id", $data['movie_id']);
+            $this->db->bind("actor_id", $actorID);
+
+            $this->db->execute();
+
+            $rowCount += $this->db->lastInsertID();
+        }
+
+        // add movie_director
+        $sql = "DELETE FROM movie_director md WHERE md.movie_id = :movie_id";
+        $this->db->query($sql);
+        $this->db->bind("movie_id", $data['movie_id']);
+        $this->db->execute();
+
+        $sql = "INSERT INTO movie_director(movie_id, director_id) VALUES (:movie_id, :director_id)";
+        
+        foreach ($data['directors'] as $idx => $directorID) {
+            $this->db->query($sql);
+            $this->db->bind("movie_id", $data['movie_id']);
+            $this->db->bind("director_id", $directorID);
+
+            $this->db->execute();
+
+            $rowCount += $this->db->lastInsertID();
+        }
+
+        return $rowCount;
+    }
+
+    public function deleteMovie($movieID) {
+        $sql = "DELETE FROM movie m WHERE m.movie_id = :movie_id";
+
+        $this->db->query($sql);
+        $this->db->bind("movie_id", $movieID);
 
         $this->db->execute();
 
         return $this->db->rowCount();
     }
+
+    // public function updateMovie($data, $path) {
+    //     $oldImage = $data['oldImage'];
+    //     $oldTrailer = $data['oldTrailer'];
+
+    //     if ($path['imageInput']['error'] === 4) {
+    //         $img_path = $oldImage;
+    //     } else {
+    //         $img_path = $this->uploadMovieImg();
+    //     }
+
+    //     if ($path['trailerInput']['error'] === 4) {
+    //         $trailer_path = $oldTrailer;
+    //     } else {
+    //         $trailer_path = $this->uploadMovieTrailer();
+    //     }
+
+
+    //     $query = "UPDATE movie SET title = :title, description = :description, year = :year, duration = :duration, img_path = :img_path, trailer_path = :trailer_path WHERE movie_id = :movie_id";
+
+    //     $this->db->query($query);
+    //     $this->db->bind('movie_id', $data['idInput']);
+    //     $this->db->bind('title', $data['titleInput']);
+    //     $this->db->bind('description', $data['descriptionInput']);
+    //     $this->db->bind('year', $data['yearInput']);
+    //     $this->db->bind('duration', $data['durationInput']);
+    //     $this->db->bind('img_path', $img_path);
+    //     $this->db->bind('trailer_path', $trailer_path);
+
+    //     $this->db->execute();
+
+    //     return $this->db->rowCount();
+    // }
 
     public function uploadMovieImg() {
         $fileName = $_FILES['imageInput']['name'];
