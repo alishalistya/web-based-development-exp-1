@@ -232,8 +232,17 @@ const isDataValid = (title, desc, year, duration) => {
         directorValid = true;
     }
 
-    if (!EDIT && !posterInput.files[0]) {
-        posterWarn.innerHTML = "Please fill out Poster!";
+    // photo checking
+    if (posterInput.files.length == 0) {
+        posterWarn.innerHTML = "Please choose photo!";
+        posterWarn.className = "show";
+        posterValid = false;
+    } else if (!posterInput.files[0].type.match("image.*")) {
+        posterWarn.innerHTML = "Insert valid image!";
+        posterWarn.className = "show";
+        posterValid = false;
+    } else if (posterInput.files[0].size > 8000000) {
+        posterWarn.innerHTML = "File too big!";
         posterWarn.className = "show";
         posterValid = false;
     } else {
@@ -241,8 +250,17 @@ const isDataValid = (title, desc, year, duration) => {
         posterValid = true;
     }
 
-    if (!EDIT && !trailerInput.files[0]) {
-        trailerWarn.innerHTML = "Please fill out Trailer!";
+    // photo checking
+    if (trailerInput.files.length == 0) {
+        trailerWarn.innerHTML = "Please choose video!";
+        trailerWarn.className = "show";
+        trailerValid = false;
+    } else if (!trailerInput.files[0].type.match("video.*")) {
+        trailerWarn.innerHTML = "Insert valid video!";
+        trailerWarn.className = "show";
+        trailerValid = false;
+    } else if (trailerInput.files[0].size > 8000000) {
+        trailerWarn.innerHTML = "File too big!";
         trailerWarn.className = "show";
         trailerValid = false;
     } else {
@@ -355,13 +373,24 @@ confirmBtn &&
 
         xhr.open("POST", `/movie/insert`);
 
-        const formUpdate = new FormData();
-        formUpdate.append("title", title);
-        formUpdate.append("description");
-        formUpdate.append("blur", blur);
-        formUpdate.append("movie_id", movieID);
+        const formInsert = new FormData();
+        formInsert.append("poster", poster);
+        formInsert.append("trailer", trailer);
+        formInsert.append("title", title);
+        formInsert.append("description", desc);
+        formInsert.append("release-year", year);
+        formInsert.append("duration", duration);
+        formInsert.append("description", desc);
 
-        xhr.send(formUpdate);
+        actors.forEach(function (value) {
+            formInsert.append("actors[]", value);
+        });
+
+        directors.forEach(function (value) {
+            formInsert.append("actors[]", value);
+        });
+
+        xhr.send(formInsert);
 
         xhr.onreadystatechange = async function () {
             if (this.readyState === XMLHttpRequest.DONE) {

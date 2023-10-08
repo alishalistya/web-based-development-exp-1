@@ -62,7 +62,7 @@ class Director {
 
         $this->db->query($query);
         $this->db->bind('name', $data['name']);
-        $this->db->bind('birth_date', $data['birth_date']);
+        $this->db->bind('birth_date', $data['birthdate']);
         $this->db->bind('description', $data['description']);
         $this->db->bind('img_path', $photo_name);
 

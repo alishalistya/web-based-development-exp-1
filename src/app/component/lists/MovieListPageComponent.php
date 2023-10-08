@@ -19,8 +19,9 @@
         <div class="list-container">
             <div class="list-header">
                 <h1> List of Movies </h1>
-                <!-- if user = admin maka ada button add new -->
-                <a href="/movie/insert" class="btn btn-primary">Add New</a>
+                <?php if ($this->data["isAdmin"]) : ?>
+                    <a href="/movie/insert" class="btn btn-primary">Add New</a>
+                <?php endif; ?>
             </div>
             <div class="movie-container">
             </div>

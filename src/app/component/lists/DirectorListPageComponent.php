@@ -15,7 +15,9 @@
         <div class="list-header">
             <h1>List of Director</h1>
             <!-- if user = admin maka ada button add new -->
-            <a href="/director/insert" class="btn btn-primary">Add New</a>
+            <?php if ($this->data["isAdmin"]) : ?>
+                <a href="/director/insert" class="btn btn-primary">Add New</a>
+                <?php endif; ?>
         </div>
         <div class="director-container">
             <?php foreach ($this->data['director'] as $index => $director) : ?>

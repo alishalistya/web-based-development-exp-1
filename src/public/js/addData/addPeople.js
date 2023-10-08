@@ -153,6 +153,10 @@ const isDataValid = (name, desc, birth_date) => {
         photoWarn.innerHTML = "Please choose photo!";
         photoWarn.className = "show";
         photoValid = false;
+    } else if (!photoInput.files[0].type.match('image.*')){
+        photoWarn.innerHTML = "Insert valid image!";
+        photoWarn.className = "show";
+        photoValid = false;
     } else {
         photoWarn.className = "hide";
         photoValid = true;

@@ -15,7 +15,9 @@
         <div class="list-header">
             <h1>List of Actors</h1>
             <!-- if user = admin maka ada button add new -->
+            <?php if ($this->data["isAdmin"]) : ?>
             <a href="/actor/insert" class="btn btn-primary">Add New</a>
+            <?php endif; ?>
         </div>
         <div class="actor-container">
             <?php foreach ($this->data['actor'] as $index => $actor) : ?>

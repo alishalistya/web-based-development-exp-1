@@ -3,10 +3,46 @@
 class MovieController
 {
     public function index() {
-        $data['username'] = "";
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+                    
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
 
-        $homeView = Utils::view("home", "HomeView", $data);
-        $homeView->render();
+                    $movieModel = Utils::model("Movie");
+                    if ($isAdmin) {
+                        $movies = $movieModel->getAllMovies();
+                        $count = $movieModel->getCountAll();
+                    } else {
+                        $movies = $movieModel->getAllMovies();
+                        $count = $movieModel->getCountAll();
+                    }
+
+
+                    $movieView = Utils::view("lists", "MovieListView", ['data' => $movies, 'isAdmin' => $isAdmin, 'page' => $count]);
+                    $movieView->render();
+
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        }
     }
 
     public function search() {
@@ -85,10 +121,26 @@ class MovieController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+                    
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getPaginate($page);
-                    
+                    $data['isAdmin'] = $isAdmin;
+                    $data["datatype"] = "movies";
+
                     $movieView = Utils::view("lists", "MovieListView", $data);
+                    
                     $movieView->render();
                     break;
                 default:
@@ -121,33 +173,44 @@ class MovieController
                 case 'POST':
                     $movieModel = Utils::model('Movie');
 
+                    // var_dump(isset($_FILES["poster"]), isset($_FILES["trailer"]));
+
                     if (isset($_FILES["poster"]) && isset($_FILES["trailer"])) {
                         $poster = $_FILES["poster"];
                         $trailer = $_FILES["trailer"];
+                        var_dump($trailer);
 
-                        if ($poster["error"] == UPLOAD_ERR_OK && $trailer["error"] == UPLOAD_ERR_OK) {
-                            $uploadDir = "media/img/movie";
 
-                            $file["poster"] = basename($poster["name"]);
-                            $file["trailer"] = basename($trailer["name"]);
+                        if ($poster["error"] == UPLOAD_ERR_OK) {
+                            $uploadPosterDir = "media/img/movie";
+                            $posterName = basename($poster["name"]);
+                            $uploadPoster = $uploadPosterDir .'/'. $posterName;
+                            // var_dump($uploadPoster);
 
-                            $uploadPoster = $uploadDir . "/" . $file["poster"];
-                            $uploadTrailer = $uploadDir . "/" . $file["trailer"];
+                            $uploadTrailerDir = "media/img/trailer";
+                            $trailerName = basename($trailer["name"]);
+                            $uploadTrailer = $uploadTrailerDir .'/'. $trailerName;
+                            // var_dump($uploadPoster);
+                
+                            if (move_uploaded_file($poster["tmp_name"], $uploadPoster) && move_uploaded_file($trailer["tmp_name"], $uploadTrailer)) {
+                                // echo "File is valid and was successfully uploaded.";
 
-                            if (move_uploaded_file($poster["tmp_name"], $uploadPoster)
-                            && move_uploaded_file($trailer["tmp_name"], $uploadTrailer)){
-                                if ($movieModel->addMovie()){
-                                    
+                                // Add mvooe
+                                if ($movieModel -> addMovie($_POST, $posterName, $trailerName) > 0){
+                                    // var_dump($_POST);
+                                    header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+                                break;
+                                exit;
                                 }
+
+                            } else {
+                                echo "Error uploading the file.";
                             }
+                        } else {
+                            echo "Upload error: " . $poster["error"];
                         }
                     }
-                    if ($movieModel -> addMovie($_POST) > 0){
-                        // var_dump($_POST);
-                        header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
-                    }
-                    break;
-                    exit;
+
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }

@@ -77,6 +77,14 @@
     margin: auto;
 }
 
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+
+    .home-header {
+        display: none;
+    }
+}
+
 @media (max-width: 900px) {
     .home-recommend-header {
         flex-direction: column;
