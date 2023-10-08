@@ -1,4 +1,4 @@
-<form action = "insert" method="post" class="addMovie" novalidate>
+<form action = "insert" method="post" class="addMovie" enctype="multipart/form-data" novalidate>
     <h1 class="auth-title">
         <?php if($isEdit) : ?>
             Edit Film        
@@ -33,7 +33,7 @@
 
     <!-- Release Date -->
     <div class="form-group">
-        <label for="release-year">Release Year</label>
+        <label for="year">Release Year</label>
         <input id="year" class="form-input" name="release-year" type="text" placeholder="1996"
             <?php if($isEdit) : ?>
                 value = "<?php echo $movie['year'] ?>"
@@ -115,8 +115,8 @@
 
     <!-- Image -->
     <div class="form-group">
-        <label for="movie_img">Poster Film</label>
-        <input id="poster" class="form-input" name="movie_img" type="file" placeholder="Sebuah Deskripsi"/>
+        <label for="poster">Poster Film</label>
+        <input id="poster" class="form-input" name="poster" type="file" placeholder="Sebuah Deskripsi"/>
         <i>
             <p id="poster-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>
@@ -124,8 +124,8 @@
 
     <!-- Trailer -->
     <div class="form-group">
-        <label for="movie-trailer">Trailer</label>
-        <input id="trailer" class="form-input" name="movie-trailer" type="file" placeholder="Sebuah Deskripsi"/>
+        <label for="trailer">Trailer</label>
+        <input id="trailer" class="form-input" name="trailer" type="file" placeholder="Sebuah Deskripsi"/>
         <i>
             <p id="trailer-warn" class="hide alert-text">Nggak boleh kosong!</p>
         </i>

@@ -172,7 +172,7 @@ class Movie {
         return $count['count'];
     }
 
-    public function addMovie($data)
+    public function addMovie($data, $photo_name, $video_name)
     {
         // echo 'okey';
         // var_dump($data);
@@ -185,8 +185,8 @@ class Movie {
         $this->db->bind('deskripsi', $data['description']);
         $this->db->bind('rdate', $data['release-year']);
         $this->db->bind('duration', $data['duration']);
-        $this->db->bind('img_path', $data['title']);
-        $this->db->bind('trailer_path', $data['title']);
+        $this->db->bind('img_path', $photo_name);
+        $this->db->bind('trailer_path', $video_name);
 
         // echo $query;
 

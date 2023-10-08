@@ -4,15 +4,15 @@ const titleInput = document.querySelector("#title");
 const descriptionInput = document.querySelector("#description");
 const yearInput = document.querySelector("#year");
 const durationInput = document.querySelector("#duration");
-// const posterInput = document.querySelector("");
-// const trailerInput = document.querySelector("");
+const posterInput = document.querySelector("#poster");
+const trailerInput = document.querySelector("#trailer");
 
 const titleWarn = document.querySelector("#title-warn");
 const descriptionWarn = document.querySelector("#description-warn");
 const yearWarn = document.querySelector("#year-warn");
 const durationWarn = document.querySelector("#duration-warn");
-// const posterWarn = document.querySelector("");
-// const trailerWarn = document.querySelector("");
+const posterWarn = document.querySelector("#poster-warn");
+const trailerWarn = document.querySelector("#trailer-warn");
 const actorsInput = document.querySelector("#actors");
 const directorsInput = document.querySelector("#directors");
 
@@ -23,8 +23,8 @@ let titleValid = false;
 let descriptionValid = false;
 let yearValid = false;
 let durationValid = false;
-// let posterValid = false;
-// let trailerValid = false;
+let posterValid = false;
+let trailerValid = false;
 
 titleInput &&
     titleInput.addEventListener(
@@ -124,15 +124,17 @@ durationInput &&
 
 addForm &&
     addForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
         console.log("submit");
 
         const title = titleInput.value;
         const desc = descriptionInput.value;
         const year = yearInput.value;
         const duration = durationInput.value;
-        console.log(title, desc, year, duration);
 
-        if (!isDataValid(title, desc, year, duration)) {
+        const checkData = isDataValid(title, desc, year, duration);
+
+        if (!checkData || posterInput.files.length == 0 || trailerInput.files.length == 0 ) {
             e.preventDefault();
             console.log("checked");
             return;
@@ -143,10 +145,6 @@ const isDataValid = (title, desc, year, duration) => {
     // Name checking
     if (!title) {
         titleWarn.innerHTML = "Please fill out name!";
-        titleWarn.className = "show";
-        titleValid = false;
-    } else if (!nameRegex.test(name)){
-        titleWarn.innerHTML = "Name cannot contain any symbol or number!";
         titleWarn.className = "show";
         titleValid = false;
     } else {
@@ -184,7 +182,27 @@ const isDataValid = (title, desc, year, duration) => {
         durationValid = true;
     }
 
-    if (!titleValid || !descriptionValid || !yearValid || !durationValid) {
+    // photo checking
+    if (posterInput.files.length == 0) {
+        posterWarn.innerHTML = "Please choose photo!";
+        posterWarn.className = "show";
+        posterValid = false;
+    } else {
+        posterWarn.className = "hide";
+        posterValid = true;
+    }
+
+    // photo checking
+    if (trailerInput.files.length == 0) {
+        trailerWarn.innerHTML = "Please choose photo!";
+        trailerWarn.className = "show";
+        trailerValid = false;
+    } else {
+        trailerWarn.className = "hide";
+        trailerValid = true;
+    }
+
+    if (!titleValid || !descriptionValid || !yearValid || !durationValid || !posterValid || !trailerValid) {
         return false;
     }
 

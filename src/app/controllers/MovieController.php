@@ -120,13 +120,45 @@ class MovieController
                     break;
                 case 'POST':
                     $movieModel = Utils::model('Movie');
-                    // var_dump();
-                    if ($movieModel -> addMovie($_POST) > 0){
-                        // var_dump($_POST);
-                        header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+
+                    // var_dump(isset($_FILES["poster"]), isset($_FILES["trailer"]));
+
+                    if (isset($_FILES["poster"]) && isset($_FILES["trailer"])) {
+                        $poster = $_FILES["poster"];
+                        $trailer = $_FILES["trailer"];
+                        // var_dump($trailer);
+
+
+                        if ($poster["error"] == UPLOAD_ERR_OK) {
+                            $uploadPosterDir = "media/img/movie";
+                            $posterName = basename($poster["name"]);
+                            $uploadPoster = $uploadPosterDir .'/'. $posterName;
+                            // var_dump($uploadPoster);
+
+                            $uploadTrailerDir = "media/img/trailer";
+                            $trailerName = basename($trailer["name"]);
+                            $uploadTrailer = $uploadTrailerDir .'/'. $trailerName;
+                            // var_dump($uploadPoster);
+                
+                            if (move_uploaded_file($poster["tmp_name"], $uploadPoster) && move_uploaded_file($trailer["tmp_name"], $uploadTrailer)) {
+                                // echo "File is valid and was successfully uploaded.";
+
+                                // Add mvooe
+                                if ($movieModel -> addMovie($_POST, $posterName, $trailerName) > 0){
+                                    // var_dump($_POST);
+                                    header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+                                break;
+                                exit;
+                                }
+
+                            } else {
+                                echo "Error uploading the file.";
+                            }
+                        } else {
+                            echo "Upload error: " . $poster["error"];
+                        }
                     }
-                    break;
-                    exit;
+
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
             }
