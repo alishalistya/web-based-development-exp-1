@@ -3,10 +3,46 @@
 class MovieController
 {
     public function index() {
-        $data['username'] = "";
+        try {
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+                    
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
 
-        $homeView = Utils::view("home", "HomeView", $data);
-        $homeView->render();
+                    $movieModel = Utils::model("Movie");
+                    if ($isAdmin) {
+                        $movies = $movieModel->getAllMovies();
+                        $count = $movieModel->getCountAll();
+                    } else {
+                        $movies = $movieModel->getAllMovies();
+                        $count = $movieModel->getCountAll();
+                    }
+
+
+                    $movieView = Utils::view("lists", "MovieListView", ['data' => $movies, 'isAdmin' => $isAdmin, 'page' => $count]);
+                    $movieView->render();
+
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        }
     }
 
     public function search() {
@@ -85,10 +121,26 @@ class MovieController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+                    
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getPaginate($page);
-                    
+                    $data['isAdmin'] = $isAdmin;
+                    $data["datatype"] = "movies";
+
                     $movieView = Utils::view("lists", "MovieListView", $data);
+                    
                     $movieView->render();
                     break;
                 default:

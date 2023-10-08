@@ -6,8 +6,25 @@ class ActorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    // Authetication
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+                    
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
+                    // Model
                     $actorModel = Utils::model('Actor');
                     $data["actor"] = $actorModel->getAllActor();
+                    $data["isAdmin"] = $isAdmin;
+                    $data["datatype"] = "actor";
                     $loginView = Utils::view("lists", "ActorListView", $data);
                     $loginView->render();
                     break;
@@ -23,6 +40,7 @@ class ActorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    // Actor model
                     $actorModel = Utils::model('Actor');
                     $data["actor"] = $actorModel->getAllActor();
                     $data["datatype"] = "actor";

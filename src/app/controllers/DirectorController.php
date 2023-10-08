@@ -6,10 +6,27 @@ class DirectorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+                    // Authetication
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isUserLogin();
+                    
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
+                    // Model
                     $directorModel = Utils::model('Director');
                     $data["director"] = $directorModel->getAllDirectors();
-                    $loginView = Utils::view("lists", "DirectorListView", $data);
-                    $loginView->render();
+                    $data["isAdmin"] = $isAdmin;
+                    $data["datatype"] = "director";
+                    $directorView = Utils::view("lists", "DirectorListView", $data);
+                    $directorView->render();
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
@@ -23,6 +40,8 @@ class DirectorController
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
+
+                // Director Model
                     $directorModel = Utils::model('Director');
                     $data["director"] = $directorModel->getAllDirectors();
                     $data["datatype"] = "director";
@@ -91,6 +110,7 @@ class DirectorController
                     break;
                 case 'POST':
                     $directorModel = Utils::model('Director');
+
                     // var_dump($_POST['photo']);
                     
                     // Copy file to directory
