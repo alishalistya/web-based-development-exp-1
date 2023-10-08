@@ -124,7 +124,7 @@ durationInput &&
 
 addForm &&
     addForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         console.log("submit");
 
         const title = titleInput.value;
@@ -187,6 +187,14 @@ const isDataValid = (title, desc, year, duration) => {
         posterWarn.innerHTML = "Please choose photo!";
         posterWarn.className = "show";
         posterValid = false;
+    } else if (!posterInput.files[0].type.match('image.*')){
+        posterWarn.innerHTML = "Insert valid image!";
+        posterWarn.className = "show";
+        posterValid = false; 
+    } else if (posterInput.files[0].size > 8000000){
+        posterWarn.innerHTML = "File too big!";
+        posterWarn.className = "show";
+        posterValid = false;
     } else {
         posterWarn.className = "hide";
         posterValid = true;
@@ -194,7 +202,15 @@ const isDataValid = (title, desc, year, duration) => {
 
     // photo checking
     if (trailerInput.files.length == 0) {
-        trailerWarn.innerHTML = "Please choose photo!";
+        trailerWarn.innerHTML = "Please choose video!";
+        trailerWarn.className = "show";
+        trailerValid = false;
+    } else if (!trailerInput.files[0].type.match('video.*')){
+        trailerWarn.innerHTML = "Insert valid video!";
+        trailerWarn.className = "show";
+        trailerValid = false;
+    } else if (trailerInput.files[0].size > 8000000){
+        trailerWarn.innerHTML = "File too big!";
         trailerWarn.className = "show";
         trailerValid = false;
     } else {
