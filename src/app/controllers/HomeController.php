@@ -18,6 +18,6 @@ class HomeController
         } else {
             http_response_code($e->getCode());
         }
-    }
+        }
     }
 }
