@@ -279,9 +279,9 @@ class MovieController
                     if (isset($_FILES['poster'])){
                         $poster = $_FILES["poster"];
                         if ($poster["error"] == UPLOAD_ERR_OK) {
-                            $uploadTrailerDir = "media/img/trailer";
-                            $trailerName = basename($trailer["name"]);
-                            $uploadTrailer = $uploadTrailerDir .'/'. $trailerName;
+                            $uploadPosterDir = "media/img/movie";
+                            $posterName = basename($poster["name"]);
+                            $uploadPoster = $uploadPosterDir .'/'. $posterName;
 
                             if (!move_uploaded_file($poster["tmp_name"], $uploadPoster)){
                                 throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
