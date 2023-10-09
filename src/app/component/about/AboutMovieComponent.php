@@ -79,11 +79,14 @@
                 
                     <?php foreach ($this->data['reviews'] as $review): ?>   
                             <?php if ($count >= 10) break; ?>
-                                <div class="review-card text">
-                                    <p class="review-content" ><?= $review['comment'] ?></p>
-                                    <p>Rating: <?= $review['rate'] ?></p>
-                                </div>
-                                <?php $count++; ?>
+                                <?php if ($review) : ?>
+                                    <div class="review-card text">
+                                        <p class="review-content" ><?= $review['comment'] ?></p>
+                                        <p>Rating: <?= $review['rate'] ?></p>
+                                    </div>
+                                <?php endif; ?>
+                            <?php $count++; ?>
+
                     <?php endforeach; ?>
                 <?php endif; ?>
         </div>
