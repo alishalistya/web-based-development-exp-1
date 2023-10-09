@@ -97,7 +97,7 @@
         <div class="page-navigation">
             <div class="page">
                 <?php if ($this->data['page'] > 1): ?>
-                    <a href="movie?id=<?= $this->data['movie']['movie_id'] ?>&page=<?= $this->data['page'] - 1 ?>">
+                    <a href="<?= $this->data['movie']['movie_id'] ?>?page=<?= $this->data['page'] - 1 ?>">
                         <span class="material-icons">
                             <
                         </span>
@@ -107,7 +107,7 @@
                     <?= $this->data['page'] ?>
                 </span>
                 <?php if ($this->data['page'] < $this->data['totalPage']): ?>
-                    <a href="movie?id=<?= $this->data['movie']['movie_id'] ?>&page=<?= $this->data['page'] + 1 ?>">
+                    <a href="<?= $this->data['movie']['movie_id'] ?>?page=<?= $this->data['page'] + 1 ?>">
                         <span class="material-icons">
                             >
                         </span>

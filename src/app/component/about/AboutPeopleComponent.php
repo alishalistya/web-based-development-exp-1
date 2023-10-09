@@ -67,11 +67,12 @@
             <?php endif;?>
 
         </div>
+
         <!-- page navigation -->
         <div class="page-navigation">
             <div class="page">
                 <?php if ($this->data['page'] > 1): ?>
-                    <a href="actor?id=<?= $this->data['people']['actor_id'] ?>&page=<?= $this->data['page'] - 1 ?>">
+                    <a href="<?= $this->data['people']['actor_id'] ?>?page=<?= $this->data['page'] - 1 ?>">
                         <span class="material-icons">
                             <
                         </span>
@@ -81,7 +82,7 @@
                     <?= $this->data['page'] ?>
                 </span>
                 <?php if ($this->data['page'] < $this->data['totalPage']): ?>
-                    <a href="actor?id=<?= $this->data['people']['actor_id'] ?>&page=<?= $this->data['page'] + 1 ?>">
+                    <a href="<?= $this->data['people']['actor_id'] ?>?page=<?= $this->data['page'] + 1 ?>">
                         <span class="material-icons">
                             >
                         </span>
