@@ -36,17 +36,22 @@
             KNOWN FOR:
         </h1>
         <div class="row">
-            <?php $count = 0; ?>
-            <?php foreach ($this->data['movie'] as $movie): ?>
-                <?php if ($count >= 6) break; ?>
-                    <div class="picture">
-                        <a href="movie?id=<?= $movie['movie_id'] ?>">
-                            <img src="../../../public/media/img/movie/<?= $movie['img_path']; ?>" alt="<?php echo $movie['title']; ?>">
-                        </a>
-                    </div>
-                    <?php $count++; ?>
-            <?php endforeach; ?>
+            <?php if (empty($this->data['movie'])): ?>
+                <p class="text">There are no movies.</p>
+            <?php else: ?>
+                <?php $count = 0; ?>
+                <?php foreach ($this->data['movie'] as $movie): ?>
+                    <?php if ($count >= 6) break; ?>
+                        <div class="picture">
+                            <a href="movie?id=<?= $movie['movie_id'] ?>">
+                                <img src="../../../public/media/img/movie/<?= $movie['img_path']; ?>" alt="<?= $movie['title']; ?>">
+                            </a>
+                        </div>
+                        <?php $count++; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
+
         <!-- page navigation -->
         <div class="page-navigation">
             <div class="page">
