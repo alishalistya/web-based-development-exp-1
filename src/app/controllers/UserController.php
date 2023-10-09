@@ -85,11 +85,10 @@ class UserController
     public function logout() {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
-                case 'POST':
+                case 'GET':
                     unset($_SESSION['user_id']);
-
-                    header('Content-Type: application/json');
-                    http_response_code(STATUS_OK);
+                    // header('Content-Type: application/json');
+                    // http_response_code(STATUS_OK);
                     header("Location: http://localhost:8080/home");
                     exit;
                     break;
