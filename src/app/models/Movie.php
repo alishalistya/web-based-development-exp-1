@@ -230,7 +230,7 @@ class Movie {
     {
         $rowCount = 0;
         // echo 'okey';
-        // var_dump($data);
+        // var_dump($data, $photo_name, $video_name);
         $query = "UPDATE movie m SET ";
 
         if ($photo_name) {

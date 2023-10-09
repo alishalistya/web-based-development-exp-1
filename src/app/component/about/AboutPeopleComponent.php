@@ -67,6 +67,7 @@
             <?php endif;?>
 
         </div>
+
         <!-- page navigation -->
         <div class="page-navigation">
             <div class="page">
