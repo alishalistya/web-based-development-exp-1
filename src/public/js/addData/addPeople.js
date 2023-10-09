@@ -13,10 +13,10 @@ const photoWarn = document.querySelector("#photo-warn");
 const nameRegex = /^[a-zA-Z\s]*$/;
 const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
 
-let nameValid = false;
-let descriptionValid = false;
-let birthdateValid = false;
-let photoValid = false;
+let nameValid = EDIT ? true : false;
+let descriptionValid = EDIT ? true : false;
+let birthdateValid = EDIT ? true : false;
+let photoValid = EDIT ? true : false;
 
 nameInput &&
     nameInput.addEventListener(
@@ -48,55 +48,54 @@ nameInput &&
     );
 
 descriptionInput &&
-descriptionInput.addEventListener(
-    "input",
-    debounce(() => {
-        const input = descriptionInput.value;
+    descriptionInput.addEventListener(
+        "input",
+        debounce(() => {
+            const input = descriptionInput.value;
 
-        // const name = nameInput.value;
-        // const desc = descriptionInput.value;
-        // const birth_date = birthdateInput.value;
-        // console.log(name, desc, birth_date, photoInput.files.length);
-        
-        if (input == "") {
-            console.log(`Tidak Lolos ${input}`);
-            descriptionWarn.innerHTML = "Description tidak bisa kosong!";
-            descriptionWarn.className = "show";
-            descriptionValid = false;
-        } else if (input.length > 255) {
-            descriptionWarn.innerHTML = "Too long!";
-            descriptionWarn.className = "show";
-            descriptionValid = false;
-        } else {
-            console.log(`Lolos ${input}`);
-            descriptionWarn.innerHTML = "";
-            descriptionWarn.className = "hide";
-            descriptionValid = true;
-        }
-        // console.log(input);
+            // const name = nameInput.value;
+            // const desc = descriptionInput.value;
+            // const birth_date = birthdateInput.value;
+            // console.log(name, desc, birth_date, photoInput.files.length);
 
-    }, 300)
-);
+            if (input == "") {
+                console.log(`Tidak Lolos ${input}`);
+                descriptionWarn.innerHTML = "Description tidak bisa kosong!";
+                descriptionWarn.className = "show";
+                descriptionValid = false;
+            } else if (input.length > 255) {
+                descriptionWarn.innerHTML = "Too long!";
+                descriptionWarn.className = "show";
+                descriptionValid = false;
+            } else {
+                console.log(`Lolos ${input}`);
+                descriptionWarn.innerHTML = "";
+                descriptionWarn.className = "hide";
+                descriptionValid = true;
+            }
+            // console.log(input);
+        }, 300)
+    );
 
 birthdateInput &&
-birthdateInput.addEventListener(
-    "input",
-    debounce(() => {
-        const input = birthdateInput.value;
-        
-        if (input == "") {
-            console.log(`Tidak Lolos ${input}`);
-            birthdateWarn.innerHTML = "Description tidak bisa kosong!";
-            birthdateWarn.className = "show";
-            birthdateValid = false;
-        } else {
-            console.log(`Lolos ${input}`);
-            birthdateWarn.innerHTML = "";
-            birthdateWarn.className = "hide";
-            birthdateValid = true;
-        }
-    }, 300)
-);
+    birthdateInput.addEventListener(
+        "input",
+        debounce(() => {
+            const input = birthdateInput.value;
+
+            if (input == "") {
+                console.log(`Tidak Lolos ${input}`);
+                birthdateWarn.innerHTML = "Description tidak bisa kosong!";
+                birthdateWarn.className = "show";
+                birthdateValid = false;
+            } else {
+                console.log(`Lolos ${input}`);
+                birthdateWarn.innerHTML = "";
+                birthdateWarn.className = "hide";
+                birthdateValid = true;
+            }
+        }, 300)
+    );
 
 addForm &&
     addForm.addEventListener("submit", async (e) => {
@@ -111,11 +110,10 @@ addForm &&
 
         const checkData = isDataValid(name, desc, birth_date);
 
-        if (photoInput.files.length == 0 || !checkData){
+        if (photoInput.files.length == 0 || !checkData) {
             e.preventDefault();
             return;
         }
-
     });
 
 const isDataValid = (name, desc, birth_date) => {
@@ -125,7 +123,7 @@ const isDataValid = (name, desc, birth_date) => {
         nameWarn.innerHTML = "Please fill out name!";
         nameWarn.className = "show";
         nameValid = false;
-    } else if (!nameRegex.test(name)){
+    } else if (!nameRegex.test(name)) {
         nameWarn.innerHTML = "Name cannot contain any symbol or number!";
         nameWarn.className = "show";
         nameValid = false;
@@ -157,7 +155,7 @@ const isDataValid = (name, desc, birth_date) => {
         birthdateWarn.innerHTML = "Please fill out description!";
         birthdateWarn.className = "show";
         birthdateValid = false;
-    } else if (!dateRegex.test(birth_date)){
+    } else if (!dateRegex.test(birth_date)) {
         birthdateWarn.innerHTML = "Please include a valid date!";
         birthdateWarn.className = "show";
         birthdateValid = false;
@@ -167,21 +165,23 @@ const isDataValid = (name, desc, birth_date) => {
     }
 
     // photo checking
-    if (photoInput.files.length == 0) {
-        photoWarn.innerHTML = "Please choose photo!";
-        photoWarn.className = "show";
-        photoValid = false;
-    } else if (!photoInput.files[0].type.match('image.*')){
-        photoWarn.innerHTML = "Insert valid image!";
-        photoWarn.className = "show";
-        photoValid = false;
-    } else {
-        photoWarn.className = "hide";
-        photoValid = true;
+    if (!EDIT) {
+        if (photoInput.files.length == 0) {
+            photoWarn.innerHTML = "Please choose photo!";
+            photoWarn.className = "show";
+            photoValid = false;
+        } else if (!photoInput.files[0].type.match("image.*")) {
+            photoWarn.innerHTML = "Insert valid image!";
+            photoWarn.className = "show";
+            photoValid = false;
+        } else {
+            photoWarn.className = "hide";
+            photoValid = true;
+        }
     }
 
     // console.log(nameValid, descriptionValid);
-    if (!nameValid || !descriptionValid || !birthdateValid || !photoValid){
+    if (!nameValid || !descriptionValid || !birthdateValid || !photoValid) {
         return false;
     }
 
