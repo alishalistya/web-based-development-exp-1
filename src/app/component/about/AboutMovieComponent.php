@@ -35,7 +35,7 @@
         </p>
         <div class="movie-director text">
             <?php foreach ($this->data['director'] as $key => $director): ?>
-                <a href="director?id=<?= $director['director_id'] ?>" class="director-link">
+                <a href="/director/detail/<?= $director['director_id'] ?>" class="director-link">
                     <h3><?= $director['name'] ?></h3>
                 </a>
                 <?php if ($key !== array_key_last($this->data['director'])): ?>
@@ -45,7 +45,7 @@
         </div>
         <div class="movie-cast text">
             <?php foreach ($this->data['actor'] as $key => $actor): ?>
-                <a href="actor?id=<?= $actor['actor_id'] ?>" class="cast-link">
+                <a href="/actor/detail/<?= $actor['actor_id'] ?>" class="cast-link">
                     <span><?= $actor['name'] ?></span>
                 </a>
                 <?php if ($key !== array_key_last($this->data['actor'])): ?>
