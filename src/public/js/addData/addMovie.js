@@ -170,6 +170,10 @@ const isDataValid = (title, desc, year, duration) => {
         titleWarn.innerHTML = "Please fill out name!";
         titleWarn.className = "show";
         titleValid = false;
+    } else if (title.length > 255) {
+        titleWarn.innerHTML = "Too long!";
+        titleWarn.className = "show";
+        titleValid = false;
     } else {
         titleWarn.className = "hide";
         titleValid = true;
@@ -178,6 +182,10 @@ const isDataValid = (title, desc, year, duration) => {
     // Description checking
     if (!desc) {
         descriptionWarn.innerHTML = "Please fill out description!";
+        descriptionWarn.className = "show";
+        descriptionValid = false;
+    } else if (desc.length > 255) {
+        descriptionWarn.innerHTML = "Too long!";
         descriptionWarn.className = "show";
         descriptionValid = false;
     } else {

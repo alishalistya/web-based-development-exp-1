@@ -29,6 +29,10 @@ nameInput &&
                 nameWarn.innerHTML = "Nama tidak bisa kosong!";
                 nameWarn.className = "show";
                 nameValid = false;
+            } else if (input.length > 255) {
+                nameWarn.innerHTML = "Too long!";
+                nameWarn.className = "show";
+                nameValid = false;
             } else if (!nameRegex.test(input)) {
                 console.log(`Tidak Lolos ${input}`);
                 nameWarn.innerHTML = "Nama hanya bisa berupa huruf!";
@@ -49,14 +53,18 @@ descriptionInput.addEventListener(
     debounce(() => {
         const input = descriptionInput.value;
 
-        const name = nameInput.value;
-        const desc = descriptionInput.value;
-        const birth_date = birthdateInput.value;
-        console.log(name, desc, birth_date, photoInput.files.length);
+        // const name = nameInput.value;
+        // const desc = descriptionInput.value;
+        // const birth_date = birthdateInput.value;
+        // console.log(name, desc, birth_date, photoInput.files.length);
         
         if (input == "") {
             console.log(`Tidak Lolos ${input}`);
             descriptionWarn.innerHTML = "Description tidak bisa kosong!";
+            descriptionWarn.className = "show";
+            descriptionValid = false;
+        } else if (input.length > 255) {
+            descriptionWarn.innerHTML = "Too long!";
             descriptionWarn.className = "show";
             descriptionValid = false;
         } else {
@@ -65,6 +73,8 @@ descriptionInput.addEventListener(
             descriptionWarn.className = "hide";
             descriptionValid = true;
         }
+        // console.log(input);
+
     }, 300)
 );
 
@@ -119,6 +129,10 @@ const isDataValid = (name, desc, birth_date) => {
         nameWarn.innerHTML = "Name cannot contain any symbol or number!";
         nameWarn.className = "show";
         nameValid = false;
+    } else if (name.length > 255) {
+        nameWarn.innerHTML = "Too long!";
+        nameWarn.className = "show";
+        nameValid = false;
     } else {
         nameWarn.className = "hide";
         nameValid = true;
@@ -127,6 +141,10 @@ const isDataValid = (name, desc, birth_date) => {
     // Description checking
     if (!desc) {
         descriptionWarn.innerHTML = "Please fill out description!";
+        descriptionWarn.className = "show";
+        descriptionValid = false;
+    } else if (desc.length > 255) {
+        descriptionWarn.innerHTML = "Too long!";
         descriptionWarn.className = "show";
         descriptionValid = false;
     } else {
