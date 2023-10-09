@@ -1,4 +1,10 @@
-<form action="insert" method="post" class="addPeople" enctype="multipart/form-data" novalidate>
+<form 
+<?php if($isEdit) : ?>
+    action="update"
+<?php else : ?>    
+    action="insert" 
+<?php endif; ?>
+method="post" class="addPeople" enctype="multipart/form-data" novalidate>
     <h1 class="auth-title">
         <?php if($isEdit) : ?>
             Edit Actor
@@ -8,6 +14,7 @@
     </h1>
 
    <!-- Name -->
+   <input type="hidden" id="actor_id" name="actor_id" value="<?= $actor["actor_id"] ?>"/>
    <div class="form-group">
         <label for="name">Name</label>
         <input id="name" class="form-input" name="name" type="text" placeholder="Nama Director" 
@@ -55,7 +62,7 @@
         </i>
     </div>
 
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" >Submit</button>
 </form>
 
 <!-- <div class="register-btn">

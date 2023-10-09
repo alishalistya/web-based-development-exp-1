@@ -132,35 +132,27 @@ class DirectorController
                 case 'POST':
                     $directorModel = Utils::model('Director');
 
-                    // var_dump($_POST['photo']);
-                    
-                    // Copy file to directory
-                    if (isset($_FILES["photo"])) {
-                        $file = $_FILES["photo"];
+                    $photoName = "";
 
-                        if ($file["error"] == UPLOAD_ERR_OK) {
-                            $uploadDir = "media/img/director";
-                            $name = basename($file["name"]);
-
-                            $uploadFile = $uploadDir .'/'. $name;
-                            // var_dump($uploadFile);
-                
-                            if (move_uploaded_file($file["tmp_name"], $uploadFile)) {
-                                // echo "File is valid and was successfully uploaded.";
-
-                                // Add director
-                                if ($directorModel -> addDirector($_POST, $name) > 0){
-                                header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
-                                exit;
-                                break;
-                    }
-
-                            } else {
-                                echo "Error uploading the file.";
-                            }
+                    if(isset($_FILES['photo'])) {
+                        $photo = $_FILES['photo'];
+                        if ($photo['error'] == UPLOAD_ERR_OK) {
+                            $uploadPhotoDir = "media/img/director";
+                            $photoName = basename($photo['name']);
+                            $uploadPhoto = $uploadPhotoDir . '/' . $photoName;
+                            
+                            if (!move_uploaded_file($photo['tmp_name'], $uploadPhoto)) {
+                                throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+                            } 
                         } else {
-                            echo "Upload error: " . $file["error"];
+                            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
                         }
+                    }
+                    
+                    if ($directorModel->updateDirector($_POST, $photoName) > 0) {
+                        header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+                        break;
+                        exit;
                     }
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);

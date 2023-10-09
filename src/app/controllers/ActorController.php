@@ -49,7 +49,7 @@ class ActorController
                 case 'GET':
                     // Authentication
                     $auth = Utils::middleware("Authentication");
-                    $auth->isUserLogin();
+                    $auth->isAdminLogin();
                     $data['isLogin'] = true;
 
                     // Actor model
@@ -113,7 +113,7 @@ class ActorController
                 case 'GET':
                     // Authentication
                     $auth = Utils::middleware("Authentication");
-                    $auth->isUserLogin();
+                    $auth->isAdminLogin();
                     $data['isLogin'] = true;
 
                     // Model
@@ -129,33 +129,27 @@ class ActorController
                 case 'POST':
                     $actorModel = Utils::model('Actor');
 
-                    // Copy file to directory
-                    if (isset($_FILES["photo"])) {
-                        $file = $_FILES["photo"];
+                    $photoName = "";
 
-                        if ($file["error"] == UPLOAD_ERR_OK) {
-                            $uploadDir = "media/img/actor";
-                            $name = basename($file["name"]);
-
-                            $uploadFile = $uploadDir .'/'. $name;
-                            // var_dump($uploadFile);
-                
-                            if (move_uploaded_file($file["tmp_name"], $uploadFile)) {
-                                // echo "File is valid and was successfully uploaded.";
-
-                                // Add Actor
-                                if ($actorModel -> addActor($_POST, $name) > 0){
-                                header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
-                                exit;
-                                break;
-                    }
-
-                            } else {
-                                echo "Error uploading the file.";
-                            }
+                    if(isset($_FILES['photo'])) {
+                        $photo = $_FILES['photo'];
+                        if ($photo['error'] == UPLOAD_ERR_OK) {
+                            $uploadPhotoDir = "media/img/actor";
+                            $photoName = basename($photo['name']);
+                            $uploadPhoto = $uploadPhotoDir . '/' . $photoName;
+                            
+                            if (!move_uploaded_file($photo['tmp_name'], $uploadPhoto)) {
+                                throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
+                            } 
                         } else {
-                            echo "Upload error: " . $file["error"];
+                            throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
                         }
+                    }
+                    
+                    if ($actorModel->updateActor($_POST, $photoName) > 0) {
+                        header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/home');
+                        break;
+                        exit;
                     }
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);

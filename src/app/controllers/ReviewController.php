@@ -70,7 +70,7 @@ class ReviewController {
                     $review = Utils::model("Review");
                     if ($isAdmin) {
                         $result = $review->getAllReview($page);
-                        $count = $review->getCountPage();
+                        $count = $review->getCountPage("admin");
                     } else {
                         $result = $review->getReviewByID($_SESSION['user_id'], $page);
                         $count = $review->getCountPage($_SESSION['user_id']);

@@ -92,23 +92,23 @@ class Director {
         return $this->db->rowCount();
     }
 
-    public function updateDirector($data, $image) {
-        $oldImage = $data['oldImage'];
+    public function updateDirector($data, $photo_name = "") {
+        $sql = "UPDATE director d SET ";
 
-        if ($image['imageInput']['error'] === 4) {
-            $img_path = $oldImage;
-        } else {
-            $img_path = $this->uploadDirectorImg();
+        if ($photo_name) {
+            $sql .= " d.img_path = :img_path , ";
         }
 
-        $query = "UPDATE director SET name = :name, birth_date = :birth_date, description = :description, img_path = :img_path WHERE director_id = :director_id";
+        $sql .= " d.name = :name, d.birth_date = :birth_date, d.description = :description WHERE d.director_id = :director_id";
 
-        $this->db->query($query);
-        $this->db->bind('director_id', $data['idInput']);
-        $this->db->bind('name', $data['nameInput']);
-        $this->db->bind('birth_date', $data['birthDateInput']);
-        $this->db->bind('description', $data['descriptionInput']);
-        $this->db->bind('img_path', $img_path);
+        $this->db->query($sql);
+        $this->db->bind('director_id', $data['director_id']);
+        $this->db->bind('description', $data['description']);
+        $this->db->bind('birth_date', $data['birthdate']);
+        $this->db->bind('name', $data['name']);
+        if ($photo_name) {
+            $this->db->bind('img_path', $photo_name);
+        }
 
         $this->db->execute();
 
