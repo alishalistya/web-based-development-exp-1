@@ -124,4 +124,13 @@ class Director {
         return $this->db->resultSet();
     }
     
+    public function deleteDirector($directorID) {
+        $sql = "DELETE FROM director d WHERE d.director_id = :director_id";
+
+        $this->db->query($sql);
+        $this->db->bind("director_id", $directorID);
+
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
 }

@@ -127,4 +127,14 @@ class Actor
         $this->db->bind("id", $id);
         return $this->db->resultSet();
     }
+
+    public function deleteActor($actorID) {
+        $sql = "DELETE FROM actor a WHERE a.actor_id = :actor_id";
+
+        $this->db->query($sql);
+        $this->db->bind("actor_id", $actorID);
+
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
 }
