@@ -225,7 +225,7 @@ class DirectorController
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
-                    $auth->isAdminLogin();
+                    $auth->isUserLogin();
                     $directorModel = Utils::model("Director");
                     
                     $directors = $directorModel->getPaginate($page);

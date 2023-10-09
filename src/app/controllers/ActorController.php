@@ -221,7 +221,7 @@ class ActorController
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
-                    $auth->isAdminLogin();
+                    $auth->isUserLogin();
                     
                     $actorModel = Utils::model("Actor");
                     
