@@ -14,8 +14,10 @@ method="post" class="addPeople" enctype="multipart/form-data" novalidate>
     </h1>
 
    <!-- Name -->
-   <input type="hidden" id="actor_id" name="actor_id" value="<?= $actor["actor_id"] ?>"/>
-   <div class="form-group">
+    <?php if($isEdit) : ?>
+        <input type="hidden" id="actor_id" name="actor_id" value="<?= $actor["actor_id"] ?>"/>  
+    <?php endif; ?>
+    <div class="form-group">
         <label for="name">Name</label>
         <input id="name" class="form-input" name="name" type="text" placeholder="Nama Director" 
             <?php if($isEdit) : ?>
