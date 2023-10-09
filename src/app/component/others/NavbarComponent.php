@@ -20,9 +20,15 @@
             <ul >
                 <li><a href="/movie/search">Search</a></li>
                 <li><a href="/review">Review</a></li>
-                <li><a href="/user/login">Login</a></li>
-                <li><a href="/user/register">Register</a></li>
+                <!-- <li><a href="/user/login">Login</a></li>
+                <li><a href="/user/register">Register</a></li> -->
+                <?php if($this->data['isLogin']) : ?>
+                    <li><a href="/user/logout">Logout</a></li>
+                <?php else: ?>
+                    <li><a href="/user/login">Login</a></li>
+                <?php endif; ?>
                 <li><a href="/home">Home</a></li>
+                
             </ul>
         </div>
     <!-- </nav> -->

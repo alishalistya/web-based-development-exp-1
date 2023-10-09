@@ -9,6 +9,7 @@ class ActorController
                     // Authetication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     
                     $isAdmin = false; 
                     try {
@@ -49,6 +50,7 @@ class ActorController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     // Actor model
                     $actorModel = Utils::model('Actor');
@@ -112,6 +114,7 @@ class ActorController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     // Model
                     $actorModel = Utils::model('Actor');
@@ -168,17 +171,18 @@ class ActorController
         }
     }
 
-    public function detail() {
+    public function detail($actorID) {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
-                    $actorChosen = $_GET['name'];
+                    // $actorChosen = $_GET['name'];
                     $data['title'] = 'Actor';
-                    $data['people'] = Utils::model("Actor")->getActorByName("$actorChosen");
+                    $data['people'] = Utils::model("Actor")->getActorByID($actorID);
             
                     //pagination for movies
                     $moviePerPage = 6;
@@ -186,15 +190,48 @@ class ActorController
                     $currentPage = $_GET['page'] ?? 1;
                     $data['page'] = $currentPage;
                     $initialMovie = ($moviePerPage * $currentPage) - $moviePerPage;
-            
+                    
+                    $data['movie'] = [];
                     $data['movieID'] = Utils::model("Actor")->getMovieByActorIDWithLimit($data['people']['actor_id'], $initialMovie, $moviePerPage);
                     foreach ($data['movieID'] as $movieID) {
                         $movieID = $movieID['movie_id'];
-                        $data['movie'][] = Utils::model("Movie")->getMovieByID("$movieID");
+                        $data['movie'][] = Utils::model("Movie")->getMovieByID($movieID);
                     };
             
                     $actorView = Utils::view("about", "AboutPeopleView", $data);
                     $actorView->render();
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+        }
+    }
+
+    public function delete() {
+        try {
+            // var_dump($_SERVER['REQUEST_METHOD']);
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case "DELETE":
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isAdminLogin();
+                    $data['isLogin'] = true;
+
+                    $actorModel = Utils::model('Actor');
+                    if ($actorModel->deleteActor($_GET['actor_id']) > 0){
+                        // var_dump($_POST);
+                        // header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/movie/catalog');
+                        header('Content-Type: application/json');
+                        echo json_encode(['error' => null ]);
+                    }
+                    exit;
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);

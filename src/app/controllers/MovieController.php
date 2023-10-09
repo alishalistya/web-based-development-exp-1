@@ -8,6 +8,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     
                     $isAdmin = false; 
                     try {
@@ -28,8 +29,12 @@ class MovieController
                         $count = $movieModel->getCountAll();
                     }
 
+                    $data['isAdmin'] = $isAdmin;
+                    $data['data'] = $movies;
+                    $data['page'] = $count;
+                    $data['isLogin'] = true;
 
-                    $movieView = Utils::view("lists", "MovieListView", ['data' => $movies, 'isAdmin' => $isAdmin, 'page' => $count]);
+                    $movieView = Utils::view("lists", "MovieListView", $data);
                     $movieView->render();
 
                     break;
@@ -52,6 +57,7 @@ class MovieController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     $categoryModel = Utils::model('Category');
                     $movieModel = Utils::model('Movie');
@@ -59,7 +65,14 @@ class MovieController
                     $year = $movieModel->getYear();
 
                     $result = null;
-                    $searchView = Utils::view("search", "SearchView", ['category' => $category, 'movies' => $result, 'years' => $year]);
+
+                    $data['category'] = $category;
+                    $data['movies'] = $result;
+                    $data['years'] = $year;
+                    $data['isLogin'] = true;
+
+
+                    $searchView = Utils::view("search", "SearchView", $data);
                     $searchView->render();                    
                     break;
                 default:
@@ -80,6 +93,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     $movieModel = Utils::model("Movie");
                     
                     $movies = $movieModel->getByArgs($_GET['q'], $_GET['sort'], $_GET['category'], $_GET['year'],$page);
@@ -132,6 +146,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     
                     $isAdmin = false; 
                     try {
@@ -172,6 +187,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
+                    $data['isLogin'] = true;
 
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getAllMovies();
@@ -247,6 +263,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
+                    $data['isLogin'] = true;
 
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getAllMovies();
@@ -279,9 +296,9 @@ class MovieController
                     if (isset($_FILES['poster'])){
                         $poster = $_FILES["poster"];
                         if ($poster["error"] == UPLOAD_ERR_OK) {
-                            $uploadTrailerDir = "media/img/trailer";
-                            $trailerName = basename($trailer["name"]);
-                            $uploadTrailer = $uploadTrailerDir .'/'. $trailerName;
+                            $uploadPosterDir = "media/img/trailer";
+                            $posterName = basename($poster["name"]);
+                            $uploadPoster = $uploadPosterDir .'/'. $posterName;
 
                             if (!move_uploaded_file($poster["tmp_name"], $uploadPoster)){
                                 throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
@@ -295,8 +312,8 @@ class MovieController
                         $trailer = $_FILES["trailer"];
                         if ($trailer["error"] == UPLOAD_ERR_OK) {
                             $uploadTrailerDir = "media/img/movie";
-                            $posterName = basename($poster["name"]);
-                            $uploadPoster = $uploadPosterDir .'/'. $posterName;
+                            $trailerName = basename($trailer["name"]);
+                            $uploadTrailer = $uploadTrailerDir .'/'. $trailerName;
 
                             if (!move_uploaded_file($trailer["tmp_name"], $uploadTrailer)){
                                 throw new Exception('Internal Server Error', STATUS_INTERNAL_SERVER_ERROR);
@@ -336,6 +353,7 @@ class MovieController
                 case "DELETE":
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
+                    $data['isLogin'] = true;
 
                     $movieModel = Utils::model('Movie');
                     if ($movieModel->deleteMovie($_GET['movie_id']) > 0){
@@ -367,6 +385,19 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
+
+                    // Admin Checking
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+                    $data["isAdmin"] = $isAdmin;
 
                     // $movieChosen = $_GET['title'];
                     $data['movie'] = Utils::model("Movie")->getMovieByID($movieID);

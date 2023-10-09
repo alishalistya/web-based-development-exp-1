@@ -9,6 +9,7 @@ class DirectorController
                     // Authetication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     
                     $isAdmin = false; 
                     try {
@@ -49,6 +50,7 @@ class DirectorController
                 // Authentication
                 $auth = Utils::middleware("Authentication");
                 $auth->isUserLogin();
+                $data['isLogin'] = true;
 
                 // Director Model
                     $directorModel = Utils::model('Director');
@@ -118,6 +120,7 @@ class DirectorController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     $directorModel = Utils::model('Director');
                     $data["director"] = $directorModel->getDirectorByID($_GET['director_id']);
@@ -179,18 +182,19 @@ class DirectorController
         }
     }
 
-    public function detail() {
+    public function detail($directorID) {
         try {
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     // Direction
-                    $directorChosen = $_GET['name'];
+                    // $directorChosen = $_GET['name'];
                     $data['title'] = 'Director';
-                    $data['people'] = Utils::model("Director")->getDirectorByName("$directorChosen");
+                    $data['people'] = Utils::model("Director")->getDirectorByID($directorID);
             
                     //pagination for movies
                     $moviePerPage = 6;
@@ -207,6 +211,38 @@ class DirectorController
             
                     $directorView = Utils::view("about", "AboutPeopleView", $data);
                     $directorView->render();
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+        }
+    }
+
+    public function delete() {
+        try {
+            // var_dump($_SERVER['REQUEST_METHOD']);
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case "DELETE":
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isAdminLogin();
+                    $data['isLogin'] = true;
+
+                    $directorModel = Utils::model('Director');
+                    if ($directorModel->deleteDirector($_GET['director_id']) > 0){
+                        // var_dump($_POST);
+                        // header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/movie/catalog');
+                        header('Content-Type: application/json');
+                        echo json_encode(['error' => null ]);
+                    }
+                    exit;
                     break;
                 default:
                     throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);

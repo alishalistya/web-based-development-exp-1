@@ -16,13 +16,13 @@
     <div id="movie-container">
        
         <img id="movie-background" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>" alt="<?= $this->data['movie']['title'] ?>">
-        <button type="button" id="updateContentButton" class="text" data-toggle="modal" data-target="myModal" data-id="<?= $this->data['movie']['movie_id'] ?>">EDIT</button>
+        <button id="updateContentButton"> <a href="http://localhost:8080/movie/update?movie_id=<?= $this->data['movie']['movie_id'] ?>">EDIT</a></button>
         <h2 id="about-movie" class="text">
             about Movie,
         </h2>
         <img id="movie-img" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>" alt="<?= $this->data['movie']['title'] ?>">
         <video id="movie-trailer" controls>
-            <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>.mp4" type="video/mp4">
+            <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>" type="video/mp4">
         </video>
         <h1 id="movie-title" class="text">
             <?= $this->data['movie']['title'] ?>
@@ -35,7 +35,7 @@
         </p>
         <div class="movie-director text">
             <?php foreach ($this->data['director'] as $key => $director): ?>
-                <a href="director?id=<?= $director['director_id'] ?>" class="director-link">
+                <a href="/director/detail/<?= $director['director_id'] ?>" class="director-link">
                     <h3><?= $director['name'] ?></h3>
                 </a>
                 <?php if ($key !== array_key_last($this->data['director'])): ?>
@@ -45,7 +45,7 @@
         </div>
         <div class="movie-cast text">
             <?php foreach ($this->data['actor'] as $key => $actor): ?>
-                <a href="actor?id=<?= $actor['actor_id'] ?>" class="cast-link">
+                <a href="/actor/detail/<?= $actor['actor_id'] ?>" class="cast-link">
                     <span><?= $actor['name'] ?></span>
                 </a>
                 <?php if ($key !== array_key_last($this->data['actor'])): ?>
@@ -64,9 +64,11 @@
         <h2 id="review" class="text">
             REVIEW:
         </h2>
-        <button id="addReviewButton">
-            <a href="http://localhost:8080/review/insert?movie_id=<?= $this->data['movie']['movie_id'] ?>">Add Review</a>
-        </button>
+        <?php if(!$this->data["isAdmin"]) : ?>
+            <button id="addReviewButton">
+                <a href="http://localhost:8080/review/insert?movie_id=<?= $this->data['movie']['movie_id'] ?>">Add Review</a>
+            </button>
+        <? endif; ?>
         <div class="row">
             <?php if (empty($this->data['reviews'])): ?>
                 <div class="review-card text">
@@ -74,14 +76,20 @@
                 </div>
             <?php else: ?>
                 <?php $count = 0; ?>
-                <?php foreach ($this->data['reviews'] as $review): ?>   
-                        <?php if ($count >= 10) break; ?>
-                            <div class="review-card text">
-                                <p class="review-content" ><?= $review['comment'] ?></p>
-                                <p>Rating: <?= $review['rate'] ?></p>
-                            </div>
-                            <?php $count++; ?>
-                <?php endforeach; ?>
+                <?php if ($this->data['reviews'][0] == false) :?>
+                    <div class="review-card text">
+                    <p>There are no reviews.</p>
+                    </div>
+                <?php else: ?>
+                    <?php foreach ($this->data['reviews'] as $review): ?>   
+                            <?php if ($count >= 10) break; ?>
+                                <div class="review-card text">
+                                    <p class="review-content" ><?= $review['comment'] ?></p>
+                                    <p>Rating: <?= $review['rate'] ?></p>
+                                </div>
+                                <?php $count++; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             <?php endif; ?>
         </div>
 
@@ -139,7 +147,7 @@
                         <div class="form-group">
                             <label for="trailerInput">Trailer:</label>
                             <video id="update-trailer" controls>
-                                <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>.mp4" type="video/mp4">
+                                <source src="../../../public/media/img/trailer/<?= $this->data['movie']['trailer_path'] ?>" type="video/mp4">
                             </video>
                             <input type="file" id="trailerInput" class="form-control" name="trailerInput"/>
                         </div>
@@ -149,8 +157,6 @@
             </form>
 
     </div>
-
-    <script src="../../../public/js/edit/editMovie.js"></script> 
     
 </body>
 </html>
