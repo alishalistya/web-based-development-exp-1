@@ -88,7 +88,7 @@ Non-user:
 ## Screenshot Tampilan Aplikasi
 
 ### Skema Database
-![Skema Database](./screenshots/skema_database.png)
+![Skema Database](./screenshots/skema_database.jpg)
 
 ### Login
 ![Login Page](./screenshots/login.png)
