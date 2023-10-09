@@ -210,4 +210,35 @@ class ActorController
             http_response_code($e->getCode());
         }
     }
+
+    public function delete() {
+        try {
+            // var_dump($_SERVER['REQUEST_METHOD']);
+            switch ($_SERVER['REQUEST_METHOD']) {
+                case "DELETE":
+                    $auth = Utils::middleware("Authentication");
+                    $auth->isAdminLogin();
+
+                    $actorModel = Utils::model('Actor');
+                    if ($actorModel->deleteActor($_GET['actor_id']) > 0){
+                        // var_dump($_POST);
+                        // header('Location: ' ."http://$_SERVER[HTTP_HOST]".  '/movie/catalog');
+                        header('Content-Type: application/json');
+                        echo json_encode(['error' => null ]);
+                    }
+                    exit;
+                    break;
+                default:
+                    throw new Exception('Method Not Allowed', STATUS_METHOD_NOT_ALLOWED);
+            }
+        } catch (Exception $e) {
+            if ($e->getCode() === STATUS_UNAUTHORIZED) {
+                header("Location: http://localhost:8080/user/login");
+            } else {
+                http_response_code($e->getCode());
+            }
+        } catch (Exception $e) {
+            http_response_code($e->getCode());
+        }
+    }
 }
