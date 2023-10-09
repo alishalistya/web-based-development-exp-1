@@ -9,6 +9,7 @@ class DirectorController
                     // Authetication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     
                     $isAdmin = false; 
                     try {
@@ -49,6 +50,7 @@ class DirectorController
                 // Authentication
                 $auth = Utils::middleware("Authentication");
                 $auth->isUserLogin();
+                $data['isLogin'] = true;
 
                 // Director Model
                     $directorModel = Utils::model('Director');
@@ -118,6 +120,7 @@ class DirectorController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     $directorModel = Utils::model('Director');
                     $data["director"] = $directorModel->getDirectorByID($_GET['director_id']);
@@ -186,6 +189,7 @@ class DirectorController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     // Direction
                     // $directorChosen = $_GET['name'];
@@ -229,6 +233,7 @@ class DirectorController
                 case "DELETE":
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
+                    $data['isLogin'] = true;
 
                     $directorModel = Utils::model('Director');
                     if ($directorModel->deleteDirector($_GET['director_id']) > 0){

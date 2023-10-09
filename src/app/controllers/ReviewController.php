@@ -29,7 +29,12 @@ class ReviewController {
                         $count = $review->getCountPage($_SESSION['user_id']);
                     }
 
-                    $reviewView = Utils::view("review", "ReviewView", ['reviews' => $result, 'isAdmin' => $isAdmin, 'page' => $count]);
+                    $data['isAdmin'] = $isAdmin;
+                    $data['reviews'] = $result;
+                    $data['page'] = $count;
+                    $data['isLogin'] = true;
+
+                    $reviewView = Utils::view("review", "ReviewView", $data);
                     $reviewView->render();
                     break;
                 default:
@@ -118,11 +123,16 @@ class ReviewController {
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     $movieModel = Utils::model("Movie");
                     $movie = $movieModel->getMovieByID($_GET['movie_id']);
 
-                    $addReviewView = Utils::view("review", "EditReviewView", ['edited' => false, 'movie' => $movie]);
+                    $data['edited'] = false;
+                    $data['movie'] = $movie;
+                    $data['isLogin'] = true;
+
+                    $addReviewView = Utils::view("review", "EditReviewView", $data);
                     $addReviewView->render();
                     break;
                 case 'POST':
@@ -153,6 +163,7 @@ class ReviewController {
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     $reviewModel = Utils::model("Review");
                     $review = $reviewModel->getReviewByReviewID($_GET['review_id']);
@@ -162,7 +173,12 @@ class ReviewController {
                     $movieModel = Utils::model("Movie");
                     $movie = $movieModel->getMovieByID($review['movie_id']);
 
-                    $addReviewView = Utils::view("review", "EditReviewView", ['edited' => true, 'review' => $review, 'movie' => $movie ]);
+                    $data['edited'] = true;
+                    $data['review'] = $review;
+                    $data['movie'] = $movie;
+                    $data['isLogin'] = true;
+
+                    $addReviewView = Utils::view("review", "EditReviewView", $data);
                     $addReviewView->render();
                     break;
                 case 'POST':

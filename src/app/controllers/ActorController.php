@@ -9,6 +9,7 @@ class ActorController
                     // Authetication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     
                     $isAdmin = false; 
                     try {
@@ -49,6 +50,7 @@ class ActorController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     // Actor model
                     $actorModel = Utils::model('Actor');
@@ -112,6 +114,7 @@ class ActorController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     // Model
                     $actorModel = Utils::model('Actor');
@@ -175,6 +178,7 @@ class ActorController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     // $actorChosen = $_GET['name'];
                     $data['title'] = 'Actor';
@@ -218,6 +222,7 @@ class ActorController
                 case "DELETE":
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
+                    $data['isLogin'] = true;
 
                     $actorModel = Utils::model('Actor');
                     if ($actorModel->deleteActor($_GET['actor_id']) > 0){

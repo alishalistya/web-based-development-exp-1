@@ -1,6 +1,6 @@
 <form action= "login" class="login">
     <h1 class="auth-title">
-        Selamat Datang Kembali!
+        Masuk untuk Akses Full Fitur!
     </h1>
     <div class="form-group">
         <label for="username">Username</label>

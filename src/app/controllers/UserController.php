@@ -87,6 +87,7 @@ class UserController
             switch ($_SERVER['REQUEST_METHOD']) {
                 case 'GET':
                     unset($_SESSION['user_id']);
+                    $data['isLogin'] = false;
                     // header('Content-Type: application/json');
                     // http_response_code(STATUS_OK);
                     header("Location: http://localhost:8080/home");
@@ -106,12 +107,7 @@ class UserController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
-                    
-                    
-
-
-                    $movieView = Utils::view("lists", "MovieListView", ['data' => $movies, 'isAdmin' => $isAdmin, 'page' => $count]);
-                    $movieView->render();
+                    $data['isLogin'] = true;
 
                     break;
                 default:

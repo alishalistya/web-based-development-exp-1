@@ -8,6 +8,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     
                     $isAdmin = false; 
                     try {
@@ -28,8 +29,12 @@ class MovieController
                         $count = $movieModel->getCountAll();
                     }
 
+                    $data['isAdmin'] = $isAdmin;
+                    $data['data'] = $movies;
+                    $data['page'] = $count;
+                    $data['isLogin'] = true;
 
-                    $movieView = Utils::view("lists", "MovieListView", ['data' => $movies, 'isAdmin' => $isAdmin, 'page' => $count]);
+                    $movieView = Utils::view("lists", "MovieListView", $data);
                     $movieView->render();
 
                     break;
@@ -52,6 +57,7 @@ class MovieController
                     // Authentication
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     $categoryModel = Utils::model('Category');
                     $movieModel = Utils::model('Movie');
@@ -59,7 +65,14 @@ class MovieController
                     $year = $movieModel->getYear();
 
                     $result = null;
-                    $searchView = Utils::view("search", "SearchView", ['category' => $category, 'movies' => $result, 'years' => $year]);
+
+                    $data['category'] = $category;
+                    $data['movies'] = $result;
+                    $data['years'] = $year;
+                    $data['isLogin'] = true;
+
+
+                    $searchView = Utils::view("search", "SearchView", $data);
                     $searchView->render();                    
                     break;
                 default:
@@ -80,6 +93,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     $movieModel = Utils::model("Movie");
                     
                     $movies = $movieModel->getByArgs($_GET['q'], $_GET['sort'], $_GET['category'], $_GET['year'],$page);
@@ -132,6 +146,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
                     
                     $isAdmin = false; 
                     try {
@@ -172,6 +187,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
+                    $data['isLogin'] = true;
 
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getAllMovies();
@@ -247,6 +263,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
+                    $data['isLogin'] = true;
 
                     $movieModel = Utils::model('Movie');
                     $data["movies"] = $movieModel->getAllMovies();
@@ -336,6 +353,7 @@ class MovieController
                 case "DELETE":
                     $auth = Utils::middleware("Authentication");
                     $auth->isAdminLogin();
+                    $data['isLogin'] = true;
 
                     $movieModel = Utils::model('Movie');
                     if ($movieModel->deleteMovie($_GET['movie_id']) > 0){
@@ -367,6 +385,7 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    $data['isLogin'] = true;
 
                     // Admin Checking
                     $isAdmin = false; 
