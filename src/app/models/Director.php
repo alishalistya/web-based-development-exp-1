@@ -52,6 +52,25 @@ class Director {
         return $count['count'];
     }
 
+    public function getPaginate($page = 1){
+        $sql = "SELECT * FROM director LIMIT :limit OFFSET :offset";
+
+        $this->db->query($sql);
+        $this->db->bind('limit', LIMIT_PAGE);
+        $this->db->bind('offset', ($page - 1) * LIMIT_PAGE);
+        
+        return $this->db->resultSet();
+    }
+
+    public function getCountAllPage() {
+        $sql = "SELECT COUNT(*) count from director";
+        
+        $this->db->query($sql);
+        $count = $this->db->single();
+        
+        return ceil($count['count']/LIMIT_PAGE);
+    }
+
     public function addDirector($data, $photo_name)
     {
         // echo 'okey';
@@ -124,4 +143,14 @@ class Director {
         return $this->db->resultSet();
     }
     
+    public function deleteDirector($directorID) {
+        $sql = "DELETE FROM director d WHERE d.director_id = :director_id";
+
+        $this->db->query($sql);
+        $this->db->bind("director_id", $directorID);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }

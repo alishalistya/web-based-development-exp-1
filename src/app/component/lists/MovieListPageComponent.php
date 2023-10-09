@@ -27,8 +27,7 @@
                 <a href="/movie/insert" class="btn btn-primary">Add New</a>
             <?php endif; ?>
         </div>
-        <div class="movie-container">
-        </div>
+        <div class="movie-container"></div>
         <?php include(dirname(__DIR__) . '/others/PaginationGroup.php') ?>
         <?php if ($this->data["isAdmin"]) : ?>        
             <dialog class="modal">

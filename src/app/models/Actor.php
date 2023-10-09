@@ -127,4 +127,34 @@ class Actor
         $this->db->bind("id", $id);
         return $this->db->resultSet();
     }
+
+    public function getPaginate ($page) {
+        $sql = "SELECT * FROM actor LIMIT :limit OFFSET :offset";
+
+        $this->db->query($sql);
+        $this->db->bind('limit', LIMIT_PAGE);
+        $this->db->bind('offset', ($page - 1) * LIMIT_PAGE);
+        
+        return $this->db->resultSet();
+    }
+
+    public function getCountAllPage() {
+        $sql = "SELECT COUNT(*) count from actor";
+        
+        $this->db->query($sql);
+        $count = $this->db->single();
+        
+        return ceil($count['count']/LIMIT_PAGE);
+    }
+    
+    public function deleteActor($actorID) {
+        $sql = "DELETE FROM actor a WHERE a.actor_id = :actor_id";
+
+        $this->db->query($sql);
+        $this->db->bind("actor_id", $actorID);
+
+        $this->db->execute();
+
+        return $this->db->rowCount();
+    }
 }
