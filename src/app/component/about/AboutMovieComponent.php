@@ -16,7 +16,9 @@
     <div id="movie-container">
        
         <img id="movie-background" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>" alt="<?= $this->data['movie']['title'] ?>">
-        <button id="updateContentButton"> <a href="http://localhost:8080/movie/update?movie_id=<?= $this->data['movie']['movie_id'] ?>">EDIT</a></button>
+        <?php if ($this->data["isAdmin"]) : ?>
+            <button id="updateContentButton"> <a href="http://localhost:8080/movie/update?movie_id=<?= $this->data['movie']['movie_id'] ?>">EDIT</a></button>
+        <?php endif; ?>
         <h2 id="about-movie" class="text">
             about Movie,
         </h2>

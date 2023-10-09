@@ -19,16 +19,18 @@
         <img id="people-background" src="../../../public/media/img/<?= $this->data['title']; ?>/<?= $this->data['people']['img_path'] ?>" alt="<?= $this->data['people']['img_path'] ?>">
 
         <!-- Edit -->
-        <button id="updateContentButton">
-            <?php if($this->data['title'] == 'Director') : ?>
-            <a href="http://localhost:8080/director/update?director_id=<?= $this->data['people']['director_id'] ?>">Edit</a>
+        <?php if ($this->data["isAdmin"]) : ?>
+            <button id="updateContentButton">
+                <?php if($this->data['title'] == 'Director') : ?>
+                <a href="http://localhost:8080/director/update?director_id=<?= $this->data['people']['director_id'] ?>">Edit</a>
 
-            <?php elseif($this->data['title'] == 'Actor') : ?>
-                <a href="http://localhost:8080/actor/update?actor_id=<?= $this->data['people']['actor_id'] ?>">Edit</a>
-            
-            <?php endif; ?>
-        </button>
-
+                <?php elseif($this->data['title'] == 'Actor') : ?>
+                    <a href="http://localhost:8080/actor/update?actor_id=<?= $this->data['people']['actor_id'] ?>">Edit</a>
+                
+                <?php endif; ?>
+            </button>
+        <?php endif; ?>
+        
         <!-- About -->
         <h2 id="about-people" class="text">
             about <?= $this->data['title']; ?>,
