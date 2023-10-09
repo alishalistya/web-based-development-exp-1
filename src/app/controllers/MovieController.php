@@ -385,6 +385,18 @@ class MovieController
                 case 'GET':
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
+                    
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
+                    $data["isAdmin"] = $isAdmin;
                     $data['isLogin'] = true;
 
                     // Admin Checking

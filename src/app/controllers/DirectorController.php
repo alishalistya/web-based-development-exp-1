@@ -177,6 +177,18 @@ class DirectorController
                     $auth->isUserLogin();
                     $data['isLogin'] = true;
 
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
+                    $data["isAdmin"] = $isAdmin;
+
                     // Direction
                     // $directorChosen = $_GET['name'];
                     $data['title'] = 'Director';

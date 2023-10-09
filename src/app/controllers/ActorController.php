@@ -21,10 +21,12 @@ class ActorController
                         }
                     }
 
+                    $data["isAdmin"] = $isAdmin;
+
                     // Model
                     $actorModel = Utils::model('Actor');
                     $data["actor"] = $actorModel->getAllActor();
-                    $data["isAdmin"] = $isAdmin;
+                    
                     $data["datatype"] = "actor";
                     $loginView = Utils::view("lists", "ActorListView", $data);
                     $loginView->render();
@@ -173,6 +175,18 @@ class ActorController
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
                     $data['isLogin'] = true;
+
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+
+                    $data["isAdmin"] = $isAdmin;
 
                     // $actorChosen = $_GET['name'];
                     $data['title'] = 'Actor';

@@ -16,7 +16,9 @@
     <div id="movie-container">
        
         <img id="movie-background" src="../../../public/media/img/movie/<?= $this->data['movie']['img_path'] ?>" alt="<?= $this->data['movie']['title'] ?>">
-        <button id="updateContentButton"> <a href="http://localhost:8080/movie/update?movie_id=<?= $this->data['movie']['movie_id'] ?>">EDIT</a></button>
+        <?php if ($this->data["isAdmin"]) : ?>
+            <button id="updateContentButton"> <a href="http://localhost:8080/movie/update?movie_id=<?= $this->data['movie']['movie_id'] ?>">EDIT</a></button>
+        <?php endif; ?>
         <h2 id="about-movie" class="text">
             about Movie,
         </h2>
@@ -76,21 +78,19 @@
                 </div>
             <?php else: ?>
                 <?php $count = 0; ?>
-                <?php if ($this->data['reviews'][0] == false) :?>
-                    <div class="review-card text">
-                    <p>There are no reviews.</p>
-                    </div>
-                <?php else: ?>
+                
                     <?php foreach ($this->data['reviews'] as $review): ?>   
                             <?php if ($count >= 10) break; ?>
-                                <div class="review-card text">
-                                    <p class="review-content" ><?= $review['comment'] ?></p>
-                                    <p>Rating: <?= $review['rate'] ?></p>
-                                </div>
-                                <?php $count++; ?>
+                                <?php if ($review) : ?>
+                                    <div class="review-card text">
+                                        <p class="review-content" ><?= $review['comment'] ?></p>
+                                        <p>Rating: <?= $review['rate'] ?></p>
+                                    </div>
+                                <?php endif; ?>
+                            <?php $count++; ?>
+
                     <?php endforeach; ?>
                 <?php endif; ?>
-            <?php endif; ?>
         </div>
 
         <!-- page navigation -->
