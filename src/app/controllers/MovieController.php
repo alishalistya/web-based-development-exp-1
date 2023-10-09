@@ -368,6 +368,18 @@ class MovieController
                     $auth = Utils::middleware("Authentication");
                     $auth->isUserLogin();
 
+                    // Admin Checking
+                    $isAdmin = false; 
+                    try {
+                        $auth->isAdminLogin();
+                        $isAdmin = true;
+                    } catch (Exception $e) {
+                        if ($e-> getCode() !== STATUS_UNAUTHORIZED) {
+                            throw new Exception($e->getMessage(), $e->getCode());
+                        }
+                    }
+                    $data["isAdmin"] = $isAdmin;
+
                     // $movieChosen = $_GET['title'];
                     $data['movie'] = Utils::model("Movie")->getMovieByID($movieID);
                     
