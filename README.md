@@ -1,11 +1,3 @@
-    * Deskripsi aplikasi web
-    * Daftar requirement
-    * Cara instalasi
-    * Cara menjalankan server
-    * Screenshot tampilan aplikasi (tidak perlu semua kasus, minimal 1 per halaman), dan 
-    * Penjelasan mengenai pembagian tugas masing-masing anggota (lihat formatnya pada bagian pembagian tugas).
-
-
 # MOI : Movie and Review
 
 > MOI disusun untuk memenuhi Tugas Besar - Milestone 1 IF3110 Pengembangan Aplikasi Berbasis Web. Tugas besar ini berfokus pada pembuatan web menggunakan Monolithic PHP & Vanilla Web Application.
@@ -94,6 +86,9 @@ Non-user:
 3. Aplikasi web dapat dihentikan dengan menjalankan perintah perintah `docker-compose down` pada terminal _directory_ aplikasi web.
 
 ## Screenshot Tampilan Aplikasi
+
+### Skema Database
+![Skema Database](./screenshots/skema_database.png)
 
 ### Login
 ![Login Page](./screenshots/login.png)
